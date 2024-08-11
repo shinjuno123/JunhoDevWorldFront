@@ -26,6 +26,9 @@ function App() {
       if(redirect_path) {
           navigate(redirect_path);
       }
+
+  
+
   })
 
   return (
