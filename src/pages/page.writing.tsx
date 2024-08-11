@@ -3,7 +3,6 @@ import {
   useLazyFetchPostsQuery,
   Post,
   useLazyFetchNextPostsQuery,
-  Posts
 } from "../features/writing/writing.slice";
 import { ClipLoader } from "react-spinners";
 import { useCallback, useEffect, useState } from "react";
@@ -80,6 +79,7 @@ export default function Writing() {
             </div>
 
             <div className="blog-page__main">
+              
               <ul className="post__list">
                 {postList?.map((post) => {
                   return (
@@ -111,7 +111,12 @@ export default function Writing() {
                     </React.Fragment>
                   );
                 })}
+               {/* 'display': isFetching || isNextPostsFetching? 'block': 'none', */}
+                <li style={{display: isFetching || isNextPostsFetching? 'block': 'none', paddingBottom: '5rem', textAlign: 'center'}}>
+                  <ClipLoader></ClipLoader>
+                </li>
               </ul>
+      
             </div>
           </div>
         </div>
