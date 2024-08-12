@@ -7,54 +7,65 @@ import {
 import { ClipLoader } from "react-spinners";
 import { useCallback, useEffect, useState } from "react";
 import React from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 export default function Writing() {
   const [fetchPosts, { data: posts, isFetching }] = useLazyFetchPostsQuery();
-  const [fetchNextPosts, { data: nextPosts, isFetching:isNextPostsFetching }] = useLazyFetchNextPostsQuery();
+  const [fetchNextPosts, { data: nextPosts, isFetching: isNextPostsFetching }] =
+    useLazyFetchNextPostsQuery();
   const [postList, setPostList] = useState<Post[]>();
-
-
+  const [selectedOption, setSelectOption] = useState<string>('All');
 
   const fetchPostsAsync = useCallback(async () => {
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight && !isNextPostsFetching && !isFetching) {
+    if (
+      window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight &&
+      !isNextPostsFetching &&
+      !isFetching
+    ) {
       let newPosts;
 
-      if(nextPosts && posts && nextPosts.currentPage === posts.maxPage) {
+      if (nextPosts && posts && nextPosts.currentPage === posts.maxPage) {
         return;
       }
 
       if (nextPosts) {
-        newPosts = (await fetchNextPosts(nextPosts.next_page_url as string)).data;
-      } else if(posts) {
+        newPosts = (await fetchNextPosts(nextPosts.next_page_url as string))
+          .data;
+      } else if (posts) {
         newPosts = (await fetchNextPosts(posts.next_page_url as string)).data;
       } else {
-        newPosts = (await fetchPosts({limit:5, page:1})).data;
+        newPosts = (
+          await fetchPosts({ limit: 5, page: 1, category: undefined })
+        ).data;
       }
-    
 
-      if(newPosts) {
+      if (newPosts) {
         setPostList((oldArray) => {
-          if(oldArray) {
+          if (oldArray) {
             oldArray = oldArray.filter((oldPost, index) => {
-              console.log(newPosts.data[index]);
               if (oldPost.id === newPosts.data[index].id) {
                 return false;
               }
-  
+
               return true;
-            })
-  
-            return [...oldArray,...newPosts.data];
+            });
+
+            return [...oldArray, ...newPosts.data];
           }
-          
+
           return newPosts.data;
-        
         });
       }
-    } 
-  }, [fetchNextPosts, posts, isNextPostsFetching, fetchPosts, nextPosts, isFetching]);
-
+    }
+  }, [
+    fetchNextPosts,
+    posts,
+    isNextPostsFetching,
+    fetchPosts,
+    nextPosts,
+    isFetching,
+  ]);
 
   useEffect(() => {
     fetchPostsAsync();
@@ -68,6 +79,9 @@ export default function Writing() {
   }, [fetchPostsAsync]);
 
 
+  const onOptionChangehandler = (event: { target: { value: React.SetStateAction<string>; }; }) => {
+    setSelectOption(event.target.value);
+  }
 
   return (
     <>
@@ -76,10 +90,19 @@ export default function Writing() {
           <div className="blog-page">
             <div className="blog-page__header">
               <span>Writing</span>
+              <select defaultValue={'All'} id='categories'name="categories" onChange={onOptionChangehandler}>
+                <option value={"All"}>All</option>
+                {posts?.allCategories.map((category) => {
+                  return (
+                    <React.Fragment key={category}>
+                      <option value={category}>{category}</option>
+                    </React.Fragment>
+                  );
+                })}
+              </select>
             </div>
 
             <div className="blog-page__main">
-              
               <ul className="post__list">
                 {postList?.map((post) => {
                   return (
@@ -111,12 +134,18 @@ export default function Writing() {
                     </React.Fragment>
                   );
                 })}
-               {/* 'display': isFetching || isNextPostsFetching? 'block': 'none', */}
-                <li style={{display: isFetching || isNextPostsFetching? 'block': 'none', paddingBottom: '5rem', textAlign: 'center'}}>
+                {/* 'display': isFetching || isNextPostsFetching? 'block': 'none', */}
+                <li
+                  style={{
+                    display:
+                      isFetching || isNextPostsFetching ? "block" : "none",
+                    paddingBottom: "5rem",
+                    textAlign: "center",
+                  }}
+                >
                   <ClipLoader></ClipLoader>
                 </li>
               </ul>
-      
             </div>
           </div>
         </div>

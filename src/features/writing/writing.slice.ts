@@ -16,6 +16,7 @@ export interface Posts {
     modified: string;
     data: Post[];
     maxPage: number;
+    allCategories: string[];
     currentPage: number;
     status: {is_success:boolean, message: string};
 }
@@ -29,10 +30,15 @@ export const postApiSlice = createApi({
             return headers;
         }  
     }),
+
     endpoints(builder) {
         return {
-            fetchPosts: builder.query<Posts, {limit:number, page:number}>({
+            fetchPosts: builder.query<Posts, {limit:number, page:number, category:string|undefined}>({
                 query(data) {
+                    if(data.category) {
+                        return `/wp-json/writing/v1/posts?limit=${data.limit}&page=${data.page}&category=${data.category}`;
+                    }
+
                     return `/wp-json/writing/v1/posts?limit=${data.limit}&page=${data.page}`;
                 },
             }),
