@@ -22,19 +22,6 @@ export interface Posts {
 }
 
 
-export const fetchPosts = createAsyncThunk<Posts|undefined, {page: number, limit: number, categoryName:string}>(
-    'writing/fetchPosts',
-    async ({page, limit, categoryName}) => {
-        try {
-            const response = await axios.get(`http://junho-dev-world.local/wp-json/writing/v1/posts?page=${page}&limit=${limit}&category=${categoryName}`);
-            return response.data;
-        } catch (error) {
-            console.error(error);
-        }
-    }
-)
-
-
 interface PostsState {
     posts: Record<number, Post>;
     loading: 'idle' | 'pending' | 'succeeded' | 'failed';
@@ -52,6 +39,18 @@ const initialState: PostsState = {
     currentPage: 1
 } 
 
+
+export const fetchPosts = createAsyncThunk<Posts|undefined, {page: number, limit: number, categoryName:string}>(
+    'writing/fetchPosts',
+    async ({page, limit, categoryName}) => {
+        try {
+            const response = await axios.get(`http://junho-dev-world.local/wp-json/writing/v1/posts?page=${page}&limit=${limit}&category=${categoryName}`);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+)
 
 const postsSlice = createSlice({
     name: 'posts',

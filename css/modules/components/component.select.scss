@@ -1,0 +1,64 @@
+.custom-select {
+    position: relative;
+    font-family: $font-family-display;
+    font-size: $font-size-2;
+    padding: 2rem 0;
+}
+
+.custom-select select {
+    display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+    position: relative;
+    background-color: $primary-color;
+    width: 12rem;
+    border: none;
+}
+
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    transform: translateY(-20%);
+    border-radius: 4px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: $reversed-text-color transparent transparent transparent;
+}
+
+.select-selected.active:after {
+    border-color: transparent transparent $reversed-text-color transparent;
+    top: 7px;
+}
+
+.select-items div,.select-selected {
+    color: $reversed-text-color;
+    padding: .6rem 0;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+
+  }
+
+.select-items .active {
+    background-color: $supplementary-color3;
+}
+
+.select-items {
+    position: absolute;
+    background-color: $secondary-color;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    width: 12rem;
+}
+
+.select-hide {
+    display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+    background-color: rgba($color: $supplementary-color3, $alpha: .7);
+  }
