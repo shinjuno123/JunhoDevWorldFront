@@ -90,7 +90,7 @@ export default function Writing() {
                       <React.Fragment key={post[0]}>
                         <li className="post">
                           <Link
-                            to="/posts/1"
+                            to={`/posts/${post[0]}?category=${postParams.categoryName}`}
                             className="post__link"
                             dangerouslySetInnerHTML={{ __html: post[1].title }}
                           ></Link>
