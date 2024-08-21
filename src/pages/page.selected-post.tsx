@@ -1,9 +1,28 @@
 // import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import myFace from '../assets/images/myface.jpg'
+import { useEffect } from "react";
+import store from "../app/store";
+import { fetchSelectedPost } from "../features/writing/writing-selected-post.slice";
+import { useAppSelector } from "../app/hooks";
 
 export default function SelectedPost() {
-  // const postId = Number(useParams()["postId"]);
+  const { postData, loading } = useAppSelector(
+    (state) => state.selectedPostFetcher
+  );
+  const location = useLocation();
+  const { pathname } = location;
+
+
+  useEffect(()=> {
+
+    async function executeAsync() {
+      const postID = Number(pathname.split('/').at(-1));
+      await store.dispatch(fetchSelectedPost({id:postID}));
+    }
+
+    executeAsync();
+  },[])
 
   return (
     <>
@@ -16,21 +35,18 @@ export default function SelectedPost() {
                   <span>Back to list</span> <i className="material-icons icon">arrow_forward</i>
                 </Link>
               </div>
-              <h2 className="selected-post__title">Welcome to this website</h2>
+              <h2 className="selected-post__title">{postData.post.post_title}</h2>
               <div className="selected-post__info">
-                <span className="selected-post__uploaded">01 JUN 2024</span> -
+                <span className="selected-post__uploaded">{postData.post.post_date}</span> -
                 <span>
-                  <a className="selected-post__category" href="/">
-                    CODE
-                  </a>
+                  <Link className="selected-post__category" to={`/posts?category=${postData.status.category}`}>
+                    {" "+postData.status.category}
+                  </Link>
                 </span>
               </div>
               <hr />
 
-              <div className="selected-post__content">
-                I took some time this week to upgrade my site to the newest
-                version of Eleventy. Here's what I learned.
-              </div>
+              <div className="selected-post__content" dangerouslySetInnerHTML={{__html:postData.post.post_content}}></div>
             </div>
             <section className="comments__section">
               <hr />

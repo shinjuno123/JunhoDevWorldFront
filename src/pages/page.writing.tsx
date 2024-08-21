@@ -3,7 +3,7 @@ import { ClipLoader } from "react-spinners";
 import { useCallback, useEffect, useState } from "react";
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import { fetchPosts, emptyPosts } from "../features/writing/writing.slice";
+import { fetchPosts, emptyPosts } from "../features/writing/writing-posts.slice";
 import store from "../app/store";
 import { useAppSelector } from "../app/hooks";
 import Select from "../components/component.select";
