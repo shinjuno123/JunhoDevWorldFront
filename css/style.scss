@@ -3,6 +3,8 @@
 @import "../node_modules/@glidejs/glide/src/assets/sass/glide.core.scss";
 @import "../node_modules/@glidejs/glide/src/assets/sass/glide.theme.scss";
 @import "//fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap";
+@import url(https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
 
 @import "base/screen.scss";
 @import "base/event.scss";
@@ -22,11 +24,11 @@ span {
 
 a {
     text-decoration: none;
-    color: var(--primary-color)
+    color: var(--primary-color);
 }
 
 a:hover {
-    color: var(--secondary-color)
+    color: var(--secondary-color);
 }
 
 strong {
@@ -44,18 +46,17 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 
-body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    overflow-x: hidden;
-    font-family: var(--font-family-display);
-}
-
 #root {
+    position: relative;
     max-width: none;
     margin: 0;
     padding: 0;
     text-align: left;   
+    width: 100%;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    font-family: var(--font-family-display);
 }
 
 *, ::after, ::before {

@@ -1,4 +1,6 @@
 .selected-post {
+    position: relative;
+    width: 100%;
     display: block;
     padding-top: 2rem;
     padding-bottom: 5rem;
@@ -20,17 +22,21 @@
     }
 
     .selected-post__title {
+        font-family: "Abril Fatface", serif;
         line-height: 2;
-        font-size: $font-size-5;
+        font-size: $font-size-6;
         animation-name: fade-in;
         animation-duration: .5s;
+        letter-spacing: .1rem;
     }
 
     .selected-post__info {
         color: $primary-color;
         animation-name: fade-in;
         animation-duration: .7s;
-
+        font-family: "Lato", sans-serif;
+        font-weight: 500;
+        letter-spacing: .05rem;
     }
 
     .selected-post__content {
@@ -85,7 +91,7 @@
     .selected-post {
 
         .selected-post__inner {
-            width: 90%;
+            width: 100%;
         }
     }
 }
@@ -93,19 +99,13 @@
 
 @media (max-width: $small-screen) {
     .selected-post {
-
         .selected-post__inner {
             width: 100%;
         }
-
         .selected-post__title {
-            font-size: $font-size-4;
+            font-size: $font-size-5;
         }
     
-        .selected-post__info {
-            color: $progress-bar-basic-color;
-    
-        }
     
         .selected-post__content {
             font-size: $font-size-2;

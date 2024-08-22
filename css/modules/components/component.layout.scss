@@ -1,5 +1,6 @@
 .container {
-    width: 90%;
+    position: relative;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
     max-width: $big-screen;
@@ -8,7 +9,6 @@
 .main {
     display: flex;
     flex-direction: column;
-    flex: 1 0 auto;
 }
 
 
