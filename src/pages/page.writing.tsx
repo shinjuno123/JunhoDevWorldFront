@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { useCallback, useEffect, useState } from "react";
 import React from "react";
@@ -12,6 +12,9 @@ export default function Writing() {
   const { posts, categories, maxPage, currentPage, loading } = useAppSelector(
     (state) => state.postFetcher
   );
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [postParams, setPostParams] = useState({
     page: 1,
     limit: 5,
@@ -42,7 +45,14 @@ export default function Writing() {
   }, [posts, currentPage, maxPage, postParams]);
 
   useEffect(() => {
-    setPostParams({ page: 1, limit: 5, categoryName: "" });
+    const category = searchParams.get('category')
+
+    if (category){
+      setPostParams({ page: 1, limit: 5, categoryName: category });
+    } else {
+      setPostParams({ page: 1, limit: 5, categoryName: "" });
+    }
+
   }, []);
 
   useEffect(() => {

@@ -37,6 +37,10 @@
         font-family: "Lato", sans-serif;
         font-weight: 500;
         letter-spacing: .05rem;
+
+        .selected-post__category:hover {
+            color: $secondary-color;
+        }
     }
 
     .selected-post__content {
