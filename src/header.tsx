@@ -1,11 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import face from "./assets/images/myface.jpg";
 import "material-icons/iconfont/material-icons.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const [headerState, setHeaderState] = useState('closed');
-  const pathName: string = useLocation().pathname;
+  const url = useLocation().pathname;
 
   function toggleNavigation() {
     setHeaderState((headerState === 'closed'? 'opened':'closed'));
@@ -22,6 +22,7 @@ export default function Header() {
     setHeaderState('closed');
     document.body.classList.remove('overflow-y-hidden');
   }
+
 
 
 
@@ -54,7 +55,7 @@ export default function Header() {
                 <ul className="nav__menu" id="nav__menu">
                   <li
                     className={`nav__item ${
-                      pathName == "/" ? "nav__item--active" : ""
+                      url == "/" ? "nav__item--active" : ""
                     }`}
                   >
                     <Link className="nav__link" to="/" onClick={closeNavigation}>
@@ -63,7 +64,7 @@ export default function Header() {
                   </li>
                   <li
                     className={`nav__item ${
-                      pathName == "/posts" ? "nav__item--active" : ""
+                      url.includes("/posts") ? "nav__item--active" : ""
                     }`}
                   >
                     <Link className="nav__link" to="/posts" onClick={closeNavigation}>
@@ -72,7 +73,7 @@ export default function Header() {
                   </li>
                   <li
                     className={`nav__item ${
-                      pathName == "/notes" ? "nav__item--active" : ""
+                      url.includes("/notes") ? "nav__item--active" : ""
                     }`}
                   >
                     <Link className="nav__link" to="/notes" onClick={closeNavigation}>
@@ -81,7 +82,7 @@ export default function Header() {
                   </li>
                   <li
                     className={`nav__item ${
-                      pathName == "/projects" ? "nav__item--active" : ""
+                      url.includes("/projects") ? "nav__item--active" : ""
                     }`}
                   >
                     <Link className="nav__link" to="/projects"  onClick={closeNavigation}>
@@ -90,7 +91,7 @@ export default function Header() {
                   </li>
                   <li
                     className={`nav__item ${
-                      pathName == "/about" ? "nav__item--active" : ""
+                      url.includes("/about") ? "nav__item--active" : ""
                     }`}
                   >
                     <Link className="nav__link" to="/about" onClick={closeNavigation}>
