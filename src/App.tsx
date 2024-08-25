@@ -16,17 +16,11 @@ import { useEffect } from "react";
 import Page404 from "./pages/page.404";
 
 function App() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [searchParams, _setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   useEffect(()=> {
-      const redirect_path = searchParams.get('redirect');
-
-      if(redirect_path) {
-          navigate(redirect_path);
-      }
-  })
+      window.scrollTo({top:0, behavior:'smooth'});
+  },[navigate])
 
   return (
     <>
