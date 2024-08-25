@@ -1,4 +1,4 @@
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { useCallback, useEffect, useState } from "react";
 import React from "react";
@@ -16,13 +16,16 @@ export default function Writing() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [postParams, setPostParams] = useState({
-    page: 1,
-    limit: 5,
+    page: -1,
+    limit: -1,
     categoryName: "",
   });
 
   const fetchPostsAsync = useCallback(async () => {
-    await store.dispatch(fetchPosts(postParams));
+    if(postParams.page !== -1) {
+      await store.dispatch(fetchPosts(postParams));
+    } 
+
     return;
   }, [postParams]);
 
@@ -45,15 +48,16 @@ export default function Writing() {
   }, [posts, currentPage, maxPage, postParams]);
 
   useEffect(() => {
-    const category = searchParams.get('category')
-
+    store.dispatch(emptyPosts());
+    const category = searchParams.get('category');
+    
     if (category){
       setPostParams({ page: 1, limit: 5, categoryName: category });
     } else {
       setPostParams({ page: 1, limit: 5, categoryName: "" });
     }
 
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -65,18 +69,25 @@ export default function Writing() {
 
   useEffect(() => {
     fetchPostsAsync();
-  }, [postParams, fetchPostsAsync]);
+  }, [fetchPostsAsync]);
 
   const onOptionChangehandler = async (event:  React.MouseEvent<HTMLDivElement>) => {
     store.dispatch(emptyPosts());
+
+    const params = new URLSearchParams()
+
     if (event.currentTarget.innerText === "All") {
       setPostParams({ page: 1, limit: postParams.limit, categoryName: "" });
+      params.append("category", "");
+      setSearchParams(params);
     } else {
       setPostParams({
         page: 1,
         limit: postParams.limit,
         categoryName: event.currentTarget.innerText,
-      });
+      });    
+      params.append("category", event.currentTarget.innerText);
+      setSearchParams(params);
     }
   };
 

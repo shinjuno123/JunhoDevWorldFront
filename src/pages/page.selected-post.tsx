@@ -1,5 +1,5 @@
 // import { useParams } from "react-router-dom";
-import { Link, useLocation} from "react-router-dom";
+import { Link, useLocation, useParams, useSearchParams} from "react-router-dom";
 import myFace from '../assets/images/myface.jpg'
 import { useEffect } from "react";
 import store from "../app/store";
@@ -10,6 +10,8 @@ export default function SelectedPost() {
   const { postData, loading } = useAppSelector(
     (state) => state.selectedPostFetcher
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchParams] = useSearchParams();
   const location = useLocation();
   const { pathname } = location;
 
@@ -22,6 +24,7 @@ export default function SelectedPost() {
     }
 
     executeAsync();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   return (
@@ -31,7 +34,7 @@ export default function SelectedPost() {
           <div className="selected-post">
             <div className="selected-post__inner">
               <div className="btn__back-to-post-list__outer">
-                <Link className="btn__back-to-post-list" to={"/posts"}>
+                <Link className="btn__back-to-post-list" to={`/posts?${searchParams.toString()}`}>
                   <span>Back to list</span> <i className="material-icons icon">arrow_forward</i>
                 </Link>
               </div>
