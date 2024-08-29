@@ -1,4 +1,4 @@
-.about__section > .about__history {
+.about__section>.about__history {
     flex-direction: column;
     align-items: center;
 
@@ -24,7 +24,7 @@
             gap: 6rem;
             align-items: center;
             padding: 1rem 0;
-            
+
             .record:nth-child(odd) {
                 position: relative;
 
@@ -46,7 +46,7 @@
                     width: 6%;
                     height: 3rem;
                     left: 98%;
-                    top:0;   
+                    top: 0;
                     clip-path: polygon(100% 0, 0 0, 0 25%);
                 }
             }
@@ -64,17 +64,17 @@
                     border-bottom-left-radius: 30%;
                     border-top-right-radius: 20%;
                 }
-                
+
                 .description::after {
                     content: '';
                     position: absolute;
                     background: $supplementary-color3;
                     width: 6%;
                     height: 3rem;
-                    right:98%;
-                    top:0;
+                    right: 98%;
+                    top: 0;
                     clip-path: polygon(100% 0, 0 0, 100% 25%);
-    
+
                 }
             }
 
@@ -107,7 +107,7 @@
                     text-align: center;
                     padding: 1rem;
                     color: $reversed-text-color;
-    
+
 
 
                     span {
@@ -133,7 +133,7 @@
                 width: 1rem;
                 height: 1rem;
                 border-radius: 50%;
-                background: radial-gradient(circle, rgba(0,0,0,1) 1%, $background-color) 30%, rgba(0,0,0,1) 100%;
+                background: radial-gradient(circle, rgba(0, 0, 0, 1) 1%, $background-color) 30%, rgba(0, 0, 0, 1) 100%;
                 z-index: 150;
             }
         }
@@ -157,7 +157,7 @@
 }
 
 
-.about__history > .work-experience {
+.about__history>.work-experience {
     max-width: 55rem;
 
     .experiences {
@@ -182,14 +182,14 @@
                     margin-block-end: 1rem;
                 }
 
-                .experience-description-details > .detail  {
-                    list-style-type:square;
+                .experience-description-details>.detail {
+                    list-style-type: square;
                     margin-block-end: 1rem;
                     list-style-position: inside;
 
                     p {
                         display: inline;
-                        
+
                     }
                 }
             }
@@ -210,18 +210,18 @@
 }
 
 
-@media (max-width: $medium-screen) { 
+@media (max-width: $medium-screen) {
 
-    .about__history > .work-experience {
+    .about__history>.work-experience {
         font-size: $font-size-3;
     }
 
-    .about__section > .about__history {
+    .about__section>.about__history {
         width: 75%;
 
-    
 
-        .records { 
+
+        .records {
             .records__list {
 
                 .record {
@@ -230,24 +230,24 @@
                     .record__month-year {
                         font-size: $font-size-3;
                     }
-    
+
                     .description {
                         padding: .5rem;
-                        width: 15rem;
+                        width: 13rem;
 
 
                         span {
                             font-size: $font-size-2;
                             line-height: 2;
                         }
-    
+
                         p {
                             font-size: $font-size-1;
                             line-height: 1.5;
                         }
                     }
-    
-        
+
+
                 }
             }
         }
@@ -256,15 +256,15 @@
 }
 
 @media (max-width: $small-screen) {
-    .about__section > .about__history > h2 {
+    .about__section>.about__history>h2 {
         font-size: $font-size-6;
     }
 
-    .about__history > .work-experience {
+    .about__history>.work-experience {
         font-size: $font-size-2;
     }
 
-    .about__section > .about__history > .records > .records__list > .record > .description {
+    .about__section>.about__history>.records>.records__list>.record>.description {
         width: 10rem;
 
         span {
@@ -276,14 +276,35 @@
             font-size: $font-size-1;
             line-height: 1.5;
         }
-    }   
+    }
 
 
-    .about__section > .about__history > .records > .records__list > .record {
+    .about__section>.about__history>.records>.records__list>.record {
         padding: 0 .2rem;
+
 
         .record__month-year {
             font-size: $font-size-1;
         }
+
+        .description {
+            padding: .8rem;
+            width: 5.4rem;
+
+
+            span {
+                font-size: .6rem;
+                line-height: 2;
+            }
+
+            p {
+                font-size: .5rem;
+                line-height: 1;
+            }
+        }
+
+
+
+
     }
 }

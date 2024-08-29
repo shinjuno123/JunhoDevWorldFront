@@ -50,9 +50,6 @@ canvas.loading__off {
 
 
 
-
-
-
 .about__section.screen-max {
     position: fixed;
     bottom: 0;
@@ -60,7 +57,7 @@ canvas.loading__off {
     overflow-y: scroll;
     padding: 0;
     width: 100%;
-    background-color: #102C57;
+    background-color: $background-color;
     min-height: 100vh;
     top: 0;
     z-index: 102;
