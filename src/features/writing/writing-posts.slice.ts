@@ -44,7 +44,7 @@ export const fetchPosts = createAsyncThunk<Posts|undefined, {page: number, limit
     'writing/fetchPosts',
     async ({page, limit, categoryName}) => {
         try {
-            const response = await axios.get(`http://junho-dev-world.local/wp-json/writing/v1/posts?page=${page}&limit=${limit}&category=${categoryName}`);
+            const response = await axios.get(`/writing/v1/posts?page=${page}&limit=${limit}&category=${categoryName}`);
             return response.data;
         } catch (error) {
             console.error(error);

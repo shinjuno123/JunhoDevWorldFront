@@ -41,7 +41,7 @@ export const fetchSelectedPost = createAsyncThunk<SelectedPost|undefined, {id: n
     'writing/fetchSelectedPost',
     async (data) => {
         try {
-            const response = await axios.get(`http://junho-dev-world.local/wp-json/writing/v1/posts/${data.id}/`);
+            const response = await axios.get(`/writing/v1/posts/${data.id}/`);
             return response.data;
         } catch (error) {
             console.error(error);

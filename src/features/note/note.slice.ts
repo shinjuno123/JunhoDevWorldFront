@@ -33,7 +33,7 @@ export const fetchNotes = createAsyncThunk<NoteResponse| undefined, {page: numbe
     'note/FetchNotes',
     async ({page, limit}) => {
         try {
-            const response = await axios.get(`http://junho-dev-world.local/wp-json/note/v1/notes?page=${page}&limit=${limit}`);
+            const response = await axios.get(`/note/v1/notes?page=${page}&limit=${limit}`);
             return response.data;
         } catch (error) {
             console.error(error);

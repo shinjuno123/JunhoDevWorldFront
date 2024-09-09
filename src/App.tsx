@@ -14,6 +14,7 @@ import Skills from "./pages/about/page.about.skills";
 import AboutProjects from "./pages/about/page.about.projects";
 import { useEffect } from "react";
 import Page404 from "./pages/page.404";
+import './api-client.ts';
 
 function App() {
   const navigate = useNavigate();

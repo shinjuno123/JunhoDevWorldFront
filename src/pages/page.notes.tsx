@@ -3,13 +3,14 @@ import myFace from "../assets/images/myface.jpg";
 import NoteComment, {
   toggleHandle,
 } from "../components/component.note-comments";
+import { ClipLoader } from "react-spinners";
 import { useAppSelector } from "../app/hooks";
 import store from "../app/store";
 import { emptyNotes, fetchNotes } from "../features/note/note.slice";
 import React from "react";
 
 export default function Notes() {
-  const noteCommentRefs = useRef<toggleHandle[]>(null);
+  const noteCommentRefs = useRef<toggleHandle[]>([]);
   const { notes, loading, maxPage, currentPage } = useAppSelector(
     (state) => state.noteManager
   );
@@ -37,7 +38,6 @@ export default function Notes() {
   }, [fetchNotesAsync]);
 
   function openPost(ref: toggleHandle) {
-    console.log(noteCommentRefs);
     ref.toggleComments();
   }
 
@@ -47,6 +47,7 @@ export default function Notes() {
         <section className="section__notes">
           <span className="notes__header">Notes</span>
           <ul className="notes">
+            {loading === "pending"? <li style={{'textAlign':'center'}}><ClipLoader/></li>:''}
             {Object.entries(notes).map((note, index) => {
               return (
                 <React.Fragment key={note[0]}>
@@ -101,7 +102,11 @@ export default function Notes() {
                       key={index}
                       ref={(el) => {
                         if (noteCommentRefs.current && el) {
-                          noteCommentRefs.current[index] = el;
+                          if (noteCommentRefs.current.at(index)) {
+                            noteCommentRefs.current[index] = el;
+                          } else {
+                            noteCommentRefs.current.push(el);
+                          }
                         }
                       }}
                     />

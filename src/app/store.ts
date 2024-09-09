@@ -12,7 +12,9 @@ export const store = configureStore({
         selectedPostFetcher: selectedPostReducer,
         noteManager: noteReducter
     },
-    middleware: (getDefaultMiddleware) =>getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) => { 
+        return getDefaultMiddleware();
+    }
 });
 
 export type AppDispatch = typeof store.dispatch;
