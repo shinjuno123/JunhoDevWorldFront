@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import myFace from "../assets/images/myface.jpg";
 import NoteComment, {
   toggleHandle,
 } from "../components/component.note-comments";
@@ -41,14 +40,39 @@ export default function Notes() {
     ref.toggleComments();
   }
 
+  const handleScroll = useCallback(async () => {
+    if (
+      Object.entries(notes).length &&
+      window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight
+    ) {
+      if (currentPage < maxPage) {
+        setNoteParams({
+          page: noteParams.page + 1,
+          limit: noteParams.limit,
+        });
+      }
+    }
+
+    return;
+  }, [notes, currentPage, maxPage, noteParams]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
+
+
   return (
     <>
       <main className="main container">
         <section className="section__notes">
           <span className="notes__header">Notes</span>
           <ul className="notes">
-            {loading === "pending"? <li style={{'textAlign':'center'}}><ClipLoader/></li>:''}
-            {Object.entries(notes).map((note, index) => {
+            {Object.entries(notes).reverse().map((note, index) => {
               return (
                 <React.Fragment key={note[0]}>
                   <li className="note">
@@ -114,6 +138,7 @@ export default function Notes() {
                 </React.Fragment>
               );
             })}
+            {loading === "pending"? <li style={{'textAlign':'center', padding:'3rem'}}><ClipLoader/></li>:''}
           </ul>
         </section>
       </main>
