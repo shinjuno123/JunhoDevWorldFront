@@ -1,7 +1,7 @@
 import "./App.css";
 import Footer from "./footer";
 import Header from "./header";
-import { Routes, Route, useSearchParams, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./pages/page.home";
 import Writing from "./pages/page.writing";
 import Notes from "./pages/page.notes";

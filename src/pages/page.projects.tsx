@@ -1,22 +1,52 @@
 import projectImage from "../assets/images/example-project.png";
-import Glide from '@glidejs/glide';
-import { useEffect, useRef } from "react";
+import Glide , {Autoplay, Controls, Breakpoints } from '@glidejs/glide/dist/glide.modular.esm';
+import { useCallback, useEffect, useRef } from "react";
 import "material-icons/iconfont/material-icons.scss";
+import { useAppSelector } from "../app/hooks";
+import store from "../app/store";
+import { fetchOutstandingProjects } from "../features/project/outstanding-project.slice";
+import React from "react";
 
 export default function Projects() {
   const glideRef = useRef(null);
+  const { projects: outstandingProjects, loading } = useAppSelector((state) =>
+    state.outstandingProjectManager
+  );
 
-  const glide = new Glide('.glide', {
-    type: 'carousel',
-    startAt: 0,
-    perView: 1,
-  });
-  
+
+  const createGlide = () => {
+    const glide = new Glide('.glide', {
+      type: 'carousel',
+      perView: 1,
+      autoplay: 10000,
+    });
+
+
+    glide.mount({ Autoplay, Controls, Breakpoints }).play();
+
+    document.querySelectorAll('.glide__slide').forEach((slide) => {
+      slide.addEventListener('click', () => {
+        window.open(slide.getAttribute('data-url') as string, "_blank");
+      })
+    })
+
+    return
+  }
+
+
+  const fetchOutstandingProjectsAsync = useCallback(async () => {
+    await store.dispatch(fetchOutstandingProjects());
+    createGlide();
+    return;
+  }, []);
+
+
+
   useEffect(() => {
-    if(glideRef.current) {
-      glide.mount();
+    if (glideRef.current) {
+      fetchOutstandingProjectsAsync();
     }
-  })
+  }, [])
 
 
   return (
@@ -28,457 +58,40 @@ export default function Projects() {
           <div className="glide" ref={glideRef}>
             <div className="glide__track" data-glide-el="track">
               <ul className="glide__slides">
-                <li className="glide__slide">
-                  <div className="slide__wrapper">
-                    <div className="slide__background">
-                      <img
-                        src={projectImage}
-                        alt=""
-                      />
-                    </div>
+                {Object.entries(outstandingProjects).reverse().map((project) => {
+                  return <React.Fragment key={project[1].id}>
+                    <li className="glide__slide"  data-url={project[1].github_link}>
+                      <div className="slide__wrapper">
+                        <div className="slide__background" style={{ background: `url(${project[1].background}) no-repeat center center fixed`, 'backgroundSize': 'cover' }} />
+                        <div className="slide__description">
+                          <h3>Portfolio Website V1<br/>{`(Click this slide to see the details)`}</h3>
+                          <p>
+                            {project[1].description}
+                          </p>
+                          <h4>Skills</h4>
+                          <ol>
 
-                    <div className="slide__description">
-                      <h3>Portfolio Website V1</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
-                      </p>
-                      <h4>Skills</h4>
-                      <ol>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                      </ol>
-                      <h4>URL</h4>
-                      <a href="https://github.com/shinjuno123/portfolio-management-client">
-                        https://github.com/shinjuno123/portfWolio-management-client
-                      </a>
-                    </div>
-                  </div>
-                </li>
+                            {project[1].skills.map((skill, index) => {
+                              return <React.Fragment key={index}>
+                                <li >
+                                  <span className="material-symbols-outlined" >
+                                    {skill}
+                                  </span>
+                                </li>
 
-                <li className="glide__slide">
-                  <div className="slide__wrapper">
-                    <div className="slide__background">
-                      <img
-                        src={projectImage}
-                        alt=""
-                      />
-                    </div>
+                              </React.Fragment>
+                            })}
 
-                    <div className="slide__description">
-                      <h3>Portfolio Website V1</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
-                      </p>
-                      <h4>Skills</h4>
-                      <ol>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                      </ol>
-                      <h4>URL</h4>
-                      <a href="https://github.com/shinjuno123/portfolio-management-client">
-                        https://github.com/shinjuno123/portfWolio-management-client
-                      </a>
-                    </div>
-                  </div>
-                </li>
+                          </ol>
 
-                <li className="glide__slide">
-                  <div className="slide__wrapper">
-                    <div className="slide__background">
-                      <img
-                        src={projectImage}
-                        alt=""
-                      />
-                    </div>
+                        </div>
+                      </div>
+                    </li>
+                  </React.Fragment>
+                })}
 
-                    <div className="slide__description">
-                      <h3>Portfolio Website V1</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
-                      </p>
-                      <h4>Skills</h4>
-                      <ol>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                      </ol>
-                      <h4>URL</h4>
-                      <a href="https://github.com/shinjuno123/portfolio-management-client">
-                        https://github.com/shinjuno123/portfWolio-management-client
-                      </a>
-                    </div>
-                  </div>
-                </li>
 
-                <li className="glide__slide">
-                  <div className="slide__wrapper">
-                    <div className="slide__background">
-                      <img
-                        src={projectImage}
-                        alt=""
-                      />
-                    </div>
 
-                    <div className="slide__description">
-                      <h3>Portfolio Website V1</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
-                      </p>
-                      <h4>Skills</h4>
-                      <ol>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                        <li>
-                          <span className="material-symbols-outlined">
-                            html
-                          </span>
-                        </li>
-                      </ol>
-                      <h4>URL</h4>
-                      <a href="https://github.com/shinjuno123/portfolio-management-client">
-                        https://github.com/shinjuno123/portfWolio-management-client
-                      </a>
-                    </div>
-                  </div>
-                </li>
               </ul>
             </div>
             <div className="glide__arrows" data-glide-el="controls">
@@ -501,10 +114,11 @@ export default function Projects() {
             </div>
 
             <div className="glide__bullets" data-glide-el="controls[nav]">
-              <button className="glide__bullet" data-glide-dir="=0"></button>
-              <button className="glide__bullet" data-glide-dir="=1"></button>
-              <button className="glide__bullet" data-glide-dir="=2"></button>
-              <button className="glide__bullet" data-glide-dir="=3"></button>
+              {Object.entries(outstandingProjects).reverse().map((_, index) => {
+                return <React.Fragment key={index}>
+                  <button className="glide__bullet" data-glide-dir={`=${index}`}></button>
+                </React.Fragment>
+              })}
             </div>
           </div>
 
@@ -538,7 +152,7 @@ export default function Projects() {
                 <div className="project__info">
                   <div className="project__background">
                     <img
-                     src={projectImage}
+                      src={projectImage}
                       alt=""
                     />
                   </div>
