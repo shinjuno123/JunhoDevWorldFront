@@ -91,6 +91,42 @@
                 left: 0;
                 height: 100%;
                 width: 100%;
+                color: transparent;
+                transition: all 1s ease-in-out;      
+            }
+
+
+            .slide__description.hover {
+                opacity: 0;
+            }
+
+            .slide__background.hover{
+                color: $reversed-text-color;
+                z-index: 100;
+
+                div {
+                    background-color: rgba($color: #000000, $alpha: .7);
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+
+            
+                    span {
+                        display: block;
+                        font-size: $font-size-5;
+                        font-weight: bold;
+                        line-height: 1.2;
+                    }
+                }
+
+            }
+
+            .slide__background.hover::after {
+                opacity: 0;
+
             }
 
             .slide__background::after {
@@ -106,6 +142,7 @@
 
             .slide__description {
                 z-index: 200;
+                transition: opacity .5s ease-in-out;
 
                 h3 {
                     width: 100%;
@@ -149,13 +186,6 @@
                         background-color: $supplementary-color3;
                         color: $reversed-text-color;
 
-                        span {
-                            position: relative;
-                            display: inline-block;
-                            width: 100%;
-                            text-align: center;
-
-                        }
                     }
                 }
 

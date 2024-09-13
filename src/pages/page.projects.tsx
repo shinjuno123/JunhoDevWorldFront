@@ -1,6 +1,6 @@
 import projectImage from "../assets/images/example-project.png";
 import Glide , {Autoplay, Controls, Breakpoints } from '@glidejs/glide/dist/glide.modular.esm';
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "material-icons/iconfont/material-icons.scss";
 import { useAppSelector } from "../app/hooks";
 import store from "../app/store";
@@ -8,6 +8,7 @@ import { fetchOutstandingProjects } from "../features/project/outstanding-projec
 import React from "react";
 
 export default function Projects() {
+  const [hover ,setHover] = useState('');
   const glideRef = useRef(null);
   const { projects: outstandingProjects, loading } = useAppSelector((state) =>
     state.outstandingProjectManager
@@ -60,10 +61,17 @@ export default function Projects() {
                   return <React.Fragment key={project[0]}>
                     <li className="glide__slide" onClick={() => {
                       window.open(project[1].github_link, "_blank");
-                    }}>
-                      <div className="slide__wrapper">
-                        <div className="slide__background" style={{ background: `url(${project[1].background}) no-repeat center center fixed`, 'backgroundSize': 'cover' }} />
-                        <div className="slide__description">
+                    }}
+                    onMouseEnter={() => setHover('hover')} onMouseLeave={()=> setHover('')}
+                    >
+                      <div className={"slide__wrapper"}>
+                        <div className={`slide__background ${hover}`} style={{ background: `url(${project[1].background}) no-repeat center center fixed`, 'backgroundSize': 'cover' }}>
+                          <div>
+                            <span>{project[1].title}</span>
+                            <span>Click this to see the details</span>
+                          </div>
+                        </div>
+                        <div className={`slide__description ${hover}`}>
                           <h3>{project[1].title}<br/>{`(Click this slide to see the details)`}</h3>
                           <p>
                             {project[1].description}
