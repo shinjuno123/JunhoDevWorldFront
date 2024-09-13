@@ -17,18 +17,16 @@ export default function Projects() {
   const createGlide = () => {
     const glide = new Glide('.glide', {
       type: 'carousel',
-      perView: 1,
-      autoplay: 10000,
+      perView: 1
     });
 
-
-    glide.mount({ Autoplay, Controls, Breakpoints }).play();
-
-    document.querySelectorAll('.glide__slide').forEach((slide) => {
-      slide.addEventListener('click', () => {
-        window.open(slide.getAttribute('data-url') as string, "_blank");
-      })
-    })
+    glide.mount({ Controls, Breakpoints }).play();
+    
+    const arrowRight = document.querySelector('.glide__arrow--right');
+    
+    setInterval(() => {
+      arrowRight?.dispatchEvent(new Event('click'));
+    },7000);
 
     return
   }
@@ -59,12 +57,14 @@ export default function Projects() {
             <div className="glide__track" data-glide-el="track">
               <ul className="glide__slides">
                 {Object.entries(outstandingProjects).reverse().map((project) => {
-                  return <React.Fragment key={project[1].id}>
-                    <li className="glide__slide"  data-url={project[1].github_link}>
+                  return <React.Fragment key={project[0]}>
+                    <li className="glide__slide" onClick={() => {
+                      window.open(project[1].github_link, "_blank");
+                    }}>
                       <div className="slide__wrapper">
                         <div className="slide__background" style={{ background: `url(${project[1].background}) no-repeat center center fixed`, 'backgroundSize': 'cover' }} />
                         <div className="slide__description">
-                          <h3>Portfolio Website V1<br/>{`(Click this slide to see the details)`}</h3>
+                          <h3>{project[1].title}<br/>{`(Click this slide to see the details)`}</h3>
                           <p>
                             {project[1].description}
                           </p>

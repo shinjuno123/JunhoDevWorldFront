@@ -9,6 +9,7 @@ interface OutstandingProjectResponse {
 
 interface OutstandingProject {
     id: number;
+    title: string;
     description: string;
     skills: string[],
     background: string;
