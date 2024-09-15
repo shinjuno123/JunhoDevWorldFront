@@ -4,7 +4,7 @@ import postsReducer from '../features/writing/writing-posts.slice';
 import selectedPostReducer from '../features/writing/writing-selected-post.slice.ts';
 import noteReducter from '../features/note/note.slice.ts'
 import outstandingProjectReducer from '../features/project/outstanding-project.slice.ts';
-
+import otherProjectReducer from "../features/project/other-project.slice.ts";
 
 export const store = configureStore({
     reducer: {
@@ -12,7 +12,8 @@ export const store = configureStore({
         postFetcher: postsReducer,
         selectedPostFetcher: selectedPostReducer,
         noteManager: noteReducter,
-        outstandingProjectManager: outstandingProjectReducer
+        outstandingProjectManager: outstandingProjectReducer,
+        otherProjectManager: otherProjectReducer
     },
     middleware: (getDefaultMiddleware) => { 
         return getDefaultMiddleware();

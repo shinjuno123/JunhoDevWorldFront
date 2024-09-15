@@ -1,5 +1,5 @@
 import projectImage from "../assets/images/example-project.png";
-import Glide, { Autoplay, Controls, Breakpoints } from '@glidejs/glide/dist/glide.modular.esm';
+import Glide, { Controls, Breakpoints } from '@glidejs/glide/dist/glide.modular.esm';
 import { useCallback, useEffect, useRef, useState } from "react";
 import "material-icons/iconfont/material-icons.scss";
 import { useAppSelector } from "../app/hooks";
@@ -10,8 +10,11 @@ import React from "react";
 export default function Projects() {
   const [hover, setHover] = useState('');
   const glideRef = useRef(null);
-  const { projects: outstandingProjects, loading } = useAppSelector((state) =>
+  const { projects: outstandingProjects, loading: outstandingProjectsLoader } = useAppSelector((state) =>
     state.outstandingProjectManager
+  );
+  const { projects: otherProjects, loading: otherProjectsLoader } = useAppSelector((state) =>
+    state.otherProjectManager
   );
 
 
@@ -137,182 +140,34 @@ export default function Projects() {
 
           <div className="project-list">
             <ul className="projects">
-              <li className="project">
-                <div className="project__info">
-                  <div className="project__background">
-                    <img
-                      src={projectImage}
-                      alt=""
-                    />
-                  </div>
-                  <div className="project__description">
-                    <h4 className="project__title">Simon Game</h4>
-                    <p className="project__excerpt">
-                      Traditional simon game. This game is the best probably in
-                      this world!
-                    </p>
-                  </div>
-                </div>
-                <div className="project__link-cover">
-                  <a className="project__link" href="https://github.com/">
-                    <h4 className="project__title">Simon Game</h4>
-                  </a>
-                </div>
-              </li>
-              <li className="project">
-                <div className="project__info">
-                  <div className="project__background">
-                    <img
-                      src={projectImage}
-                      alt=""
-                    />
-                  </div>
-                  <div className="project__description">
-                    <h4 className="project__title">Simon Game</h4>
-                    <p className="project__excerpt">
-                      Traditional simon game. This game is the best probably in
-                      this world!
-                    </p>
-                  </div>
-                </div>
-                <div className="project__link-cover">
-                  <a className="project__link" href="https://github.com/">
-                    <h4 className="project__title">Simon Game</h4>
-                  </a>
-                </div>
-              </li>
-              <li className="project">
-                <div className="project__info">
-                  <div className="project__background">
-                    <img
-                      src={projectImage}
-                      alt=""
-                    />
-                  </div>
-                  <div className="project__description">
-                    <h4 className="project__title">Simon Game</h4>
-                    <p className="project__excerpt">
-                      Traditional simon game. This game is the best probably in
-                      this world!
-                    </p>
-                  </div>
-                </div>
-                <div className="project__link-cover">
-                  <a className="project__link" href="https://github.com/">
-                    <h4 className="project__title">Simon Game</h4>
-                  </a>
-                </div>
-              </li>
-              <li className="project">
-                <div className="project__info">
-                  <div className="project__background">
-                    <img
-                      src={projectImage}
-                      alt=""
-                    />
-                  </div>
-                  <div className="project__description">
-                    <h4 className="project__title">Simon Game</h4>
-                    <p className="project__excerpt">
-                      Traditional simon game. This game is the best probably in
-                      this world!
-                    </p>
-                  </div>
-                </div>
-                <div className="project__link-cover">
-                  <a className="project__link" href="https://github.com/">
-                    <h4 className="project__title">Simon Game</h4>
-                  </a>
-                </div>
-              </li>
-              <li className="project">
-                <div className="project__info">
-                  <div className="project__background">
-                    <img
-                      src={projectImage}
-                      alt=""
-                    />
-                  </div>
-                  <div className="project__description">
-                    <h4 className="project__title">Simon Game</h4>
-                    <p className="project__excerpt">
-                      Traditional simon game. This game is the best probably in
-                      this world!
-                    </p>
-                  </div>
-                </div>
-                <div className="project__link-cover">
-                  <a className="project__link" href="https://github.com/">
-                    <h4 className="project__title">Simon Game</h4>
-                  </a>
-                </div>
-              </li>
-              <li className="project">
-                <div className="project__info">
-                  <div className="project__background">
-                    <img
-                      src={projectImage}
-                      alt=""
-                    />
-                  </div>
-                  <div className="project__description">
-                    <h4 className="project__title">Simon Game</h4>
-                    <p className="project__excerpt">
-                      Traditional simon game. This game is the best probably in
-                      this world!
-                    </p>
-                  </div>
-                </div>
-                <div className="project__link-cover">
-                  <a className="project__link" href="https://github.com/">
-                    <h4 className="project__title">Simon Game</h4>
-                  </a>
-                </div>
-              </li>
-              <li className="project">
-                <div className="project__info">
-                  <div className="project__background">
-                    <img
-                      src={projectImage}
-                      alt=""
-                    />
-                  </div>
-                  <div className="project__description">
-                    <h4 className="project__title">Simon Game</h4>
-                    <p className="project__excerpt">
-                      Traditional simon game. This game is the best probably in
-                      this world!
-                    </p>
-                  </div>
-                </div>
-                <div className="project__link-cover">
-                  <a className="project__link" href="https://github.com/">
-                    <h4 className="project__title">Simon Game</h4>
-                  </a>
-                </div>
-              </li>
-              <li className="project">
-                <div className="project__info">
-                  <div className="project__background">
-                    <img
-                      src={projectImage}
-                      alt=""
-                    />
-                  </div>
-                  <div className="project__description">
-                    <h4 className="project__title">Simon Game</h4>
-                    <p className="project__excerpt">
-                      Traditional simon game. This game is the best probably in
-                      this world!
-                    </p>
-                  </div>
-                </div>
-                <div className="project__link-cover">
-                  <a className="project__link" href="https://github.com/">
-                    <h4 className="project__title">Simon Game</h4>
-                  </a>
-                </div>
-              </li>
+              {Object.entries(otherProjects).reverse().map((project) => {
+                return <React.Fragment key={project[0]}>
+                  <li className="project">
+                    <div className="project__info">
+                      <div className="project__background">
+                        <img
+                          src={projectImage}
+                          alt=""
+                        />
+                      </div>
+                      <div className="project__description">
+                        <h4 className="project__title">Simon Game</h4>
+                        <p className="project__excerpt">
+                          Traditional simon game. This game is the best probably in
+                          this world!
+                        </p>
+                      </div>
+                    </div>
+                    <div className="project__link-cover">
+                      <a className="project__link" href="https://github.com/">
+                        <h4 className="project__title">Simon Game</h4>
+                      </a>
+                    </div>
+                  </li>
+                </React.Fragment>
+              })}
+
+
             </ul>
 
             <div className="pagination">
