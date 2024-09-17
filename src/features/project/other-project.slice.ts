@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 interface OtherProjectResponse {
-    projects: OtherProject[],
+    otherProjects: OtherProject[],
     status: {is_success: boolean, message: string};  
 }
 
@@ -17,20 +17,21 @@ interface OtherProject {
 }
 
 interface OtherProjectState {
-    projects: Record<number, OtherProject>;
+    otherProjects: Record<number, OtherProject>;
     loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 const initialState: OtherProjectState = {
-    projects: {},
+    otherProjects: {},
     loading: 'idle',
 }
 
-export const fetchOtherProjects = createAsyncThunk<OtherProjectResponse| undefined>(
+export const fetchOtherProjects = createAsyncThunk<OtherProjectResponse| undefined, {page: number, limit: number}>(
     'project/FetchOutstandingProjects',
-    async () => {
+    async ({page, limit}) => {
         try {
-            const response = await axios.get(`/project/v1/other-projects`);
+            const response = await axios.get(`/project/v1/other-projects?page=${page}&limit=${limit}`);
+            console.log(response);
             return response.data;
         } catch (error) {
             console.error(error);
@@ -44,17 +45,18 @@ const otherProjectSlice = createSlice({
     initialState,
     reducers: {
         emptyProjects(state) {
-            state.projects = {};
+            state.otherProjects = {};
         },
 
     },
     extraReducers: (builder) => {
         builder.addCase(fetchOtherProjects.fulfilled, (state, action) => {
-            if (state.projects&& action.payload) {
-                action.payload.projects.forEach((post) => {
-                    state.projects = [];
-                    state.projects[post.id] = post;
+            if (state.otherProjects&& action.payload && action.payload.otherProjects) {
+                action.payload.otherProjects.forEach((post) => {
+                    state.otherProjects[post.id] = post;
                 });
+
+                
                 state.loading = 'succeeded';
             }
         })

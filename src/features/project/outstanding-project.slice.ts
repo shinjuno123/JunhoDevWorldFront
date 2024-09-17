@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 interface OutstandingProjectResponse {
-    projects: OutstandingProject[],
+    outstandingProjects: OutstandingProject[],
     status: {is_success: boolean, message: string};  
 }
 
@@ -18,12 +18,12 @@ interface OutstandingProject {
 }
 
 interface OutstandingProjectState {
-    projects: Record<number, OutstandingProject>;
+    outstandingProjects: Record<number, OutstandingProject>;
     loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
 const initialState: OutstandingProjectState = {
-    projects: {},
+    outstandingProjects: {},
     loading: 'idle',
 }
 
@@ -45,15 +45,15 @@ const outstandingProjectSlice = createSlice({
     initialState,
     reducers: {
         emptyProjects(state) {
-            state.projects = {};
+            state.outstandingProjects = {};
         },
 
     },
     extraReducers: (builder) => {
         builder.addCase(fetchOutstandingProjects.fulfilled, (state, action) => {
-            if (state.projects&& action.payload) {
-                action.payload.projects.forEach((post) => {
-                    state.projects[post.id] = post;
+            if (action.payload&& action.payload.outstandingProjects) {
+                action.payload.outstandingProjects.forEach((post) => {
+                    state.outstandingProjects[post.id] = post;
                 });
                 state.loading = 'succeeded';
             }

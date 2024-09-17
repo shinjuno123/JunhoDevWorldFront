@@ -6,14 +6,15 @@ import { useAppSelector } from "../app/hooks";
 import store from "../app/store";
 import { fetchOutstandingProjects } from "../features/project/outstanding-project.slice";
 import React from "react";
+import { fetchOtherProjects } from "../features/project/other-project.slice";
 
 export default function Projects() {
   const [hover, setHover] = useState('');
   const glideRef = useRef(null);
-  const { projects: outstandingProjects, loading: outstandingProjectsLoader } = useAppSelector((state) =>
+  const { outstandingProjects: outstandingProjects, loading: outstandingProjectsLoader } = useAppSelector((state) =>
     state.outstandingProjectManager
   );
-  const { projects: otherProjects, loading: otherProjectsLoader } = useAppSelector((state) =>
+  const { otherProjects, loading: otherProjectsLoader } = useAppSelector((state) =>
     state.otherProjectManager
   );
 
@@ -39,14 +40,19 @@ export default function Projects() {
   const fetchOutstandingProjectsAsync = useCallback(async () => {
     await store.dispatch(fetchOutstandingProjects());
     createGlide();
+
     return;
   }, []);
 
+  const fetchOtherProjectsAsync = useCallback(async (page: number, limit: number) => {
+    await store.dispatch(fetchOtherProjects({page: page, limit: limit}));
+  }, [])
 
 
   useEffect(() => {
     if (glideRef.current) {
       fetchOutstandingProjectsAsync();
+      fetchOtherProjectsAsync(1, 8);
     }
   }, [])
 
@@ -85,7 +91,7 @@ export default function Projects() {
                           <h4>Skills</h4>
                           <ol>
 
-                            {project[1].skills.map((skill, index) => {
+                            {/* {project[1].skills.map((skill, index) => {
                               return <React.Fragment key={index}>
                                 <li >
                                   <span className="material-symbols-outlined" >
@@ -94,7 +100,7 @@ export default function Projects() {
                                 </li>
 
                               </React.Fragment>
-                            })}
+                            })} */}
 
                           </ol>
 
