@@ -6,15 +6,14 @@ import { useAppSelector } from "../app/hooks";
 import store from "../app/store";
 import { fetchOutstandingProjects } from "../features/project/outstanding-project.slice";
 import React from "react";
-import { fetchOtherProjects } from "../features/project/other-project.slice";
-
+import { fetchOtherProjects, emptyOtherProjects } from "../features/project/other-project.slice";
 export default function Projects() {
   const [hover, setHover] = useState('');
   const glideRef = useRef(null);
   const { outstandingProjects: outstandingProjects, loading: outstandingProjectsLoader } = useAppSelector((state) =>
     state.outstandingProjectManager
   );
-  const { otherProjects, loading: otherProjectsLoader } = useAppSelector((state) =>
+  const { otherProjects, loading: otherProjectsLoader, previousPageUrl, nextPageUrl, maxPage, currentPage } = useAppSelector((state) =>
     state.otherProjectManager
   );
 
@@ -44,17 +43,32 @@ export default function Projects() {
     return;
   }, []);
 
-  const fetchOtherProjectsAsync = useCallback(async (page: number, limit: number) => {
-    await store.dispatch(fetchOtherProjects({page: page, limit: limit}));
-  }, [])
+  const fetchOtherProjectsAsync = useCallback(async (page: number, limit: number, nextPage:{activated: boolean, url: string}) => {
+    await store.dispatch(fetchOtherProjects({page: page, limit: limit, nextPage:nextPage}));
+  }, []);
 
 
   useEffect(() => {
     if (glideRef.current) {
       fetchOutstandingProjectsAsync();
-      fetchOtherProjectsAsync(1, 8);
+      fetchOtherProjectsAsync(1, 8, {activated: false, url: ''});
     }
-  }, [])
+  }, []);
+
+  const clickNext = async () => {
+    await store.dispatch(emptyOtherProjects());
+    await store.dispatch(fetchOtherProjects({page: 0, limit: 0, nextPage:{activated: true, url: nextPageUrl}}));
+  }
+
+  const clickPrev = async () => {
+    await store.dispatch(emptyOtherProjects());
+    await store.dispatch(fetchOtherProjects({page: 0, limit: 0, nextPage:{activated: true, url: previousPageUrl}}));
+  }
+
+  const toPage = async (page: number) => {
+    await store.dispatch(emptyOtherProjects());
+    await store.dispatch(fetchOtherProjects({page: page, limit: 8, nextPage:{activated: false, url: ''}}));
+  }
 
 
   return (
@@ -91,7 +105,7 @@ export default function Projects() {
                           <h4>Skills</h4>
                           <ol>
 
-                            {/* {project[1].skills.map((skill, index) => {
+                            {project[1].skills.map((skill, index) => {
                               return <React.Fragment key={index}>
                                 <li >
                                   <span className="material-symbols-outlined" >
@@ -100,7 +114,7 @@ export default function Projects() {
                                 </li>
 
                               </React.Fragment>
-                            })} */}
+                            })}
 
                           </ol>
 
@@ -152,21 +166,20 @@ export default function Projects() {
                     <div className="project__info">
                       <div className="project__background">
                         <img
-                          src={projectImage}
-                          alt=""
+                          src={project[1].background}
+                          alt={project[1].title}
                         />
                       </div>
                       <div className="project__description">
-                        <h4 className="project__title">Simon Game</h4>
+                        <h4 className="project__title">{project[1].title}</h4>
                         <p className="project__excerpt">
-                          Traditional simon game. This game is the best probably in
-                          this world!
+                          {project[1].excerpt}
                         </p>
                       </div>
                     </div>
                     <div className="project__link-cover">
-                      <a className="project__link" href="https://github.com/">
-                        <h4 className="project__title">Simon Game</h4>
+                      <a className="project__link" href={project[1].github_link} target="_blank">
+                        <h4 className="project__title">{project[1].title}</h4>
                       </a>
                     </div>
                   </li>
@@ -178,44 +191,21 @@ export default function Projects() {
 
             <div className="pagination">
               <ol className="page-numbers">
-                <li className="go-left page-number">
+                <li className="go-left page-number" onClick={() => clickPrev()}>
                   <span className="material-icons">
                     chevron_left
                   </span>
                 </li>
-                <li className="page-number current-page">
-                  <span>1</span>
-                </li>
 
-                <li className="page-number">
-                  <span>2</span>
-                </li>
+                {[...Array(maxPage).keys()].map(i=>i+1).map((page)=> {
+                  return <React.Fragment key={page}>
+                    <li className={`page-number ${currentPage == page? 'current-page':''}`} onClick={() => toPage(page)}>
+                      <span>{page}</span>
+                    </li>
+                  </React.Fragment>
+                })}
 
-                <li className="page-number">
-                  <span>3</span>
-                </li>
-
-                <li className="page-number">
-                  <span>4</span>
-                </li>
-
-                <li className="page-number">
-                  <span>5</span>
-                </li>
-
-                <li className="page-number">
-                  <span>6</span>
-                </li>
-
-                <li className="page-number">
-                  <span>7</span>
-                </li>
-
-                <li className="page-number">
-                  <span>8</span>
-                </li>
-
-                <li className="go-right page-number">
+                <li className="go-right page-number" onClick={() => clickNext()}>
                   <span className="material-icons">
                     chevron_right
                   </span>

@@ -1,10 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import store from '../../app/store';
+import { useAppSelector } from '../../app/hooks';
 
 
 interface OtherProjectResponse {
     otherProjects: OtherProject[],
     status: {is_success: boolean, message: string};  
+    next_page_url: string;
+    prev_page_url: string;
+    maxPage: number;
+    currentPage: number;
 }
 
 interface OtherProject {
@@ -19,20 +25,30 @@ interface OtherProject {
 interface OtherProjectState {
     otherProjects: Record<number, OtherProject>;
     loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+    nextPageUrl: string;
+    previousPageUrl: string;
+    maxPage: number;
+    currentPage: number;
 }
 
 const initialState: OtherProjectState = {
     otherProjects: {},
+    nextPageUrl: '',
+    previousPageUrl: '',
     loading: 'idle',
+    maxPage: 0,
+    currentPage: 1
 }
 
-export const fetchOtherProjects = createAsyncThunk<OtherProjectResponse| undefined, {page: number, limit: number}>(
+export const fetchOtherProjects = createAsyncThunk<OtherProjectResponse| undefined, {page: number, limit: number, nextPage: {activated: boolean, url: string}}>(
     'project/FetchOutstandingProjects',
-    async ({page, limit}) => {
+    async ({page, limit, nextPage={activated: false, url: ''}}) => {
         try {
-            const response = await axios.get(`/project/v1/other-projects?page=${page}&limit=${limit}`);
-            console.log(response);
-            return response.data;
+            if (nextPage.activated && nextPage.url) {
+                return (await axios.get(nextPage.url)).data;
+            } else {
+                return (await axios.get(`/project/v1/other-projects?page=${page}&limit=${limit}`)).data;
+            }
         } catch (error) {
             console.error(error);
         }
@@ -44,9 +60,9 @@ const otherProjectSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
-        emptyProjects(state) {
+        emptyOtherProjects(state) {
             state.otherProjects = {};
-        },
+        }
 
     },
     extraReducers: (builder) => {
@@ -56,7 +72,10 @@ const otherProjectSlice = createSlice({
                     state.otherProjects[post.id] = post;
                 });
 
-                
+                state.nextPageUrl = action.payload.next_page_url;
+                state.previousPageUrl = action.payload.prev_page_url;
+                state.maxPage = action.payload.maxPage
+                state.currentPage = action.payload.currentPage;
                 state.loading = 'succeeded';
             }
         })
@@ -73,7 +92,7 @@ const otherProjectSlice = createSlice({
 
 
 export default otherProjectSlice.reducer;
-export const {emptyProjects} = otherProjectSlice.actions;
+export const {emptyOtherProjects} = otherProjectSlice.actions;
 
 
 
