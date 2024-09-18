@@ -2,11 +2,12 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export interface FeaturedPost {
-    id: number,
-    title: string,
-    excerpt: string,
-    created: string,
-    modified: string 
+    id: number;
+    title: string;
+    excerpt: string;
+    created: string;
+    modified: string;
+    background_image: string;
 }
 
 export interface FeaturedPosts {

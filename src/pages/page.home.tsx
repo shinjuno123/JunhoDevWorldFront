@@ -52,10 +52,10 @@ export default function Home() {
                                         <div className="featured-post">
                                             <picture>
                                                 <source
-                                                    srcSet="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg 500w"
+                                                    srcSet={`${featuredPost[1].background_image} 500w`}
                                                     type="img/avif" />
                                                 <img className="featured-post__image"
-                                                    src="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg"
+                                                    src={featuredPost[1].background_image}
                                                     alt="" loading="eager" decoding="auto" width="500" height="500" />
                                             </picture>
                                             <div className="featured-post__inner">
