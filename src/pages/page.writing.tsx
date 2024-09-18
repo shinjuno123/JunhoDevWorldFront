@@ -104,7 +104,6 @@ export default function Writing() {
             <div className="blog-page__main">
               <ul className="post__list">
                 {Object.entries(posts)
-                  .sort()
                   .reverse()
                   .map((post) => {
                     return (

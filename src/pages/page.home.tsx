@@ -1,8 +1,26 @@
 import "material-icons/iconfont/material-icons.scss";
-import { Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../app/hooks";
+import { useCallback, useEffect, useRef } from "react";
+import store from "../app/store";
+import { fetchFeaturedPosts } from "../features/writing/writing-featured-posts.slice";
+import React from "react";
 
 export default function Home() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { featuredPosts, loading } = useAppSelector((state) => state.featuredPostManager);
+    const navigate = useNavigate();
+
+    const fetchFeaturedPostsAsync = useCallback(async()=> {
+        await store.dispatch(fetchFeaturedPosts());
+    },[])
+
+    useEffect(() => {
+        fetchFeaturedPostsAsync();
+    }, []);
+
+    const clickLink = (id: number) => {
+        navigate(`/posts/${id}`);
+    }
 
 
     return (
@@ -24,194 +42,39 @@ export default function Home() {
 
                 </div>
 
-
                 <div className="featured-posts__outer">
                     <h2>Featured Posts</h2>
                     <div className="featured-posts">
                         <ul className="featured-posts__list">
+                            {Object.entries(featuredPosts).reverse().map((featuredPost) => {
+                                return <React.Fragment key={featuredPost[0]} >
+                                    <li className="featured-posts__item" onClick={()=> clickLink(featuredPost[1].id)}>
+                                        <div className="featured-post">
+                                            <picture>
+                                                <source
+                                                    srcSet="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg 500w"
+                                                    type="img/avif" />
+                                                <img className="featured-post__image"
+                                                    src="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg"
+                                                    alt="" loading="eager" decoding="auto" width="500" height="500" />
+                                            </picture>
+                                            <div className="featured-post__inner">
+                                                <Link className="featured-post__link" to={`/posts/${featuredPost[1].id}`}>
+                                                    <span className="featured-post__title">{featuredPost[1].title}</span>
+                                                </Link>
+                                                <p className="featured-post__description">
+                                                    {featuredPost[1].excerpt}
+                                                </p>
+                                                <span className="featured-post__likecount" aria-label="47 Likes">
+                                                    <i className="fa-regular fa-heart"></i>
+                                                    &nbsp;&nbsp;<span>47</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </li>
 
-                            <li className="featured-posts__item">
-                                <div className="featured-post">
-                                    <picture>
-                                        <source
-                                            srcSet="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg 500w"
-                                            type="img/avif"/>
-                                        <img className="featured-post__image"
-                                            src="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg"
-                                            alt="" loading="eager" decoding="auto" width="500" height="500"/>
-                                    </picture>
-                                    <div className="featured-post__inner">
-                                        <a className="featured-post__link" href="/">
-                                            <span className="featured-post__title">Welcome to Web dev</span>
-                                        </a>
-                                        <p className="featured-post__description">
-                                            A lot of new CSS features have shipped in the last years, but actual usage is still low.
-                                            One of the biggest barriers: we need to re-wire our own brains.
-                                        </p>
-                                        <span className="featured-post__likecount" aria-label="47 Likes">
-                                            <i className="fa-regular fa-heart"></i>
-                                            &nbsp;&nbsp;<span>47</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li className="featured-posts__item">
-                                <div className="featured-post">
-                                    <picture>
-                                        <source
-                                            srcSet="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg 500w"
-                                            type="img/avif"/>
-                                        <img className="featured-post__image"
-                                            src="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg"
-                                            alt="" loading="eager" decoding="auto" width="500" height="500"/>
-                                    </picture>
-                                    <div className="featured-post__inner">
-                                        <a className="featured-post__link" href="/">
-                                            <span className="featured-post__title">Welcome to Web dev</span>
-                                        </a>
-                                        <p className="featured-post__description">
-                                            A lot of new CSS features have shipped in the last years, but actual usage is still low.
-                                            One of the biggest barriers: we need to re-wire our own brains.
-                                        </p>
-                                        <span className="featured-post__likecount" aria-label="47 Likes">
-                                            <i className="fa-regular fa-heart"></i>
-                                            &nbsp;&nbsp;<span>47</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li className="featured-posts__item">
-                                <div className="featured-post">
-                                    <picture>
-                                        <source
-                                            srcSet="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg 500w"
-                                            type="img/avif"/>
-                                        <img className="featured-post__image"
-                                            src="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg"
-                                            alt="" loading="eager" decoding="auto" width="500" height="500"/>
-                                    </picture>
-                                    <div className="featured-post__inner">
-                                        <a className="featured-post__link" href="/">
-                                            <span className="featured-post__title">Welcome to Web dev</span>
-                                        </a>
-                                        <p className="featured-post__description">
-                                            A lot of new CSS features have shipped in the last years, but actual usage is still low.
-                                            One of the biggest barriers: we need to re-wire our own brains.
-                                        </p>
-                                        <span className="featured-post__likecount" aria-label="47 Likes">
-                                            <i className="fa-regular fa-heart"></i>
-                                            &nbsp;&nbsp;<span>47</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li className="featured-posts__item">
-                                <div className="featured-post">
-                                    <picture>
-                                        <source
-                                            srcSet="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg 500w"
-                                            type="img/avif"/>
-                                        <img className="featured-post__image"
-                                            src="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg"
-                                            alt="" loading="eager" decoding="auto" width="500" height="500"/>
-                                    </picture>
-                                    <div className="featured-post__inner">
-                                        <a className="featured-post__link" href="/">
-                                            <span className="featured-post__title">Welcome to Web dev</span>
-                                        </a>
-                                        <p className="featured-post__description">
-                                            A lot of new CSS features have shipped in the last years, but actual usage is still low.
-                                            One of the biggest barriers: we need to re-wire our own brains.
-                                        </p>
-                                        <span className="featured-post__likecount" aria-label="47 Likes">
-                                            <i className="fa-regular fa-heart"></i>
-                                            &nbsp;&nbsp;<span>47</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li className="featured-posts__item">
-                                <div className="featured-post">
-                                    <picture>
-                                        <source
-                                            srcSet="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg 500w"
-                                            type="img/avif"/>
-                                        <img className="featured-post__image"
-                                            src="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg"
-                                            alt="" loading="eager" decoding="auto" width="500" height="500"/>
-                                    </picture>
-                                    <div className="featured-post__inner">
-                                        <a className="featured-post__link" href="/">
-                                            <span className="featured-post__title">Welcome to Web dev</span>
-                                        </a>
-                                        <p className="featured-post__description">
-                                            A lot of new CSS features have shipped in the last years, but actual usage is still low.
-                                            One of the biggest barriers: we need to re-wire our own brains.
-                                        </p>
-                                        <span className="featured-post__likecount" aria-label="47 Likes">
-                                            <i className="fa-regular fa-heart"></i>
-                                            &nbsp;&nbsp;<span>47</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li className="featured-posts__item">
-                                <div className="featured-post">
-                                    <picture>
-                                        <source
-                                            srcSet="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg 500w"
-                                            type="img/avif"/>
-                                        <img className="featured-post__image"
-                                            src="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg"
-                                            alt="" loading="eager" decoding="auto" width="500" height="500"/>
-                                    </picture>
-                                    <div className="featured-post__inner">
-                                        <a className="featured-post__link" href="/">
-                                            <span className="featured-post__title">Welcome to Web dev</span>
-                                        </a>
-                                        <p className="featured-post__description">
-                                            A lot of new CSS features have shipped in the last years, but actual usage is still low.
-                                            One of the biggest barriers: we need to re-wire our own brains.
-                                        </p>
-                                        <span className="featured-post__likecount" aria-label="47 Likes">
-                                            <i className="fa-regular fa-heart"></i>
-                                            &nbsp;&nbsp;<span>47</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-
-                                                        <li className="featured-posts__item">
-                                <div className="featured-post">
-                                    <picture>
-                                        <source
-                                            srcSet="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg 500w"
-                                            type="img/avif"/>
-                                        <img className="featured-post__image"
-                                            src="https://t4.ftcdn.net/jpg/02/25/08/49/360_F_225084966_hhswkk9GgkAKcr2p1n69aaiI1jETbZO9.jpg"
-                                            alt="" loading="eager" decoding="auto" width="500" height="500"/>
-                                    </picture>
-                                    <div className="featured-post__inner">
-                                        <a className="featured-post__link" href="/">
-                                            <span className="featured-post__title">Welcome to Web dev</span>
-                                        </a>
-                                        <p className="featured-post__description">
-                                            A lot of new CSS features have shipped in the last years, but actual usage is still low.
-                                            One of the biggest barriers: we need to re-wire our own brains.
-                                        </p>
-                                        <span className="featured-post__likecount" aria-label="47 Likes">
-                                            <i className="fa-regular fa-heart"></i>
-                                            &nbsp;&nbsp;<span>47</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-
+                                </React.Fragment>
+                            })}
 
                         </ul>
                         <p className="featured-posts__footer">

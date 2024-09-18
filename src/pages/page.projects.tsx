@@ -1,4 +1,3 @@
-import projectImage from "../assets/images/example-project.png";
 import Glide, { Controls, Breakpoints } from '@glidejs/glide/dist/glide.modular.esm';
 import { useCallback, useEffect, useRef, useState } from "react";
 import "material-icons/iconfont/material-icons.scss";
