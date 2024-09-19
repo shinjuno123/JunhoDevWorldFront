@@ -38,7 +38,7 @@ const initialState: SelectedPostState = {
 
 
 export const fetchSelectedPost = createAsyncThunk<SelectedPost|undefined, {id: number}>(
-    'writing/fetchSelectedPost',
+    'fetchSelectedPost',
     async (data) => {
         try {
             const response = await axios.get(`/writing/v1/posts/${data.id}/`);
@@ -51,7 +51,7 @@ export const fetchSelectedPost = createAsyncThunk<SelectedPost|undefined, {id: n
 
 
 const selectedPostSlice = createSlice({
-    name: 'posts',
+    name: 'fetchSelectedPost',
     initialState,
     reducers: {
 

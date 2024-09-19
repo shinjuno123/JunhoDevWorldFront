@@ -38,7 +38,7 @@ const initialState: FeaturedPostsState = {
 
 
 export const fetchFeaturedPosts = createAsyncThunk<FeaturedPosts|undefined>(
-    'writing/fetchFeaturedPosts',
+    'featuredPosts',
     async () => {
         try {
             const response = await axios.get(`/writing/v1/posts?onlyFeaturedPosts=TRUE`);
@@ -62,6 +62,7 @@ const featuredPostsSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchFeaturedPosts.fulfilled, (state, action) => {
             if (state.featuredPosts && action.payload) {
+                
                 action.payload.data.forEach((post) => {
                     state.featuredPosts[post.id] = post;
                 });

@@ -10,11 +10,12 @@ import About from "./pages/page.about";
 import SelectedPost from "./pages/page.selected-post";
 import Intro from "./pages/about/page.about.intro";
 import History from "./pages/about/page.about.history";
-import Skills from "./pages/about/page.about.skills";
+import AboutSkills from "./pages/about/page.about.skills";
 import AboutProjects from "./pages/about/page.about.projects";
 import { useEffect } from "react";
 import Page404 from "./pages/page.404";
 import './api-client.ts';
+import Skills from "./pages/page.skills.tsx";
 
 function App() {
   const navigate = useNavigate();
@@ -32,11 +33,12 @@ function App() {
         <Route path="posts/:postId" element={<SelectedPost />}></Route>
         <Route path="notes" element={<Notes />}></Route>
         <Route path="projects" element={<Projects />}></Route>
+        <Route path="skills" element={<Skills/>}></Route>
         <Route path="about" element={<About />}>
           <Route path="" element={<Intro />}></Route>
           <Route path="history" element={<History />}></Route>
           <Route path="projects" element={<AboutProjects/>}></Route>
-          <Route path="skills" element={<Skills />}></Route>
+          <Route path="skills" element={<AboutSkills />}></Route>
         </Route>
         <Route path="*" element={<Page404/>}></Route>
       </Routes>

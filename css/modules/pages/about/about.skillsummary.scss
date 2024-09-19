@@ -3,9 +3,12 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+    min-height: 50rem;
 
     h1 {
-        padding: 0 0 4rem;
+        padding: 1rem 0;
         width: fit-content;
         text-align: center;
         font-size: $font-size-5;
@@ -14,7 +17,7 @@
     .skills {
         display: flex;
         flex-direction: column;
-        gap: 3rem;
+        gap: 1.2rem;
         font-size: $font-size-3;
         font-weight: bold;
         background-color: $background-color;
@@ -24,11 +27,15 @@
         max-width: 55rem;
         width: 80%;
         border-radius: 5px;
+        margin: 3rem 0 5rem 0;
 
         .skill {
             position: relative;
             display: flex;
-            gap: 2.5rem;
+            padding: 2em;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+            transition: all .3s ease-in-out;
 
             .skill-name {
                 width: 20%;
@@ -46,7 +53,7 @@
                     background-color: $supplementary-color3;
                     border-radius: 2px;
                     height: 4px;
-                    z-index: 100;
+                    z-index: 10;
                     animation-name: grow-skill-gauge-up;
                     animation-duration: 4s;
                 }
@@ -67,9 +74,29 @@
                 text-align: end;
             }
         }
+
+        .skill:hover {
+            background-color: $secondary-color;
+            cursor: pointer;
+        }
+
     }
 }
 
+
+.skill-details {
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+    padding: 1.5rem 1rem;
+    border-radius: 5px;
+
+
+    .skill-details__description-box img {
+        width: 25%;
+        float: right;
+        border-radius: 5px;
+    }
+
+}
 
 @keyframes grow-skill-gauge-up {
     0% {

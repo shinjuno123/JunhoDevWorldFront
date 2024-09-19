@@ -28,7 +28,7 @@ const initialState: OutstandingProjectState = {
 }
 
 export const fetchOutstandingProjects = createAsyncThunk<OutstandingProjectResponse| undefined>(
-    'project/FetchOutstandingProjects',
+    'FetchOutstandingProjects',
     async () => {
         try {
             const response = await axios.get(`/project/v1/outstanding-projects`);
@@ -41,7 +41,7 @@ export const fetchOutstandingProjects = createAsyncThunk<OutstandingProjectRespo
 
 
 const outstandingProjectSlice = createSlice({
-    name: 'notes',
+    name: 'FetchOutstandingProjects',
     initialState,
     reducers: {
         emptyProjects(state) {

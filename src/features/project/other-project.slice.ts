@@ -41,7 +41,7 @@ const initialState: OtherProjectState = {
 }
 
 export const fetchOtherProjects = createAsyncThunk<OtherProjectResponse| undefined, {page: number, limit: number, nextPage: {activated: boolean, url: string}}>(
-    'project/FetchOutstandingProjects',
+    'FetchOtherProjects',
     async ({page, limit, nextPage={activated: false, url: ''}}) => {
         try {
             if (nextPage.activated && nextPage.url) {
@@ -57,7 +57,7 @@ export const fetchOtherProjects = createAsyncThunk<OtherProjectResponse| undefin
 
 
 const otherProjectSlice = createSlice({
-    name: 'notes',
+    name: 'FetchOtherProjects',
     initialState,
     reducers: {
         emptyOtherProjects(state) {

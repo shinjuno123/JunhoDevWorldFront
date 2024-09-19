@@ -1,7 +1,7 @@
 import PreviousPage from "../../components/component.previous-page-btn";
 import NextPage from "../../components/component.next-page-btn";
 
-export default function Skills() {
+export default function AboutSkills() {
   return (
     <>
       <section className="about__skill-summary local-page">

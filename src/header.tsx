@@ -89,15 +89,27 @@ export default function Header() {
                       <span className="nav__num">04</span> projects
                     </Link>
                   </li>
+
+                  <li
+                    className={`nav__item ${
+                      url.includes("/skills") ? "nav__item--active" : ""
+                    }`}
+                  >
+                    <Link className="nav__link" to="/skills" onClick={closeNavigation}>
+                      <span className="nav__num">05</span> Skills
+                    </Link>
+                  </li>
+
                   <li
                     className={`nav__item ${
                       url.includes("/about") ? "nav__item--active" : ""
                     }`}
                   >
                     <Link className="nav__link" to="/about" onClick={closeNavigation}>
-                      <span className="nav__num">05</span> about
+                      <span className="nav__num">06</span> about
                     </Link>
                   </li>
+
                 </ul>
               </div>
 

@@ -41,7 +41,7 @@ const initialState: PostsState = {
 
 
 export const fetchPosts = createAsyncThunk<Posts|undefined, {page: number, limit: number, categoryName:string}>(
-    'writing/fetchPosts',
+    'etchPosts',
     async ({page, limit, categoryName}) => {
         try {
             const response = await axios.get(`/writing/v1/posts?page=${page}&limit=${limit}&category=${categoryName}`);
@@ -53,7 +53,7 @@ export const fetchPosts = createAsyncThunk<Posts|undefined, {page: number, limit
 )
 
 const postsSlice = createSlice({
-    name: 'posts',
+    name: 'fetchPosts',
     initialState,
     reducers: {
         emptyPosts(state) {

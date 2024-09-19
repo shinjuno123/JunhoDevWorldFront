@@ -30,7 +30,7 @@ interface NoteState {
 
 
 export const fetchNotes = createAsyncThunk<NoteResponse| undefined, {page: number, limit: number}>(
-    'note/FetchNotes',
+    'notes',
     async ({page, limit}) => {
         try {
             const response = await axios.get(`/note/v1/notes?page=${page}&limit=${limit}`);
