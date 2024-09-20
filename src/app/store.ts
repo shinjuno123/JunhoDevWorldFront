@@ -7,6 +7,7 @@ import outstandingProjectReducer from '../features/project/outstanding-project.s
 import otherProjectReducer from "../features/project/other-project.slice.ts";
 import featuredPostReducer  from '../features/writing/writing-featured-posts.slice.ts';
 import skillReducer from '../features/skills/skills.slice.ts';
+import adminReducer from "../features/admin/admin.slice.ts";
 
 export const store = configureStore({
     reducer: {
@@ -17,7 +18,8 @@ export const store = configureStore({
         outstandingProjectManager: outstandingProjectReducer,
         otherProjectManager: otherProjectReducer,
         featuredPostManager: featuredPostReducer,
-        skillManager: skillReducer
+        skillManager: skillReducer,
+        adminManager: adminReducer,
     },
     middleware: (getDefaultMiddleware) => { 
         return getDefaultMiddleware();
