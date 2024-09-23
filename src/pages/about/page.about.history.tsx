@@ -1,7 +1,20 @@
 import PreviousPage from "../../components/component.previous-page-btn";
 import NextPage from "../../components/component.next-page-btn";
+import store from "../../app/store";
+import { fetchAdminHistory } from "../../features/admin/admin-histor.slice";
+import { useAppSelector } from "../../app/hooks";
+import { useEffect } from "react";
+import React from "react";
 
 export default function History() {
+  const { histories, loading } = useAppSelector(state => state.adminHistoryManager);
+
+  useEffect(() => {
+    store.dispatch(fetchAdminHistory());
+
+    return;
+  });
+
   return (
     <>
       <section className="about__history local-page">
@@ -11,77 +24,22 @@ export default function History() {
 
         <div className="records">
           <ol className="records__list">
-            <li className="record">
-              <span className="record__month-year">
-                <i className="material-symbols-outlined">school</i>
-                <span>03/2014</span>
-              </span>
-              <section className="description">
-                <span>Graduated Middle school</span>
-                <p>Graduated Asan middle school in South Korea.</p>
-              </section>
-            </li>
-            <li className="record">
-              <span className="record__month-year">
-                <i className="material-symbols-outlined">school</i>
-                <span>03/2014</span>
-              </span>
-              <section className="description">
-                <span>Graduated Middle school</span>
-                <p>Graduated Asan middle school in South Korea.</p>
-              </section>
-            </li>
-            <li className="record">
-              <span className="record__month-year">
-                <i className="material-symbols-outlined">school</i>
-                <span>03/2014</span>
-              </span>
-              <section className="description">
-                <span>Graduated Middle school</span>
-                <p>Graduated Asan middle school in South Korea.</p>
-              </section>
-            </li>
-            <li className="record">
-              <span className="record__month-year">
-                <i className="material-symbols-outlined">school</i>
-                <span>03/2014</span>
-              </span>
-              <section className="description">
-                <span>Graduated Middle school</span>
-                <p>Graduated Asan middle school in South Korea.</p>
-              </section>
-            </li>
-            <li className="record">
-              <span className="record__month-year">
-                <i className="material-symbols-outlined">school</i>
-                <span>03/2014</span>
-              </span>
-              <section className="description">
-                <span>Graduated Middle school</span>
-                <p>Graduated Asan middle school in South Korea.</p>
-              </section>
-            </li>
-            <li className="record">
-              <span className="record__month-year">
-                <i className="material-symbols-outlined">school</i>
-                <span>03/2014</span>
-              </span>
-              <section className="description">
-                <span>Graduated Middle school</span>
-                <p>Graduated Asan middle school in South Korea.</p>
-              </section>
-            </li>
+            {Object.entries(histories).sort().map((history) => {
 
-            <li className="record">
-              <span className="record__month-year">
-                <i className="material-symbols-outlined">school</i>
-                <span>03/2014</span>
-              </span>
-              <section className="description">
-                <span>Graduated Middle school</span>
-                <p>Graduated Asan middle school in South Korea.</p>
-              </section>
-            </li>
+              return <React.Fragment key={history[1].id}>
+                <li className="record">
+                  <span className="record__month-year">
+                    <i className="material-symbols-outlined">{history[1].place}</i>
+                    <span>{history[1].date}</span>
+                  </span>
+                  <section className="description">
+                    <span>{history[1].title}</span>
+                    <p>{history[1].description}</p>
+                  </section>
+                </li>
+
+              </React.Fragment>
+            })}
           </ol>
         </div>
 
