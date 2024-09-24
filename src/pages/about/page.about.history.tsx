@@ -24,7 +24,7 @@ export default function History() {
 
         <div className="records">
           <ol className="records__list">
-            {Object.entries(histories).sort().map((history) => {
+            {Object.entries(histories).sort(()=>1).map((history) => {
 
               return <React.Fragment key={history[1].id}>
                 <li className="record">

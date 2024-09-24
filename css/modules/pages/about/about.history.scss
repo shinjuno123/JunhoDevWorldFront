@@ -142,8 +142,9 @@
                 width: 1rem;
                 height: 1rem;
                 border-radius: 50%;
+                opacity: .5;
                 background: radial-gradient(circle, rgba(0, 0, 0, 1) 1%, $background-color) 30%, rgba(0, 0, 0, 1) 100%;
-                z-index: 100;
+                z-index: 1;
             }
         }
 
