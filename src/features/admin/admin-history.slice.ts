@@ -3,6 +3,7 @@ import axios from 'axios';
 
 interface AdminHistoryResponse {
     histories: History[];
+    workHistories: workExperience[];
     status: {is_success: boolean, message: string};    
 }
 
@@ -16,8 +17,19 @@ interface History {
     date: string;
 }
 
+interface workExperience {
+    id: number;
+    title: string;
+    description: string;
+    icon: string;
+    company: string;
+    from: string;
+    to: string; 
+}
+
 interface HistoryState {
     histories: Record<string, History>;
+    experiences: Record<string, workExperience>
     loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 }
 
@@ -36,6 +48,7 @@ export const fetchAdminHistory = createAsyncThunk<AdminHistoryResponse| undefine
 
 const initialState: HistoryState = {
     histories: {},
+    experiences: {},
     loading: 'idle'
 }
 
@@ -56,8 +69,22 @@ const adminHistorySlice = createSlice({
                 action.payload.histories.forEach((history) => {
                     state.histories[history.date] = history;
                 });
+     
+            }
+
+            if (state.experiences && action.payload) { 
+                console.log(action.payload.workHistories)
+                action.payload.workHistories.forEach((experience) => {
+                    state.experiences[experience.id] = experience;
+                })
+
+            }
+
+            if (state.experiences && state.histories) {
                 state.loading = 'succeeded';
             }
+
+
         })
 
         .addCase(fetchAdminHistory.pending, (state) => {

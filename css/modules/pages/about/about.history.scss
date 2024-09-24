@@ -185,11 +185,23 @@
                 background-color: $background-color;
                 box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
                 margin-block-end: 2rem;
+
+                img {
+                    width: 5rem;
+                }
             }
 
             .experience-description {
                 h4 {
                     margin-block-end: 1rem;
+                }
+
+                .experience-description-details {
+                    li {
+                        list-style: outside;
+                        list-style-position: inside;
+                        margin-bottom: 1rem;
+                    }
                 }
 
                 .experience-description-details>.detail {
@@ -215,7 +227,7 @@
     }
 
     100% {
-        height: calc(100% - 3rem);
+        height: calc(100% - 6rem);
     }
 }
 
