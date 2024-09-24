@@ -23,18 +23,21 @@
             flex-direction: column;
             gap: 6rem;
             align-items: center;
-            padding: 1rem 0;
+            padding: 2rem 0;
 
             .record:nth-child(odd) {
                 position: relative;
 
                 .record__month-year {
+                    display: flex;
+                    flex-direction: row-reverse;
                     position: relative;
                     left: 120%;
+                    text-align: start;
                 }
 
                 .description {
-                    right: 110%;
+                    right: 120%;
                     border-bottom-right-radius: 30%;
                     border-top-left-radius: 20%;
                 }
@@ -56,11 +59,14 @@
 
                 .record__month-year {
                     position: relative;
+                    display: flex;
+                    flex-direction: row;
                     right: 120%;
+                    text-align: end;
                 }
 
                 .description {
-                    left: 110%;
+                    left: 120%;
                     border-bottom-left-radius: 30%;
                     border-top-right-radius: 20%;
                 }
@@ -80,8 +86,8 @@
 
             .record {
                 position: relative;
-                padding: 0 1rem;
-
+                padding: 0 .1rem;
+                width: 80%;
                 .record__month-year {
                     display: flex;
                     align-items: center;
@@ -89,6 +95,8 @@
                     height: fit-content;
                     gap: 5px;
                     font-weight: bolder;
+                    padding: 0;
+                    width: fit-content;
 
                     i {
                         display: block;
@@ -102,10 +110,11 @@
                 .description {
                     position: absolute;
                     width: 20rem;
+                    max-width: 15rem;
                     top: 0;
                     background-color: $supplementary-color3;
                     text-align: center;
-                    padding: 1rem;
+                    padding: .5rem;
                     color: $reversed-text-color;
 
 
@@ -134,7 +143,7 @@
                 height: 1rem;
                 border-radius: 50%;
                 background: radial-gradient(circle, rgba(0, 0, 0, 1) 1%, $background-color) 30%, rgba(0, 0, 0, 1) 100%;
-                z-index: 150;
+                z-index: 100;
             }
         }
 
@@ -142,8 +151,8 @@
             content: '';
             position: absolute;
             width: .5rem;
-            height: calc(100% - 3rem);
-            top: 1.5rem;
+            height: calc(100% - 6rem);
+            top: 3rem;
             background-color: $background-color;
             left: 50%;
             transform: translateX(-50%);
@@ -224,11 +233,44 @@
         .records {
             .records__list {
 
+
+                .record:nth-child(odd) {
+                    position: relative;
+    
+                    .record__month-year {
+                        left: 110%;
+                    }
+    
+                    .description {
+                        right: 110%;
+                    }
+    
+                }
+    
+                .record:nth-child(even) {
+                    position: relative;
+    
+                    .record__month-year {
+                        right: 110%;
+                    }
+    
+                    .description {
+                        left: 110%;
+                    }
+    
+                }
+
                 .record {
                     padding: 0 .5rem;
+                    width: 100%;
 
                     .record__month-year {
                         font-size: $font-size-3;
+                        max-width: 7rem;
+
+                        i {
+                            font-size: $font-size-2;
+                        }
                     }
 
                     .description {
@@ -285,10 +327,11 @@
 
         .record__month-year {
             font-size: $font-size-1;
+            width: 5.4rem;
         }
 
         .description {
-            padding: .8rem;
+            padding: .3rem;
             width: 5.4rem;
 
 
@@ -304,7 +347,40 @@
         }
 
 
+        
+
 
 
     }
+
+    .about__section>.about__history>.records>.records__list {
+        .record:nth-child(odd) {
+            position: relative;
+    
+            .record__month-year {
+                left: 105%;
+            }
+    
+            .description {
+                right: 105%;
+            }
+    
+        }
+    
+        .record:nth-child(even) {
+            position: relative;
+    
+            .record__month-year {
+                right: 105%;
+            }
+    
+            .description {
+                left: 105%;
+            }
+    
+        }
+
+    }
+
+    
 }

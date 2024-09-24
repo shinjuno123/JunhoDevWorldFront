@@ -1,7 +1,7 @@
 import PreviousPage from "../../components/component.previous-page-btn";
 import NextPage from "../../components/component.next-page-btn";
 import store from "../../app/store";
-import { fetchAdminHistory } from "../../features/admin/admin-histor.slice";
+import { fetchAdminHistory } from "../../features/admin/admin-history.slice";
 import { useAppSelector } from "../../app/hooks";
 import { useEffect } from "react";
 import React from "react";
@@ -13,7 +13,7 @@ export default function History() {
     store.dispatch(fetchAdminHistory());
 
     return;
-  });
+  },[]);
 
   return (
     <>

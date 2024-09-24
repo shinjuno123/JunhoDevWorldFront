@@ -8,7 +8,7 @@ import otherProjectReducer from "../features/project/other-project.slice.ts";
 import featuredPostReducer  from '../features/writing/writing-featured-posts.slice.ts';
 import skillReducer from '../features/skills/skills.slice.ts';
 import adminReducer from "../features/admin/admin.slice.ts";
-import adminHistoryReducer from "../features/admin/admin-histor.slice.ts";
+import adminHistoryReducer from "../features/admin/admin-history.slice.ts";
 
 export const store = configureStore({
     reducer: {
