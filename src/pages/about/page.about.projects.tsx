@@ -1,569 +1,222 @@
-import projectImage from "../../assets/images/example-project.png";
-import Glide from '@glidejs/glide';
-import { useEffect, useRef } from "react";
+import Glide, { Controls, Breakpoints } from '@glidejs/glide/dist/glide.modular.esm';
+import { useCallback, useEffect, useRef, useState } from "react";
 import "material-icons/iconfont/material-icons.scss";
-import PreviousPage from "../../components/component.previous-page-btn";
-import NextPage from "../../components/component.next-page-btn";
+import { useAppSelector } from '../../app/hooks';
+import store from '../../app/store';
+import { fetchOutstandingProjects } from '../../features/project/outstanding-project.slice';
+import React from "react";
+import { fetchOtherProjects, emptyOtherProjects } from "../../features/project/other-project.slice";
+import PreviousPage from '../../components/component.previous-page-btn';
+import NextPage from '../../components/component.next-page-btn';
+export default function Projects() {
+  const [hover, setHover] = useState('');
+  const glideRef = useRef(null);
+  const { outstandingProjects: outstandingProjects, loading: outstandingProjectsLoader } = useAppSelector((state) =>
+    state.outstandingProjectManager
+  );
+  const { otherProjects, loading: otherProjectsLoader, previousPageUrl, nextPageUrl, maxPage, currentPage } = useAppSelector((state) =>
+    state.otherProjectManager
+  );
 
-export default function AboutProjects() {
-    const glideRef = useRef(null);
-  
+
+  const createGlide = () => {
     const glide = new Glide('.glide', {
       type: 'carousel',
-      startAt: 0,
-      perView: 1,
+      perView: 1
     });
-    
-    useEffect(() => {
-      if(glideRef.current) {
-        glide.mount();
-      }
-    })
-  
+
+    glide.mount({ Controls, Breakpoints }).play();
+
+    const arrowRight = document.querySelector('.glide__arrow--right');
+
+    setInterval(() => {
+      arrowRight?.dispatchEvent(new Event('click'));
+    }, 7000);
+
+    return
+  }
+
+
+  const fetchOutstandingProjectsAsync = useCallback(async () => {
+    await store.dispatch(fetchOutstandingProjects());
+    createGlide();
+
+    return;
+  }, []);
+
+  const fetchOtherProjectsAsync = useCallback(async (page: number, limit: number, nextPage:{activated: boolean, url: string}) => {
+    await store.dispatch(fetchOtherProjects({page: page, limit: limit, nextPage:nextPage}));
+  }, []);
+
+
+  useEffect(() => {
+    if (glideRef.current) {
+      fetchOutstandingProjectsAsync();
+      fetchOtherProjectsAsync(1, 8, {activated: false, url: ''});
+    }
+  }, []);
+
+  const clickNext = async () => {
+    await store.dispatch(emptyOtherProjects());
+    await store.dispatch(fetchOtherProjects({page: 0, limit: 0, nextPage:{activated: true, url: nextPageUrl}}));
+  }
+
+  const clickPrev = async () => {
+    await store.dispatch(emptyOtherProjects());
+    await store.dispatch(fetchOtherProjects({page: 0, limit: 0, nextPage:{activated: true, url: previousPageUrl}}));
+  }
+
+  const toPage = async (page: number) => {
+    await store.dispatch(emptyOtherProjects());
+    await store.dispatch(fetchOtherProjects({page: page, limit: 8, nextPage:{activated: false, url: ''}}));
+  }
+
 
   return (
     <>
-      <section className="hero_projects local-page">
+      <section className="project__page">
+        <section className="hero_projects local-page">
         <PreviousPage/>
-        <h1>Amazing Projects!</h1>
+          <h1>Amazing Projects!</h1>
 
-        <div className="glide" ref={glideRef}>
-          <div className="glide__track" data-glide-el="track">
-            <ul className="glide__slides">
-              <li className="glide__slide">
-                <div className="slide__wrapper">
-                  <div className="slide__background">
-                    <img src={projectImage} alt="" />
-                  </div>
+          <div className="glide" ref={glideRef}>
+            <div className="glide__track" data-glide-el="track">
+              <ul className="glide__slides">
+                {Object.entries(outstandingProjects).reverse().map((project) => {
+                  return <React.Fragment key={project[0]}>
+                    <li className="glide__slide" onClick={() => {
+                      window.open(project[1].github_link, "_blank");
+                    }}
+                      onMouseEnter={() => setHover('hover')} onMouseLeave={() => setHover('')}
+                    >
+                      <div className={"slide__wrapper"}>
+                        <div className={`slide__background ${hover}`} style={{ background: `url(${project[1].background}) no-repeat center center fixed`, 'backgroundSize': 'cover' }}>
+                          {hover === 'hover' ? <>
+                            <div>
+                              <span>{project[1].title}</span>
+                              <span>Click this to see the details</span>
+                            </div>
+                          </> : <></>}
 
-                  <div className="slide__description">
-                    <h3>Portfolio Website V1</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </p>
-                    <h4>Skills</h4>
-                    <ol>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                    </ol>
-                    <h4>URL</h4>
-                    <a href="https://github.com/shinjuno123/portfolio-management-client">
-                      https://github.com/shinjuno123/portfWolio-management-client
-                    </a>
-                  </div>
-                </div>
-              </li>
+                        </div>
+                        <div className={`slide__description ${hover}`}>
+                          <h3>{project[1].title}<br />{`(Click this slide to see the details)`}</h3>
+                          <p>
+                            {project[1].description}
+                          </p>
+                          <h4>Skills</h4>
+                          <ol>
 
-              <li className="glide__slide">
-                <div className="slide__wrapper">
-                  <div className="slide__background">
-                    <img src={projectImage} alt="" />
-                  </div>
+                            {project[1].skills.map((skill, index) => {
+                              return <React.Fragment key={index}>
+                                <li >
+                                  <span className="material-symbols-outlined" >
+                                    {skill}
+                                  </span>
+                                </li>
 
-                  <div className="slide__description">
-                    <h3>Portfolio Website V1</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </p>
-                    <h4>Skills</h4>
-                    <ol>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                    </ol>
-                    <h4>URL</h4>
-                    <a href="https://github.com/shinjuno123/portfolio-management-client">
-                      https://github.com/shinjuno123/portfWolio-management-client
-                    </a>
-                  </div>
-                </div>
-              </li>
+                              </React.Fragment>
+                            })}
 
-              <li className="glide__slide">
-                <div className="slide__wrapper">
-                  <div className="slide__background">
-                    <img src={projectImage} alt="" />
-                  </div>
+                          </ol>
 
-                  <div className="slide__description">
-                    <h3>Portfolio Website V1</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </p>
-                    <h4>Skills</h4>
-                    <ol>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                    </ol>
-                    <h4>URL</h4>
-                    <a href="https://github.com/shinjuno123/portfolio-management-client">
-                      https://github.com/shinjuno123/portfWolio-management-client
-                    </a>
-                  </div>
-                </div>
-              </li>
+                        </div>
+                      </div>
+                    </li>
+                  </React.Fragment>
+                })}
 
-              <li className="glide__slide">
-                <div className="slide__wrapper">
-                  <div className="slide__background">
-                    <img src={projectImage} alt="" />
-                  </div>
 
-                  <div className="slide__description">
-                    <h3>Portfolio Website V1</h3>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </p>
-                    <h4>Skills</h4>
-                    <ol>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                      <li>
-                        <span className="material-symbols-outlined">html</span>
-                      </li>
-                    </ol>
-                    <h4>URL</h4>
-                    <a href="https://github.com/shinjuno123/portfolio-management-client">
-                      https://github.com/shinjuno123/portfWolio-management-client
-                    </a>
-                  </div>
-                </div>
-              </li>
+
+              </ul>
+            </div>
+            <div className="glide__arrows" data-glide-el="controls">
+              <button
+                className="glide__arrow glide__arrow--left"
+                data-glide-dir="<"
+              >
+                <span className="material-icons">
+                  arrow_back_ios
+                </span>
+              </button>
+              <button
+                className="glide__arrow glide__arrow--right"
+                data-glide-dir=">"
+              >
+                <span className="material-icons">
+                  arrow_forward_ios
+                </span>
+              </button>
+            </div>
+
+            <div className="glide__bullets" data-glide-el="controls[nav]">
+              {Object.entries(outstandingProjects).reverse().map((_, index) => {
+                return <React.Fragment key={index}>
+                  <button className="glide__bullet" data-glide-dir={`=${index}`}></button>
+                </React.Fragment>
+              })}
+            </div>
+          </div>
+
+          <h2>Check my other projects!</h2>
+
+          <div className="project-list">
+            <ul className="projects">
+              {Object.entries(otherProjects).reverse().map((project) => {
+                return <React.Fragment key={project[0]}>
+                  <li className="project">
+                    <div className="project__info">
+                      <div className="project__background">
+                        <img
+                          src={project[1].background}
+                          alt={project[1].title}
+                        />
+                      </div>
+                      <div className="project__description">
+                        <h4 className="project__title">{project[1].title}</h4>
+                        <p className="project__excerpt">
+                          {project[1].excerpt}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="project__link-cover">
+                      <a className="project__link" href={project[1].github_link} target="_blank">
+                        <h4 className="project__title">{project[1].title}</h4>
+                      </a>
+                    </div>
+                  </li>
+                </React.Fragment>
+              })}
+
+
             </ul>
+
+            <div className="pagination">
+              <ol className="page-numbers">
+                <li className="go-left page-number" onClick={() => clickPrev()}>
+                  <span className="material-icons">
+                    chevron_left
+                  </span>
+                </li>
+
+                {[...Array(maxPage).keys()].map(i=>i+1).map((page)=> {
+                  return <React.Fragment key={page}>
+                    <li className={`page-number ${currentPage == page? 'current-page':''}`} onClick={() => toPage(page)}>
+                      <span>{page}</span>
+                    </li>
+                  </React.Fragment>
+                })}
+
+                <li className="go-right page-number" onClick={() => clickNext()}>
+                  <span className="material-icons">
+                    chevron_right
+                  </span>
+                </li>
+              </ol>
+            </div>
           </div>
-          <div className="glide__arrows" data-glide-el="controls">
-            <button
-              className="glide__arrow glide__arrow--left"
-              data-glide-dir="<"
-            >
-              <span className="material-icons">arrow_back_ios</span>
-            </button>
-            <button
-              className="glide__arrow glide__arrow--right"
-              data-glide-dir=">"
-            >
-              <span className="material-icons">arrow_forward_ios</span>
-            </button>
-          </div>
-
-          <div className="glide__bullets" data-glide-el="controls[nav]">
-            <button className="glide__bullet" data-glide-dir="=0"></button>
-            <button className="glide__bullet" data-glide-dir="=1"></button>
-            <button className="glide__bullet" data-glide-dir="=2"></button>
-            <button className="glide__bullet" data-glide-dir="=3"></button>
-          </div>
-        </div>
-
-        <h2>Check my other projects!</h2>
-
-        <div className="project-list">
-          <ul className="projects">
-            <li className="project">
-              <div className="project__info">
-                <div className="project__background">
-                  <img src={projectImage} alt="" />
-                </div>
-                <div className="project__description">
-                  <h4 className="project__title">Simon Game</h4>
-                  <p className="project__excerpt">
-                    Traditional simon game. This game is the best probably in
-                    this world!
-                  </p>
-                </div>
-              </div>
-              <div className="project__link-cover">
-                <a className="project__link" href="https://github.com/">
-                  <h4 className="project__title">Simon Game</h4>
-                </a>
-              </div>
-            </li>
-            <li className="project">
-              <div className="project__info">
-                <div className="project__background">
-                  <img src={projectImage} alt="" />
-                </div>
-                <div className="project__description">
-                  <h4 className="project__title">Simon Game</h4>
-                  <p className="project__excerpt">
-                    Traditional simon game. This game is the best probably in
-                    this world!
-                  </p>
-                </div>
-              </div>
-              <div className="project__link-cover">
-                <a className="project__link" href="https://github.com/">
-                  <h4 className="project__title">Simon Game</h4>
-                </a>
-              </div>
-            </li>
-            <li className="project">
-              <div className="project__info">
-                <div className="project__background">
-                  <img src={projectImage} alt="" />
-                </div>
-                <div className="project__description">
-                  <h4 className="project__title">Simon Game</h4>
-                  <p className="project__excerpt">
-                    Traditional simon game. This game is the best probably in
-                    this world!
-                  </p>
-                </div>
-              </div>
-              <div className="project__link-cover">
-                <a className="project__link" href="https://github.com/">
-                  <h4 className="project__title">Simon Game</h4>
-                </a>
-              </div>
-            </li>
-            <li className="project">
-              <div className="project__info">
-                <div className="project__background">
-                  <img src={projectImage} alt="" />
-                </div>
-                <div className="project__description">
-                  <h4 className="project__title">Simon Game</h4>
-                  <p className="project__excerpt">
-                    Traditional simon game. This game is the best probably in
-                    this world!
-                  </p>
-                </div>
-              </div>
-              <div className="project__link-cover">
-                <a className="project__link" href="https://github.com/">
-                  <h4 className="project__title">Simon Game</h4>
-                </a>
-              </div>
-            </li>
-            <li className="project">
-              <div className="project__info">
-                <div className="project__background">
-                  <img src={projectImage} alt="" />
-                </div>
-                <div className="project__description">
-                  <h4 className="project__title">Simon Game</h4>
-                  <p className="project__excerpt">
-                    Traditional simon game. This game is the best probably in
-                    this world!
-                  </p>
-                </div>
-              </div>
-              <div className="project__link-cover">
-                <a className="project__link" href="https://github.com/">
-                  <h4 className="project__title">Simon Game</h4>
-                </a>
-              </div>
-            </li>
-            <li className="project">
-              <div className="project__info">
-                <div className="project__background">
-                  <img src={projectImage} alt="" />
-                </div>
-                <div className="project__description">
-                  <h4 className="project__title">Simon Game</h4>
-                  <p className="project__excerpt">
-                    Traditional simon game. This game is the best probably in
-                    this world!
-                  </p>
-                </div>
-              </div>
-              <div className="project__link-cover">
-                <a className="project__link" href="https://github.com/">
-                  <h4 className="project__title">Simon Game</h4>
-                </a>
-              </div>
-            </li>
-            <li className="project">
-              <div className="project__info">
-                <div className="project__background">
-                  <img src={projectImage} alt="" />
-                </div>
-                <div className="project__description">
-                  <h4 className="project__title">Simon Game</h4>
-                  <p className="project__excerpt">
-                    Traditional simon game. This game is the best probably in
-                    this world!
-                  </p>
-                </div>
-              </div>
-              <div className="project__link-cover">
-                <a className="project__link" href="https://github.com/">
-                  <h4 className="project__title">Simon Game</h4>
-                </a>
-              </div>
-            </li>
-            <li className="project">
-              <div className="project__info">
-                <div className="project__background">
-                  <img src={projectImage} alt="" />
-                </div>
-                <div className="project__description">
-                  <h4 className="project__title">Simon Game</h4>
-                  <p className="project__excerpt">
-                    Traditional simon game. This game is the best probably in
-                    this world!
-                  </p>
-                </div>
-              </div>
-              <div className="project__link-cover">
-                <a className="project__link" href="https://github.com/">
-                  <h4 className="project__title">Simon Game</h4>
-                </a>
-              </div>
-            </li>
-          </ul>
-
-          <div className="pagination">
-            <ol className="page-numbers">
-              <li className="go-left page-number">
-                <span className="material-icons">chevron_left</span>
-              </li>
-              <li className="page-number current-page">
-                <span>1</span>
-              </li>
-
-              <li className="page-number">
-                <span>2</span>
-              </li>
-
-              <li className="page-number">
-                <span>3</span>
-              </li>
-
-              <li className="page-number">
-                <span>4</span>
-              </li>
-
-              <li className="page-number">
-                <span>5</span>
-              </li>
-
-              <li className="page-number">
-                <span>6</span>
-              </li>
-
-              <li className="page-number">
-                <span>7</span>
-              </li>
-
-              <li className="page-number">
-                <span>8</span>
-              </li>
-
-              <li className="go-right page-number">
-                <span className="material-icons">chevron_right</span>
-              </li>
-            </ol>
-          </div>
-        </div>
-        <NextPage/>
+          <NextPage/>
+        </section>
       </section>
     </>
   );
