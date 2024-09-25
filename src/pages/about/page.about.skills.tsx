@@ -6,17 +6,18 @@ import { useEffect, useState } from "react";
 import React from "react";
 import PreviousPage from "../../components/component.previous-page-btn";
 import NextPage from "../../components/component.next-page-btn";
+import { ClipLoader } from "react-spinners";
 
 export default function AboutSkills() {
   const { skills, loading } = useAppSelector(state => state.skillManager);
-  const [currentSkill, setCurrentSkill] = useState<Skill>({name:'', id:0, proficiency:0, icon:'', description:''});
+  const [currentSkill, setCurrentSkill] = useState<Skill>({ name: '', id: 0, proficiency: 0, icon: '', description: '' });
 
   function clickSkill(id: number) {
     setCurrentSkill(skills[id]);
   }
 
   useEffect(() => {
-    store.dispatch(fetchSkills()).then((data)=>{
+    store.dispatch(fetchSkills()).then((data) => {
       const skillResponse = data.payload as SkillResponse;
       if (skillResponse.skills.length) {
         setCurrentSkill(skillResponse.skills[0]);
@@ -30,15 +31,24 @@ export default function AboutSkills() {
     <>
       <section className="about__skill-summary local-page">
 
-        <PreviousPage/>
+        <PreviousPage />
 
         <h1>Skill Summary</h1>
         <p>Please click each of skills below to see the details</p>
         <div className="skills">
+          <li
+            style={{
+              display: loading === 'pending' ? "block" : "none",
+              padding: '15rem 0',
+              textAlign: "center",
+            }}
+          >
+            <ClipLoader />
+          </li>
           {Object.entries(skills).reverse().map((skills) => {
 
             return <React.Fragment key={skills[0]}>
-              <li className="skill" onClick={()=>clickSkill(skills[1].id)}>
+              <li className="skill" onClick={() => clickSkill(skills[1].id)}>
                 <div className="skill-name">
                   <span>{skills[1].name}</span>
                 </div>
@@ -57,7 +67,7 @@ export default function AboutSkills() {
           <SkillDetails imageLink={currentSkill.icon} skillName={currentSkill.name} description={currentSkill.description}></SkillDetails>
         </div>
 
-        <NextPage/>
+        <NextPage />
 
       </section>
     </>

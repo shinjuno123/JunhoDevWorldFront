@@ -4,20 +4,31 @@ import store from "../../app/store";
 import { fetchAdminInfo } from "../../features/admin/admin.slice";
 import { useAppSelector } from "../../app/hooks";
 import { useEffect } from "react";
+import { ClipLoader } from "react-spinners";
 
 export default function Intro() {
-  const {adminInfo, loading} = useAppSelector(state=> state.adminManager);
+  const { adminInfo, loading } = useAppSelector(state => state.adminManager);
 
-  useEffect(()=> {
+  useEffect(() => {
     store.dispatch(fetchAdminInfo());
-    
+
     return;
-  },[])
+  }, [])
 
   return (
     <>
       <section className="about__intro local-page">
         <PreviousPage />
+
+        <li
+          style={{
+            display: loading === 'pending' ? "block" : "none",
+            padding: '15rem 0',
+            textAlign: "center",
+          }}
+        >
+          <ClipLoader />
+        </li>
 
         <h1>Who am I</h1>
         <div className="card">

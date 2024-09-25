@@ -5,6 +5,7 @@ import { fetchAdminHistory } from "../../features/admin/admin-history.slice";
 import { useAppSelector } from "../../app/hooks";
 import { useEffect } from "react";
 import React from "react";
+import { ClipLoader } from "react-spinners";
 
 export default function History() {
   const { histories, experiences, loading } = useAppSelector(state => state.adminHistoryManager);
@@ -24,6 +25,15 @@ export default function History() {
 
         <div className="records">
           <ol className="records__list">
+            <li className="record"
+              style={{
+                display: loading === 'pending' ? "block" : "none",
+                padding: '15rem 0',
+                textAlign: "center",
+              }}
+            >
+              <ClipLoader />
+            </li>
             {Object.entries(histories).sort(() => 1).map((history) => {
 
               return <React.Fragment key={history[1].id}>
@@ -47,6 +57,15 @@ export default function History() {
 
         <div className="work-experience">
           <ul className="experiences">
+            <li className="experience"
+              style={{
+                display: loading === 'pending' ? "block" : "none",
+                padding: '15rem 0',
+                textAlign: "center",
+              }}
+            >
+              <ClipLoader />
+            </li>
             {Object.entries(experiences).sort(() => -1).map((experience) => {
 
               return <React.Fragment key={experience[0]}>
@@ -59,8 +78,8 @@ export default function History() {
                   </div>
                   <div className="experience-description">
                     <h4>Company name: {experience[1].company}</h4>
-                    <h4>Period: {experience[1].from} ~ {experience[1].to? experience[1].to:'now'}</h4>
-                    <div className="experience-description-details" dangerouslySetInnerHTML={{__html: experience[1].description}}></div>
+                    <h4>Period: {experience[1].from} ~ {experience[1].to ? experience[1].to : 'now'}</h4>
+                    <div className="experience-description-details" dangerouslySetInnerHTML={{ __html: experience[1].description }}></div>
                   </div>
                 </li>
 

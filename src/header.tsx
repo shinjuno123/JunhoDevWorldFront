@@ -2,10 +2,20 @@ import { Link, useLocation, useSearchParams } from "react-router-dom";
 import face from "./assets/images/myface.jpg";
 import "material-icons/iconfont/material-icons.scss";
 import { useEffect, useState } from "react";
+import { fetchAdminInfo } from "./features/admin/admin.slice";
+import { useAppSelector } from "./app/hooks";
+import store from "./app/store";
 
 export default function Header() {
   const [headerState, setHeaderState] = useState('closed');
   const url = useLocation().pathname;
+  const { adminInfo } = useAppSelector(state => state.adminManager);
+
+  useEffect(() => {
+    store.dispatch(fetchAdminInfo());
+
+    return;
+  }, [])
 
   function toggleNavigation() {
     setHeaderState((headerState === 'closed'? 'opened':'closed'));
@@ -31,7 +41,7 @@ export default function Header() {
       <header className="header">
         <div className="header__inner container">
           <Link className="header__brand" to="/">
-            <img className="header__avatar" src={face} alt=""></img>
+            <img className="header__avatar" src={adminInfo.avatarUrl} alt={adminInfo.avatarUrl}></img>
             <span className="header__info">
               <span>Junho Shin</span>
               <span className="header__verification">
