@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import store from '../../app/store';
-import { useAppSelector } from '../../app/hooks';
+import {axios} from '../../api-client';
 
 
 interface OtherProjectResponse {

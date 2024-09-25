@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import {axios} from '../../api-client';
 
 export interface Post {
     id: number,

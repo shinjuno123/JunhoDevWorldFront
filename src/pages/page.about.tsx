@@ -31,7 +31,7 @@ export default function About() {
         <>
             <div className="loading-cover"></div>
             <section className={`about__section ${isFullscreen? 'screen-max':''}`}>
-                <button onClick={toggleFullscreen} className="about__section-fullscreen-btn"><i className="material-icons">fullscreen</i><span>Full screen</span></button>
+                {/* <button onClick={toggleFullscreen} className="about__section-fullscreen-btn"><i className="material-icons">fullscreen</i><span>Full screen</span></button> */}
                 <Outlet/>
             </section>
         </>

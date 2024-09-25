@@ -6,6 +6,7 @@ import store from "../app/store";
 import { fetchOutstandingProjects } from "../features/project/outstanding-project.slice";
 import React from "react";
 import { fetchOtherProjects, emptyOtherProjects } from "../features/project/other-project.slice";
+import { ClipLoader } from 'react-spinners';
 export default function Projects() {
   const [hover, setHover] = useState('');
   const glideRef = useRef(null);
@@ -42,31 +43,31 @@ export default function Projects() {
     return;
   }, []);
 
-  const fetchOtherProjectsAsync = useCallback(async (page: number, limit: number, nextPage:{activated: boolean, url: string}) => {
-    await store.dispatch(fetchOtherProjects({page: page, limit: limit, nextPage:nextPage}));
+  const fetchOtherProjectsAsync = useCallback(async (page: number, limit: number, nextPage: { activated: boolean, url: string }) => {
+    await store.dispatch(fetchOtherProjects({ page: page, limit: limit, nextPage: nextPage }));
   }, []);
 
 
   useEffect(() => {
     if (glideRef.current) {
       fetchOutstandingProjectsAsync();
-      fetchOtherProjectsAsync(1, 8, {activated: false, url: ''});
+      fetchOtherProjectsAsync(1, 8, { activated: false, url: '' });
     }
   }, []);
 
   const clickNext = async () => {
     await store.dispatch(emptyOtherProjects());
-    await store.dispatch(fetchOtherProjects({page: 0, limit: 0, nextPage:{activated: true, url: nextPageUrl}}));
+    await store.dispatch(fetchOtherProjects({ page: 0, limit: 0, nextPage: { activated: true, url: nextPageUrl } }));
   }
 
   const clickPrev = async () => {
     await store.dispatch(emptyOtherProjects());
-    await store.dispatch(fetchOtherProjects({page: 0, limit: 0, nextPage:{activated: true, url: previousPageUrl}}));
+    await store.dispatch(fetchOtherProjects({ page: 0, limit: 0, nextPage: { activated: true, url: previousPageUrl } }));
   }
 
   const toPage = async (page: number) => {
     await store.dispatch(emptyOtherProjects());
-    await store.dispatch(fetchOtherProjects({page: page, limit: 8, nextPage:{activated: false, url: ''}}));
+    await store.dispatch(fetchOtherProjects({ page: page, limit: 8, nextPage: { activated: false, url: '' } }));
   }
 
 
@@ -76,8 +77,21 @@ export default function Projects() {
         <section className="hero_projects local-page">
           <h1>Amazing Projects!</h1>
 
+
+
           <div className="glide" ref={glideRef}>
+            <li
+              style={{
+                display: outstandingProjectsLoader === 'pending' ? "block" : "none",
+                padding: '15rem 0',
+                textAlign: "center",
+              }}
+            >
+              <ClipLoader />
+            </li>
+
             <div className="glide__track" data-glide-el="track">
+
               <ul className="glide__slides">
                 {Object.entries(outstandingProjects).reverse().map((project) => {
                   return <React.Fragment key={project[0]}>
@@ -159,6 +173,27 @@ export default function Projects() {
 
           <div className="project-list">
             <ul className="projects">
+              {Object.entries([1, 2, 3, 4, 5, 6, 7, 8]).map((_, index) => {
+
+                return <React.Fragment key={index}>
+                  <li
+                    className="project"
+                    style={{
+                      display: otherProjectsLoader === 'pending' ? "block" : "none",
+                    }}
+                  >
+                    <div className="project__info">
+                      <div className="project__description">
+                        <ClipLoader />
+                      </div>
+                    </div>
+                  </li>
+
+                </React.Fragment>
+              })}
+
+
+
               {Object.entries(otherProjects).reverse().map((project) => {
                 return <React.Fragment key={project[0]}>
                   <li className="project">
@@ -196,9 +231,9 @@ export default function Projects() {
                   </span>
                 </li>
 
-                {[...Array(maxPage).keys()].map(i=>i+1).map((page)=> {
+                {[...Array(maxPage).keys()].map(i => i + 1).map((page) => {
                   return <React.Fragment key={page}>
-                    <li className={`page-number ${currentPage == page? 'current-page':''}`} onClick={() => toPage(page)}>
+                    <li className={`page-number ${currentPage == page ? 'current-page' : ''}`} onClick={() => toPage(page)}>
                       <span>{page}</span>
                     </li>
                   </React.Fragment>
