@@ -13,6 +13,8 @@ export default function Writing() {
     (state) => state.postFetcher
   );
 
+  const [delayLoadingActivated, setDelayLoadingActivated] = useState<boolean>(false);
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [postParams, setPostParams] = useState({
@@ -24,6 +26,7 @@ export default function Writing() {
   const fetchPostsAsync = useCallback(async () => {
     if(postParams.page !== -1) {
       await store.dispatch(fetchPosts(postParams));
+      setDelayLoadingActivated(false);
     } 
 
     return;
@@ -35,12 +38,17 @@ export default function Writing() {
       window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight
     ) {
-      if (currentPage < maxPage) {
-        setPostParams({
-          page: postParams.page + 1,
-          limit: postParams.limit,
-          categoryName: postParams.categoryName,
-        });
+      if (currentPage < maxPage && !delayLoadingActivated && loading === 'succeeded') {
+
+        setDelayLoadingActivated(true);
+
+        setTimeout(()=> {
+          setPostParams({
+            page: postParams.page + 1,
+            limit: postParams.limit,
+            categoryName: postParams.categoryName,
+          });
+        }, 1000)
       }
     }
 
@@ -145,7 +153,7 @@ export default function Writing() {
 
                 <li
                   style={{
-                    display: loading === "pending" ? "block" : "none",
+                    display: delayLoadingActivated? "block" : "none",
                     paddingBottom: "5rem",
                     textAlign: "center",
                   }}

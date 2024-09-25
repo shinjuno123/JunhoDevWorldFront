@@ -14,6 +14,8 @@ export default function Notes() {
     (state) => state.noteManager
   );
 
+  const [delayLoadingActivated, setDelayLoadingActivated] = useState<boolean>(false);
+
   const [noteParams, setNoteParams] = useState({
     page: -1,
     limit: -1,
@@ -22,6 +24,7 @@ export default function Notes() {
   const fetchNotesAsync = useCallback(async () => {
     if (noteParams.page !== -1) {
       await store.dispatch(fetchNotes(noteParams));
+      setDelayLoadingActivated(false);
     }
 
     return;
@@ -46,11 +49,17 @@ export default function Notes() {
       window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight
     ) {
-      if (currentPage < maxPage) {
-        setNoteParams({
-          page: noteParams.page + 1,
-          limit: noteParams.limit,
-        });
+      if (currentPage < maxPage && !delayLoadingActivated && loading === 'succeeded') {
+
+        setDelayLoadingActivated(true);
+
+        setTimeout(()=> {
+          setNoteParams({
+            page: noteParams.page + 1,
+            limit: noteParams.limit,
+          });
+        }, 1000)
+
       }
     }
 
@@ -138,7 +147,15 @@ export default function Notes() {
                 </React.Fragment>
               );
             })}
-            {loading === "pending"? <li style={{'textAlign':'center', padding:'3rem'}}><ClipLoader/></li>:''}
+            <li
+                  style={{
+                    display: delayLoadingActivated? "block" : "none",
+                    padding: "2rem",
+                    textAlign: "center",
+                  }}
+                >
+                  <ClipLoader></ClipLoader>
+                </li>
           </ul>
         </section>
       </main>

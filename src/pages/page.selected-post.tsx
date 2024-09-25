@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import store from "../app/store";
 import { fetchSelectedPost } from "../features/writing/writing-selected-post.slice";
 import { useAppSelector } from "../app/hooks";
+import { SyncLoader } from "react-spinners";
 
 export default function SelectedPost() {
   const { postData, loading } = useAppSelector(
@@ -48,6 +49,7 @@ export default function SelectedPost() {
                 </span>
               </div>
               <hr />
+              {loading !== "succeeded"? <SyncLoader/>:''}
 
               <div className="selected-post__content" dangerouslySetInnerHTML={{__html:postData.post.post_content}}></div>
             </div>
