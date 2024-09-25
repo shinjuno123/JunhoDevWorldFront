@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef } from "react";
 import store from "../app/store";
 import { fetchFeaturedPosts } from "../features/writing/writing-featured-posts.slice";
 import React from "react";
+import { GridLoader } from "react-spinners";
 
 export default function Home() {
     const { featuredPosts, loading } = useAppSelector((state) => state.featuredPostManager);
@@ -46,6 +47,12 @@ export default function Home() {
                     <h2>Featured Posts</h2>
                     <div className="featured-posts">
                         <ul className="featured-posts__list">
+                            {loading !=='succeeded'? 
+                                <li className="featured-posts__item" style={{padding: '2rem'}}>
+                                    <div style={{position: 'relative', display: 'inline-block',width: 'fit-content', left: '50%', top:'50%', transform: 'translate(-50%,-50%)'}}>
+                                        <GridLoader/>
+                                    </div>
+                                </li>: ''}
                             {Object.entries(featuredPosts).reverse().map((featuredPost) => {
                                 return <React.Fragment key={featuredPost[0]} >
                                     <li className="featured-posts__item" onClick={()=> clickLink(featuredPost[1].id)}>
