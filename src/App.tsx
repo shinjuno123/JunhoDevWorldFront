@@ -16,6 +16,8 @@ import { useEffect } from "react";
 import Page404 from "./pages/page.404";
 import './api-client.ts';
 import Skills from "./pages/page.skills.tsx";
+import { SignUp } from "./pages/page.sign-up.tsx";
+import { SignIn } from "./pages/page.sign-in.tsx";
 
 function App() {
   const navigate = useNavigate();
@@ -34,6 +36,8 @@ function App() {
         <Route path="notes" element={<Notes />}></Route>
         <Route path="projects" element={<Projects />}></Route>
         <Route path="skills" element={<Skills/>}></Route>
+        <Route path="sign-up" element={<SignUp/>}></Route>
+        <Route path="sign-in" element={<SignIn/>}></Route>
         <Route path="about" element={<About />}>
           <Route path="" element={<Intro />}></Route>
           <Route path="history" element={<History />}></Route>

@@ -74,6 +74,51 @@
     display: flex;
 }
 
+.nav__content {
+    .account {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        font-size: $font-size-2;
+        word-break: keep-all;
+        min-width: 4rem;
+        max-width: 70%;
+        
+
+        button {
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            padding: .3rem 0;
+        }
+
+        .login__button {
+            background-color: $supplementary-color4;
+            color: $reversed-text-color;
+            letter-spacing: .5px;
+            transition: background-color .3s ease-in-out;
+        }
+
+        .signup__button {
+            background-color: $supplementary-color3;
+            color: $reversed-text-color;
+            letter-spacing: .5px;
+            transition: background-color .3s ease-in-out;
+        }
+
+        .login__button:hover {
+            background-color: rgba($color: $supplementary-color4, $alpha: .7);
+        }
+
+        .signup__button:hover {
+            background-color: rgba($color: $supplementary-color3, $alpha: .7);
+        }
+
+    }
+}
+
 .nav__item {
     position: relative;
 }
@@ -205,7 +250,7 @@
     position: fixed;
     z-index: 99;
     top: 3.125rem;
-    right:  5%;
+    right:  10%;
     height: 4px;
     width: 4px;
     transform: translate(-22px, 22px);
@@ -307,6 +352,18 @@
     .nav--open .nav__menu {
         opacity: 1;
         transform: translateY(0);
+
+        .account {
+            max-width: 100%;
+            margin-top: 2rem;            
+
+            button {
+                width: 80%;
+                padding: .5rem 0;
+                margin-bottom: 1rem;
+                font-size: $font-size-3;
+            }
+        }
     }
 
     .nav--open .nav__bg__circle {

@@ -1,4 +1,4 @@
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import face from "./assets/images/myface.jpg";
 import "material-icons/iconfont/material-icons.scss";
 import { useEffect, useState } from "react";
@@ -10,6 +10,7 @@ export default function Header() {
   const [headerState, setHeaderState] = useState('closed');
   const url = useLocation().pathname;
   const { adminInfo } = useAppSelector(state => state.adminManager);
+  const navigate = useNavigate();
 
   useEffect(() => {
     store.dispatch(fetchAdminInfo());
@@ -18,7 +19,7 @@ export default function Header() {
   }, [])
 
   function toggleNavigation() {
-    setHeaderState((headerState === 'closed'? 'opened':'closed'));
+    setHeaderState((headerState === 'closed' ? 'opened' : 'closed'));
 
     if (headerState === 'closed') {
       document.body.classList.add('overflow-y-hidden');
@@ -51,7 +52,7 @@ export default function Header() {
           </Link>
 
           <div className="header__nav">
-            <nav className={`nav ${headerState === 'opened'? 'nav--open':''}`}>
+            <nav className={`nav ${headerState === 'opened' ? 'nav--open' : ''}`}>
               <button className={`iconbtn nav__togglebtn`} onClick={toggleNavigation}>
                 <span className="menuicon">
                   <span className="menuicon__bar"></span>
@@ -64,46 +65,41 @@ export default function Header() {
               <div className="nav__content">
                 <ul className="nav__menu" id="nav__menu">
                   <li
-                    className={`nav__item ${
-                      url == "/" ? "nav__item--active" : ""
-                    }`}
+                    className={`nav__item ${url == "/" ? "nav__item--active" : ""
+                      }`}
                   >
                     <Link className="nav__link" to="/" onClick={closeNavigation}>
                       <span className="nav__num">01</span> home
                     </Link>
                   </li>
                   <li
-                    className={`nav__item ${
-                      url.includes("/posts") ? "nav__item--active" : ""
-                    }`}
+                    className={`nav__item ${url.includes("/posts") ? "nav__item--active" : ""
+                      }`}
                   >
                     <Link className="nav__link" to="/posts" onClick={closeNavigation}>
                       <span className="nav__num">02</span> writing
                     </Link>
                   </li>
                   <li
-                    className={`nav__item ${
-                      url.includes("/notes") ? "nav__item--active" : ""
-                    }`}
+                    className={`nav__item ${url.includes("/notes") ? "nav__item--active" : ""
+                      }`}
                   >
                     <Link className="nav__link" to="/notes" onClick={closeNavigation}>
                       <span className="nav__num">03</span> notes
                     </Link>
                   </li>
                   <li
-                    className={`nav__item ${
-                      url.includes("/projects") ? "nav__item--active" : ""
-                    }`}
+                    className={`nav__item ${url.includes("/projects") ? "nav__item--active" : ""
+                      }`}
                   >
-                    <Link className="nav__link" to="/projects"  onClick={closeNavigation}>
+                    <Link className="nav__link" to="/projects" onClick={closeNavigation}>
                       <span className="nav__num">04</span> projects
                     </Link>
                   </li>
 
                   <li
-                    className={`nav__item ${
-                      url.includes("/skills") ? "nav__item--active" : ""
-                    }`}
+                    className={`nav__item ${url.includes("/skills") ? "nav__item--active" : ""
+                      }`}
                   >
                     <Link className="nav__link" to="/skills" onClick={closeNavigation}>
                       <span className="nav__num">05</span> Skills
@@ -111,22 +107,28 @@ export default function Header() {
                   </li>
 
                   <li
-                    className={`nav__item ${
-                      url.includes("/about") ? "nav__item--active" : ""
-                    }`}
+                    className={`nav__item ${url.includes("/about") ? "nav__item--active" : ""
+                      }`}
                   >
                     <Link className="nav__link" to="/about" onClick={closeNavigation}>
                       <span className="nav__num">06</span> about
                     </Link>
                   </li>
-
+                  <div className="account">
+                    <button className="login__button" onClick={()=> {navigate('/sign-in'); closeNavigation();}}>Sign in</button>
+                    <button className="signup__button" onClick={()=> {navigate('/sign-up'); closeNavigation();}}>Sign up</button>
+                  </div>
                 </ul>
               </div>
+
 
               <div className="nav__bg">
                 <div className="nav__bg__circle"></div>
               </div>
+
             </nav>
+
+
           </div>
         </div>
       </header>

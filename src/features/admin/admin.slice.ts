@@ -59,7 +59,6 @@ const adminInfoSlice = createSlice({
         builder.addCase(fetchAdminInfo.fulfilled, (state, action) => {
             if (state.adminInfo && action.payload) {
                 state.adminInfo = action.payload.adminInfo;
-                console.log(action.payload.adminInfo)
                 state.loading = 'succeeded';
             }
         })
