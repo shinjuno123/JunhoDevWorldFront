@@ -1,0 +1,151 @@
+.signin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 50rem;
+
+    .signin__form {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 6rem 5rem;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+
+        .signin__form-id {
+            position: relative;
+            width: fit-content;
+            p {
+                line-height: 2
+            }
+
+            input {
+                position: relative;
+                box-shadow: inset #abacaf 0 0 0 2px;
+                border: 0;
+                background: rgba(0, 0, 0, 0);
+                appearance: none;
+                position: relative;
+                border-radius: 3px;
+                padding: 0 12px;
+                line-height: 1.4;
+                color: rgb(0, 0, 0);
+                font-size: 16px;
+                font-weight: 400;
+                height: 40px;
+                transition: all .2s ease;
+
+            }
+
+            input:hover {
+                box-shadow: 0 0 0 0 #fff inset, #1de9b6 0 0 0 2px;
+            }
+
+            input:focus {
+                background: #fff;
+                outline: 0;
+                box-shadow: 0 0 0 0 #fff inset, #1de9b6 0 0 0 3px;
+            }
+        }
+
+        .signin__form-password {
+            p {
+                line-height: 2
+            }
+
+            input {
+                box-shadow: inset #abacaf 0 0 0 2px;
+                border: 0;
+                background: rgba(0, 0, 0, 0);
+                appearance: none;
+                position: relative;
+                border-radius: 3px;
+                padding: 0 12px;
+                line-height: 1.4;
+                color: rgb(0, 0, 0);
+                font-size: 16px;
+                font-weight: 400;
+                height: 40px;
+                transition: all .2s ease;
+            }
+
+            input:hover {
+                box-shadow: 0 0 0 0 #fff inset, #1de9b6 0 0 0 2px;
+            }
+
+            input:focus {
+                background: #fff;
+                outline: 0;
+                box-shadow: 0 0 0 0 #fff inset, #1de9b6 0 0 0 3px;
+            }
+        }
+
+        .signin__buttons {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+        
+            button {
+                border: 0;
+                border-radius: 5px;
+                padding: .5rem 0;
+                color: $reversed-text-color;
+                font-weight: bold;
+                letter-spacing: 1px;
+                transition: background-color .2s ease-in-out;
+            }
+
+            .signin__button {
+                background-color: $primary-color;
+    
+            }
+
+            .signin__register {
+                background-color: $supplementary-color4;
+            }
+
+
+            .signin__button:hover, .signin__button:focus {
+                background-color: rgba($color: $primary-color, $alpha: .7);
+            }
+
+
+            .signin__register:hover, .signin__register:focus {
+                background-color: rgba($color: $supplementary-color4, $alpha: .7);
+            }
+        }
+
+
+        .signin__oauth {
+            display: flex;
+            justify-content: center;
+            gap: .5rem;
+    
+        }
+
+        .signin__oauth>button {
+            position: relative;
+            width: 100%;
+            background-color: white;
+            border: 0;
+            padding: .2rem 0;
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+            border-radius: 5px;
+            border: 2px solid white;
+
+            img {
+                position: relative;
+                width: 1.5rem;
+                top: 50%;
+                transform: translateY(-50%);               
+            }
+        }
+
+        .signin__oauth>button:hover, .signin__oauth>button:focus {
+            border: 2px solid rgba($color: $primary-color, $alpha: .4);
+        }
+    }
+}
