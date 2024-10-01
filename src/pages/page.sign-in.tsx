@@ -1,12 +1,14 @@
 import googleIcon from "../assets/icons/google.svg";
 import githubIcon from "../assets/icons/github.svg";
+import { useNavigate } from "react-router-dom";
 
 export function SignIn() {
+    const navigate = useNavigate();
 
     return <>
         <section className="signin container">
             <div className="signin__form">
-                <h2>Login</h2>
+                <h2>Sign-In</h2>
                 <div className="signin__form-id">
                     <p>Account Email</p>
                     <input type="text" placeholder="Enter your account Email"/>
@@ -16,8 +18,8 @@ export function SignIn() {
                     <input type="password" placeholder="Enter your password"/>
                 </div>
                 <div className="signin__buttons">
-                    <button className="signin__button">Sign-in</button>
-                    <button className="signin__register">Register</button>
+                    <button className="signin__button">Login</button>
+                    <button className="signin__register" onClick={()=> navigate('/sign-up')}>Sign-up</button>
                 </div>
                 <div className="signin__oauth">
                     <button type="button"><img src={googleIcon} alt={googleIcon}/></button>
