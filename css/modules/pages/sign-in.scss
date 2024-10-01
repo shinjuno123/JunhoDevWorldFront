@@ -12,32 +12,39 @@
         gap: 1rem;
         padding: 6rem 5rem;
         border-radius: 5px;
+        width: 25rem;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
+        h2 {
+            font-size: $font-size-6;
+            text-align: center;
+            line-height: 1.8;
+        }
 
         .signin__form-id {
             position: relative;
-            width: fit-content;
             p {
                 line-height: 2
             }
 
             input {
-                position: relative;
+                width: 100%;
                 box-shadow: inset #abacaf 0 0 0 2px;
                 border: 0;
                 background: rgba(0, 0, 0, 0);
                 appearance: none;
-                position: relative;
                 border-radius: 3px;
-                padding: 0 12px;
                 line-height: 1.4;
                 color: rgb(0, 0, 0);
                 font-size: 16px;
                 font-weight: 400;
                 height: 40px;
                 transition: all .2s ease;
+                text-indent: .6rem;
 
+            }
+            input::placeholder {
+                text-indent: .6rem;
             }
 
             input:hover {
@@ -57,19 +64,24 @@
             }
 
             input {
+                width: 100%;
                 box-shadow: inset #abacaf 0 0 0 2px;
                 border: 0;
                 background: rgba(0, 0, 0, 0);
                 appearance: none;
                 position: relative;
                 border-radius: 3px;
-                padding: 0 12px;
                 line-height: 1.4;
                 color: rgb(0, 0, 0);
                 font-size: 16px;
                 font-weight: 400;
                 height: 40px;
                 transition: all .2s ease;
+                text-indent: .6rem;
+            }
+
+            input::placeholder {
+                text-indent: .6rem;
             }
 
             input:hover {
@@ -146,6 +158,42 @@
 
         .signin__oauth>button:hover, .signin__oauth>button:focus {
             border: 2px solid rgba($color: $primary-color, $alpha: .4);
+        }
+    }
+}
+
+@media  (max-width: $medium-screen) {
+    .signin {
+    
+        .signin__form {
+            width: 20rem;
+
+        }
+    }
+}
+
+
+@media  (max-width: $small-screen) {
+    .signin {
+    
+        .signin__form {
+            width: 10rem;
+            font-size: $font-size-2;
+
+            h2 {
+                font-size: $font-size-4;
+                line-height: 1.5;
+            }
+            
+            input {
+                font-size: $font-size-2;
+            }
+
+            input::placeholder {
+                font-size: $font-size-2;
+                text-indent: .3rem;
+            }
+
         }
     }
 }

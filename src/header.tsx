@@ -114,10 +114,10 @@ export default function Header() {
                       <span className="nav__num">06</span> about
                     </Link>
                   </li>
-                  <div className="account">
+                  <li className="account">
                     <button className="login__button" onClick={()=> {navigate('/sign-in'); closeNavigation();}}>Sign in</button>
                     <button className="signup__button" onClick={()=> {navigate('/sign-up'); closeNavigation();}}>Sign up</button>
-                  </div>
+                  </li>
                 </ul>
               </div>
 
