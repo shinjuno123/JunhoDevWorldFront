@@ -26,8 +26,8 @@ export default function Writing() {
   const fetchPostsAsync = useCallback(async () => {
     if(postParams.page !== -1) {
       await store.dispatch(fetchPosts(postParams));
-      setDelayLoadingActivated(false);
     } 
+    setDelayLoadingActivated(false);
 
     return;
   }, [postParams]);
@@ -53,7 +53,7 @@ export default function Writing() {
     }
 
     return;
-  }, [posts, currentPage, maxPage, postParams]);
+  }, [posts, currentPage, maxPage, postParams, delayLoadingActivated]);
 
   useEffect(() => {
     store.dispatch(emptyPosts());

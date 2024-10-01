@@ -64,7 +64,7 @@ export default function Notes() {
     }
 
     return;
-  }, [notes, currentPage, maxPage, noteParams]);
+  }, [notes, currentPage, maxPage, noteParams, delayLoadingActivated]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
