@@ -29,6 +29,11 @@ export function SignUp() {
     }
 
     function register() {
+        if (loading === "pending") {
+            console.log("lOADIGN")
+            return;
+        }
+
         if (password === "" || reEnteredPassword === "" || username === ""){
             setMessage("Please fill all the fields!"); }
         else if (!validateEmail(username)) {
@@ -73,7 +78,7 @@ export function SignUp() {
                 </div>
                 <div className="signup__form-password">
                     <p>Re-enter your password<i style={{color:'red'}}>*</i></p>
-                    <input onKeyDown={(e) => e.key==='Enter'? register(): ''} type="password" onInput={(event)=> setReEnteredPassword((event.target as HTMLTextAreaElement).value)} placeholder="Re-Enter your password" />
+                    <input disabled={status.is_success || loading === "pending"} type="password" onKeyUp={(e) => e.key==='Enter'? register():''} onInput={(event)=> setReEnteredPassword((event.target as HTMLTextAreaElement).value)} placeholder="Re-Enter your password" />
                 </div>
 
                 <div className={`signup__message ${status.is_success? 'success':''}`}>
