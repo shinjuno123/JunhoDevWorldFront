@@ -54,6 +54,7 @@ export function SignUp() {
             }, 3000);
         }
 
+
         return;
     },[status]);
     
@@ -63,16 +64,16 @@ export function SignUp() {
                 <button className="signup__prev" onClick={()=>navigate('/sign-in')}> <i className="material-icons icon">arrow_backward</i> <p>Back to sign-in</p></button>
                 <h2>Sign-Up</h2>
                 <div className="signup__form-id">
-                    <p>Account Email</p>
+                    <p>Account Email<i style={{color:'red'}}>*</i></p>
                     <input type="text" onInput={(event)=> setUsername((event.target as HTMLTextAreaElement).value)} placeholder="Enter your account Email" />
                 </div>
                 <div className="signup__form-password">
-                    <p>Enter your password</p>
+                    <p>Enter your password<i style={{color:'red'}}>*</i></p>
                     <input type="password" onInput={(event)=> setPassword((event.target as HTMLTextAreaElement).value)} placeholder="Enter your password" />
                 </div>
                 <div className="signup__form-password">
-                    <p>Re-enter your password</p>
-                    <input type="password" onInput={(event)=> setReEnteredPassword((event.target as HTMLTextAreaElement).value)} placeholder="Re-Enter your password" />
+                    <p>Re-enter your password<i style={{color:'red'}}>*</i></p>
+                    <input onKeyDown={(e) => e.key==='Enter'? register(): ''} type="password" onInput={(event)=> setReEnteredPassword((event.target as HTMLTextAreaElement).value)} placeholder="Re-Enter your password" />
                 </div>
 
                 <div className={`signup__message ${status.is_success? 'success':''}`}>
@@ -80,7 +81,7 @@ export function SignUp() {
                 </div>
 
                 <div className="signup__buttons">
-                    <button className="signup__register" disabled={status.is_success || loading === "pending"} onClick={register}>{status.is_success || loading === "pending" ? <PulseLoader size={5}/>:<>Register</>}</button>
+                    <button  className="signup__register" disabled={status.is_success || loading === "pending"} onClick={register}>{status.is_success || loading === "pending" ? <PulseLoader size={5}/>:<>Register</>}</button>
                 </div>
                 <div className="signup__oauth">
                     <button type="button"><img src={googleIcon} alt={googleIcon} /></button>
