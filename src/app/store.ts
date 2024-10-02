@@ -9,6 +9,7 @@ import featuredPostReducer  from '../features/writing/writing-featured-posts.sli
 import skillReducer from '../features/skills/skills.slice.ts';
 import adminReducer from "../features/admin/admin.slice.ts";
 import adminHistoryReducer from "../features/admin/admin-history.slice.ts";
+import registerReducer from "../features/login/register.slice.ts"
 
 export const store = configureStore({
     reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
         skillManager: skillReducer,
         adminManager: adminReducer,
         adminHistoryManager: adminHistoryReducer,
+        registerManager: registerReducer
     },
     middleware: (getDefaultMiddleware) => { 
         return getDefaultMiddleware();
