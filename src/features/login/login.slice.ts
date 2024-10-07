@@ -48,18 +48,22 @@ const loginSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(loginUser.fulfilled, (state, action) => {
             if (state.status && action.payload) {
-                state.status = action.payload.status;
+                state.status.is_success = action.payload.status.is_success;
+                state.status.message = action.payload.auth_cookie;
                 localStorage.setItem('auth_key', action.payload.auth_cookie);
                 state.loading = 'succeeded';
             }
 
+
         })
 
         .addCase(loginUser.pending, (state) => {
+            console.log("pending")
             state.loading = 'pending';
         })
 
         .addCase(loginUser.rejected, (state) => {
+            console.log("failed")
             state.loading = 'failed';
         })
     },
