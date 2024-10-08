@@ -25,13 +25,13 @@ export function SignIn() {
     }
 
     const printErrorMessage = useCallback(()=> {
-        if (status.message === 'invalid_username') {
-            return "Username doesn't exist"
+        if (status.message === 'incorrect_password' || status.message === 'invalid_username') {
+            return "Password or Email could be wrong!"
+        } else if (status.message === '') {
+            return '';
         }
-        console.log(status);
-        
 
-        return '';
+        return 'Error happened. Please try this later.';
     },[status, loading])
 
 
@@ -39,7 +39,7 @@ export function SignIn() {
     useEffect(() => {
         const authKey = localStorage.getItem("auth_key");
         if (authKey !== "undefined" && authKey !== '') {
-            // navigate('/');
+            navigate('/');
         }
 
         return;
@@ -56,6 +56,9 @@ export function SignIn() {
                 <div className="signin__form-password">
                     <p>Password</p>
                     <input type="password" onKeyUp={(e) => e.key==='Enter'? login():''} onInput={(event) => setPassword((event.target as HTMLTextAreaElement).value)} placeholder="Enter your password" />
+                </div>
+                <div className={`signin__message ${status.is_success? 'success':''}`}>
+                    <span>{printErrorMessage()}</span>
                 </div>
                 <div className="signin__buttons">
                     <button className="signin__button" onClick={login}>Login</button>

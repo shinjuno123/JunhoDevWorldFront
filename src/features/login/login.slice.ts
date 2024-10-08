@@ -48,8 +48,7 @@ const loginSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(loginUser.fulfilled, (state, action) => {
             if (state.status && action.payload) {
-                state.status.is_success = action.payload.status.is_success;
-                state.status.message = action.payload.auth_cookie;
+                state.status = action.payload.status;
                 localStorage.setItem('auth_key', action.payload.auth_cookie);
                 state.loading = 'succeeded';
             }
