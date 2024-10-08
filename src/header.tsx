@@ -1,22 +1,42 @@
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import face from "./assets/images/myface.jpg";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "material-icons/iconfont/material-icons.scss";
 import { useEffect, useState } from "react";
 import { fetchAdminInfo } from "./features/admin/admin.slice";
 import { useAppSelector } from "./app/hooks";
 import store from "./app/store";
+import { logoutUser } from "./features/login/logout.slice";
 
 export default function Header() {
   const [headerState, setHeaderState] = useState('closed');
   const url = useLocation().pathname;
   const { adminInfo } = useAppSelector(state => state.adminManager);
+  const {status} = useAppSelector(state=> state.loginManager);
   const navigate = useNavigate();
+  const [isLogined, setIsLogined] = useState<boolean>(false);
+
 
   useEffect(() => {
     store.dispatch(fetchAdminInfo());
 
-    return;
-  }, [])
+    const authKey = localStorage.getItem('auth_key');
+
+    if (authKey) {
+      setIsLogined(true);
+    } else {
+      setIsLogined(false);
+    }
+  }, [status]);
+
+  async function logout() {
+    await store.dispatch(logoutUser());
+    setIsLogined(false);
+
+    // Open modal
+    
+
+    // Modal confirm click go back to home
+    navigate("/");
+  }
 
   function toggleNavigation() {
     setHeaderState((headerState === 'closed' ? 'opened' : 'closed'));
@@ -114,9 +134,12 @@ export default function Header() {
                       <span className="nav__num">06</span> about
                     </Link>
                   </li>
-                  <li className="account">
+                  <li className="account" style={{display: isLogined? 'none':'flex'}}>
                     <button className="login__button" onClick={()=> {navigate('/sign-in'); closeNavigation();}}>Sign in</button>
                     <button className="signup__button" onClick={()=> {navigate('/sign-up'); closeNavigation();}}>Sign up</button>
+                  </li>
+                  <li className="account" style={{display: isLogined? 'flex':'none'}}>
+                    <button className="signup__button" onClick={logout}>Logout</button>
                   </li>
                 </ul>
               </div>

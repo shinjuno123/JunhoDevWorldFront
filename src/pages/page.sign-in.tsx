@@ -20,6 +20,7 @@ export function SignIn() {
                 
                 if (authKey !== 'undefined') {
                     navigate('/');
+                
                 } 
             });
     }
@@ -27,7 +28,7 @@ export function SignIn() {
     const printErrorMessage = useCallback(()=> {
         if (status.message === 'incorrect_password' || status.message === 'invalid_username') {
             return "Password or Email could be wrong!"
-        } else if (status.message === '') {
+        } else if (status.message === '' || status.message === 'login_success') {
             return '';
         }
 
@@ -38,7 +39,7 @@ export function SignIn() {
 
     useEffect(() => {
         const authKey = localStorage.getItem("auth_key");
-        if (authKey !== "undefined" && authKey !== '') {
+        if (authKey) {
             navigate('/');
         }
 

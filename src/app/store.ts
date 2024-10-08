@@ -11,6 +11,7 @@ import adminReducer from "../features/admin/admin.slice.ts";
 import adminHistoryReducer from "../features/admin/admin-history.slice.ts";
 import registerReducer from "../features/login/register.slice.ts";
 import loginReducer from "../features/login/login.slice.ts";
+import logoutReducer from "../features/login/logout.slice.ts";
 
 export const store = configureStore({
     reducer: {
@@ -25,7 +26,8 @@ export const store = configureStore({
         adminManager: adminReducer,
         adminHistoryManager: adminHistoryReducer,
         registerManager: registerReducer,
-        loginManager: loginReducer
+        loginManager: loginReducer,
+        logoutManager: logoutReducer,
     },
     middleware: (getDefaultMiddleware) => { 
         return getDefaultMiddleware();
