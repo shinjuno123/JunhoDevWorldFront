@@ -29,13 +29,13 @@ export default function Header() {
 
   async function logout() {
     await store.dispatch(logoutUser());
-    setIsLogined(false);
-
-    // Open modal
-    
+    setIsLogined(false);   
 
     // Modal confirm click go back to home
     navigate("/");
+
+    // Minimize the header
+    setHeaderState('closed');
   }
 
   function toggleNavigation() {

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import store from "../app/store";
 import { loginUser } from "../features/login/login.slice";
 import { useAppSelector } from "../app/hooks";
+import { PulseLoader } from "react-spinners";
 
 export function SignIn() {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ export function SignIn() {
             .then(() => {
                 const authKey = localStorage.getItem("auth_key");
                 
-                if (authKey !== 'undefined') {
+                if (authKey) {
                     navigate('/');
                 
                 } 
@@ -62,7 +63,7 @@ export function SignIn() {
                     <span>{printErrorMessage()}</span>
                 </div>
                 <div className="signin__buttons">
-                    <button className="signin__button" onClick={login}>Login</button>
+                    <button className="signin__button" disabled={status.is_success || loading === "pending"} onClick={login}>{loading === "pending" ? <PulseLoader size={5}/>:<>Login</>}</button>
                     <button className="signin__register" onClick={() => navigate('/sign-up')}>Sign-up</button>
                 </div>
                 <div className="signin__oauth">
