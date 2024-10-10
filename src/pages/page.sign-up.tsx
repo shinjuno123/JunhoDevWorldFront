@@ -2,10 +2,11 @@ import googleIcon from "../assets/icons/google.svg";
 import githubIcon from "../assets/icons/github.svg";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { registerUser, setStatus } from "../features/login/register.slice";
 import store from "../app/store";
 import { PulseLoader } from "react-spinners";
+import Modal, { ModalControl } from "../components/component.modal";
 
 export function SignUp() {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ export function SignUp() {
     const [password, setPassword] = useState<string>('');
     const [message, setMessage] = useState<string>('');
     const [reEnteredPassword, setReEnteredPassword] = useState<string>('');
+    const modal = useRef<ModalControl>(null);
 
     const validateEmail = (email: string) => {
         return String(email)
@@ -55,7 +57,7 @@ export function SignUp() {
         if (status.is_success) {
             setTimeout(()=> {
                 store.dispatch(setStatus({payload: {is_success: false, message: ''}}))
-                navigate("/sign-in");
+                modal.current?.openModal();
             }, 3000);
         }
 
@@ -64,6 +66,7 @@ export function SignUp() {
     },[status]);
     
     return <>
+        <Modal title="Message" message="Account was created successfully!" navigateUrl="/sign-in" ref={modal}></Modal>
         <section className="signup container">
             <div className="signup__form">
                 <button className="signup__prev" onClick={()=>navigate('/sign-in')}> <i className="material-icons icon">arrow_backward</i> <p>Back to sign-in</p></button>

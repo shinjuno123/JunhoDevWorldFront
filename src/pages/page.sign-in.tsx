@@ -1,17 +1,19 @@
 import googleIcon from "../assets/icons/google.svg";
 import githubIcon from "../assets/icons/github.svg";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import store from "../app/store";
 import { loginUser } from "../features/login/login.slice";
 import { useAppSelector } from "../app/hooks";
 import { PulseLoader } from "react-spinners";
+import Modal, { ModalControl } from "../components/component.modal";
 
 export function SignIn() {
     const navigate = useNavigate();
     const { loading, status } = useAppSelector(state => state.loginManager);
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const modal = useRef<ModalControl>(null);
 
 
     function login() {
@@ -20,8 +22,7 @@ export function SignIn() {
                 const authKey = localStorage.getItem("auth_key");
                 
                 if (authKey) {
-                    navigate('/');
-                
+                    modal.current?.openModal();
                 } 
             });
     }
@@ -48,6 +49,7 @@ export function SignIn() {
     }, []);
 
     return <>
+        <Modal title="Message" message="Login successful!" navigateUrl="/" ref={modal}></Modal>
         <section className="signin container">
             <div className="signin__form">
                 <h2>Sign-In</h2>

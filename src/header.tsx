@@ -1,10 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "material-icons/iconfont/material-icons.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchAdminInfo } from "./features/admin/admin.slice";
 import { useAppSelector } from "./app/hooks";
 import store from "./app/store";
 import { logoutUser } from "./features/login/logout.slice";
+import Modal, { ModalControl } from "./components/component.modal";
 
 export default function Header() {
   const [headerState, setHeaderState] = useState('closed');
@@ -13,6 +14,7 @@ export default function Header() {
   const {status} = useAppSelector(state=> state.loginManager);
   const navigate = useNavigate();
   const [isLogined, setIsLogined] = useState<boolean>(false);
+  const modal = useRef<ModalControl>(null);
 
 
   useEffect(() => {
@@ -36,6 +38,8 @@ export default function Header() {
 
     // Minimize the header
     setHeaderState('closed');
+
+    modal.current?.openModal();
   }
 
   function toggleNavigation() {
@@ -59,6 +63,7 @@ export default function Header() {
 
   return (
     <>
+      <Modal title="Message" message="Your account was logged out successfully!" navigateUrl="/" ref={modal}></Modal>
       <header className="header">
         <div className="header__inner container">
           <Link className="header__brand" to="/">
