@@ -1,7 +1,7 @@
 import "material-icons/iconfont/material-icons.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect } from "react";
 import store from "../app/store";
 import { fetchFeaturedPosts } from "../features/writing/writing-featured-posts.slice";
 import React from "react";
