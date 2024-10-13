@@ -19,6 +19,7 @@ import Skills from "./pages/page.skills.tsx";
 import { SignUp } from "./pages/page.sign-up.tsx";
 import { SignIn } from "./pages/page.sign-in.tsx";
 
+
 function App() {
   const navigate = useNavigate();
 

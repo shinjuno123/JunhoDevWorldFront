@@ -12,6 +12,7 @@ import adminHistoryReducer from "../features/admin/admin-history.slice.ts";
 import registerReducer from "../features/login/register.slice.ts";
 import loginReducer from "../features/login/login.slice.ts";
 import logoutReducer from "../features/login/logout.slice.ts";
+import oauthReducer from "../features/login/oauth.slice.ts";
 
 export const store = configureStore({
     reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
         registerManager: registerReducer,
         loginManager: loginReducer,
         logoutManager: logoutReducer,
+        oauthManager: oauthReducer,
     },
     middleware: (getDefaultMiddleware) => { 
         return getDefaultMiddleware();

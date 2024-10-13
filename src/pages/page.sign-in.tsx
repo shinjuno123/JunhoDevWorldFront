@@ -7,6 +7,7 @@ import { loginUser } from "../features/login/login.slice";
 import { useAppSelector } from "../app/hooks";
 import { PulseLoader } from "react-spinners";
 import Modal, { ModalControl } from "../components/component.modal";
+import { getOauthUrl } from "../features/login/oauth.slice";
 
 export function SignIn() {
     const navigate = useNavigate();
@@ -27,6 +28,11 @@ export function SignIn() {
             });
     }
 
+    async function googleLogin() {
+        (await store.dispatch(getOauthUrl({platform: 'google'}))).payload as string;
+        
+    }
+
     const printErrorMessage = useCallback(()=> {
         if (status.message === 'incorrect_password' || status.message === 'invalid_username') {
             return "Password or Email could be wrong!"
@@ -35,7 +41,8 @@ export function SignIn() {
         }
 
         return 'Error happened. Please try this later.';
-    },[status, loading])
+    },[status, loading]);
+
 
 
 
@@ -69,7 +76,7 @@ export function SignIn() {
                     <button className="signin__register" onClick={() => navigate('/sign-up')}>Sign-up</button>
                 </div>
                 <div className="signin__oauth">
-                    <button type="button"><img src={googleIcon} alt={googleIcon} /></button>
+                    <button onClick={googleLogin} type="button"><img src={googleIcon} alt={googleIcon}/></button>
                     <button type="button"><img src={githubIcon} alt={githubIcon} /></button>
                 </div>
             </div>
