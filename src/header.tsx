@@ -37,7 +37,7 @@ export default function Header() {
     navigate("/");
 
     // Minimize the header
-    setHeaderState('closed');
+    toggleNavigation();
 
     modal.current?.openModal();
   }
