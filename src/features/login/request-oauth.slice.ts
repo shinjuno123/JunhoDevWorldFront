@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios, { AxiosError } from "axios";
 
 /*
 Google Oauth Request
@@ -59,6 +58,7 @@ export const getOauthUrl = createAsyncThunk<string, { platform: string }>(
 )
 
 
+
 const oauthSlice = createSlice({
     name: 'oauth',
     initialState,
@@ -77,9 +77,12 @@ const oauthSlice = createSlice({
         .addCase(getOauthUrl.rejected, (state) => {
             state.loading = 'failed';
         })
+
     },
 
 });
+
+
 
 // export const { getOAuthUrl: getOuathUrl } = oauthSlice.actions;
 export default oauthSlice.reducer;

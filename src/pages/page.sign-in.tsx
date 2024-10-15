@@ -7,7 +7,7 @@ import { loginUser } from "../features/login/login.slice";
 import { useAppSelector } from "../app/hooks";
 import { PulseLoader } from "react-spinners";
 import Modal, { ModalControl } from "../components/component.modal";
-import { getOauthUrl } from "../features/login/oauth.slice";
+import { getOauthUrl } from "../features/login/request-oauth.slice";
 
 export function SignIn() {
     const navigate = useNavigate();

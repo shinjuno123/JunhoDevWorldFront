@@ -12,7 +12,8 @@ import adminHistoryReducer from "../features/admin/admin-history.slice.ts";
 import registerReducer from "../features/login/register.slice.ts";
 import loginReducer from "../features/login/login.slice.ts";
 import logoutReducer from "../features/login/logout.slice.ts";
-import oauthReducer from "../features/login/oauth.slice.ts";
+import requestOauthReducer from "../features/login/request-oauth.slice.ts";
+import verifyGoogleAccessTokenSlice from "../features/login/verify-google-oauth.ts";
 
 export const store = configureStore({
     reducer: {
@@ -29,7 +30,8 @@ export const store = configureStore({
         registerManager: registerReducer,
         loginManager: loginReducer,
         logoutManager: logoutReducer,
-        oauthManager: oauthReducer,
+        requestOauthManager: requestOauthReducer,
+        verifyGoogleAccessTokenManager: verifyGoogleAccessTokenSlice
     },
     middleware: (getDefaultMiddleware) => { 
         return getDefaultMiddleware();

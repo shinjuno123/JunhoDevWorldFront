@@ -7,9 +7,6 @@ interface RegisterResponse {
 }
 
 
-
-
-
 interface RegisterState {
     loading: 'idle' | 'pending' | 'succeeded' | 'failed';
     status: {is_success: boolean, message: string};
