@@ -7,7 +7,7 @@ export const axios = setupCache(instance);
 
 axios.interceptors.request.use((config) => {
     if (!config.url?.includes('http')) {
-        config.url = 'http://localhost:10004/wp-json' + config.url;
+        config.url = import.meta.env.VITE_SERVER_URL + config.url;
     }
     return config;
 }, (error) => {
