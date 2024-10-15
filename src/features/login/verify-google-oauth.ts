@@ -30,7 +30,7 @@ interface VerifyState {
     };
 }
 
-interface VerifyResponse {
+export interface VerifyResponse {
     userInfo: {
         name: string,
         given_name: string,

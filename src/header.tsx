@@ -6,32 +6,39 @@ import { useAppSelector } from "./app/hooks";
 import store from "./app/store";
 import { logoutUser } from "./features/login/logout.slice";
 import Modal, { ModalControl } from "./components/component.modal";
+import { verifyAccessToken } from "./features/login/verify-google-oauth";
+import { VerifyResponse } from "./features/login/verify-google-oauth";
 
 export default function Header() {
   const [headerState, setHeaderState] = useState('closed');
   const url = useLocation().pathname;
   const { adminInfo } = useAppSelector(state => state.adminManager);
-  const {status} = useAppSelector(state=> state.loginManager);
+  const { status: regularLoginStatus } = useAppSelector(state => state.loginManager);
+  const { loading: googleOauthVerificationLoading } = useAppSelector(state => state.verifyGoogleAccessTokenManager);
   const navigate = useNavigate();
   const [isLogined, setIsLogined] = useState<boolean>(false);
   const modal = useRef<ModalControl>(null);
 
 
-  useEffect(() => {
-    store.dispatch(fetchAdminInfo());
+  function setCredentials() {
+    const params = new URLSearchParams(window.location.hash.replace("#", "?"));
+    const accessToken = params.get('access_token');
+    const tokenType = params.get('token_type');
+    const expiresIn = params.get('expires_in');
+    const startTime = Date.now().toString();
 
-    const authKey = localStorage.getItem('auth_key');
-
-    if (authKey) {
-      setIsLogined(true);
-    } else {
-      setIsLogined(false);
+    if (accessToken && tokenType && expiresIn) {
+      localStorage.setItem("access_token", accessToken);
+      localStorage.setItem("token_type", tokenType);
+      localStorage.setItem("expires_in", expiresIn);
+      localStorage.setItem("start_time", startTime);
+      window.location.hash = '';
     }
-  }, [status]);
+  }
 
   async function logout() {
     await store.dispatch(logoutUser());
-    setIsLogined(false);   
+    setIsLogined(false);
 
     // Modal confirm click go back to home
     navigate("/");
@@ -53,11 +60,40 @@ export default function Header() {
   }
 
 
+
   function closeNavigation() {
     setHeaderState('closed');
     document.body.classList.remove('overflow-y-hidden');
   }
 
+  useEffect(() => {
+    store.dispatch(fetchAdminInfo());
+
+    const authKey = localStorage.getItem('auth_key');
+
+    if (authKey) {
+      setIsLogined(true);
+    } else {
+      setIsLogined(false);
+    }
+  }, [regularLoginStatus]);
+
+  useEffect(() => {
+    setCredentials();
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      store.dispatch(verifyAccessToken(accessToken))
+        .then((res) => {
+          const verifyRes = res.payload as VerifyResponse;
+
+          if (verifyRes.status.is_success) {
+            setIsLogined(true);
+          } else {
+            setIsLogined(false);
+          }
+        })
+    }
+  }, []);
 
 
 
@@ -139,11 +175,11 @@ export default function Header() {
                       <span className="nav__num">06</span> about
                     </Link>
                   </li>
-                  <li className="account" style={{display: isLogined? 'none':'flex'}}>
-                    <button className="login__button" onClick={()=> {navigate('/sign-in'); closeNavigation();}}>Sign in</button>
-                    <button className="signup__button" onClick={()=> {navigate('/sign-up'); closeNavigation();}}>Sign up</button>
+                  <li className="account" style={{ display: isLogined ? 'none' : 'flex' }}>
+                    <button className="login__button" onClick={() => { navigate('/sign-in'); closeNavigation(); }}>Sign in</button>
+                    <button className="signup__button" onClick={() => { navigate('/sign-up'); closeNavigation(); }}>Sign up</button>
                   </li>
-                  <li className="account" style={{display: isLogined? 'flex':'none'}}>
+                  <li className="account" style={{ display: isLogined ? 'flex' : 'none' }}>
                     <button className="signup__button" onClick={logout}>Logout</button>
                   </li>
                 </ul>

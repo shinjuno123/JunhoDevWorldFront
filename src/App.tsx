@@ -12,7 +12,6 @@ import Intro from "./pages/about/page.about.intro";
 import History from "./pages/about/page.about.history";
 import AboutSkills from "./pages/about/page.about.skills";
 import AboutProjects from "./pages/about/page.about.projects";
-import { useEffect } from "react";
 import Page404 from "./pages/page.404";
 import './api-client.ts';
 import Skills from "./pages/page.skills.tsx";
@@ -20,30 +19,6 @@ import { SignUp } from "./pages/page.sign-up.tsx";
 import { SignIn } from "./pages/page.sign-in.tsx";
 
 function App() {
-  const navigate = useNavigate();
-
-  function setCredentials() {
-    const params = new URLSearchParams(window.location.hash.replace("#","?"));
-    const accessToken = params.get('access_token');
-    const tokenType = params.get('token_type');
-    const expiresIn = params.get('expires_in');
-    const startTime = Date.now().toString();
-
-    if (accessToken && tokenType && expiresIn) {
-      localStorage.setItem("access_token", accessToken);
-      localStorage.setItem("token_type", tokenType);
-      localStorage.setItem("expires_in", expiresIn);
-      localStorage.setItem("start_time", startTime);
-      window.location.hash = '';
-    }
-  }
-
-  useEffect(()=> {
-      window.scrollTo({top:0, behavior:'smooth'});
-      setCredentials();
-  },[navigate])
-
-
 
   return (
     <>
