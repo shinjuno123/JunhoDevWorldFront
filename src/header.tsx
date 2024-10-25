@@ -17,7 +17,8 @@ export default function Header() {
   const { loading: googleOauthVerificationLoading } = useAppSelector(state => state.verifyGoogleAccessTokenManager);
   const navigate = useNavigate();
   const [isLogined, setIsLogined] = useState<boolean>(false);
-  const modal = useRef<ModalControl>(null);
+  const logoutModal = useRef<ModalControl>(null);
+  const loginModal = useRef<ModalControl>(null);
 
 
   function setCredentials() {
@@ -46,7 +47,9 @@ export default function Header() {
     // Minimize the header
     toggleNavigation();
 
-    modal.current?.openModal();
+    localStorage.clear();
+
+    logoutModal.current?.openModal();
   }
 
   function toggleNavigation() {
@@ -80,7 +83,7 @@ export default function Header() {
 
   useEffect(() => {
     setCredentials();
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('access_token');
     if (accessToken) {
       store.dispatch(verifyAccessToken(accessToken))
         .then((res) => {
@@ -88,7 +91,12 @@ export default function Header() {
 
           if (verifyRes.status.is_success) {
             setIsLogined(true);
+            if (!localStorage.getItem('login_status')) {
+              loginModal.current?.openModal();
+            }
+            localStorage.setItem('login_status', 'exist');
           } else {
+            localStorage.setItem('login_status', 'exist');
             setIsLogined(false);
           }
         })
@@ -99,7 +107,8 @@ export default function Header() {
 
   return (
     <>
-      <Modal title="Message" message="Your account was logged out successfully!" navigateUrl="/" ref={modal}></Modal>
+       <Modal title="Message" message="Login successful!" navigateUrl="/" ref={loginModal}></Modal>
+      <Modal title="Message" message="Your account was logged out successfully!" navigateUrl="/" ref={logoutModal}></Modal>
       <header className="header">
         <div className="header__inner container">
           <Link className="header__brand" to="/">

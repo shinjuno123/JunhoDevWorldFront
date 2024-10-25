@@ -19,7 +19,6 @@ import { SignUp } from "./pages/page.sign-up.tsx";
 import { SignIn } from "./pages/page.sign-in.tsx";
 
 function App() {
-
   return (
     <>
       <Header></Header>

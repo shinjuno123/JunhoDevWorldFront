@@ -57,7 +57,7 @@ const registerSlice = createSlice({
             state.loading = 'pending';
         })
 
-        .addCase(registerUser.rejected, (state, action) => {
+        .addCase(registerUser.rejected, (state) => {
             state.loading = 'failed';
         })
     },

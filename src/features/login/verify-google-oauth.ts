@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { AxiosError } from "axios";
+import {axios} from '../../api-client';
 
 /*
 Server access token verification Response
@@ -50,30 +51,35 @@ const initialState: VerifyState = {
     }
 }
 
-export const verifyAccessToken = createAsyncThunk<VerifyState['userInfo'], string>(
+export const verifyAccessToken = createAsyncThunk<VerifyResponse, string>(
     'google-verify',
-    async (accessToken) => {
-        const result =  {
-            name: '',
-            given_name: '',
-            family_name: '',
-            picture: ''
-        };
+    async (accessToken: string) => {
 
-        const response: VerifyResponse = await axios.post(`/oauth/google`, {accessToken: accessToken}, {
-            headers: {
-                'Content-Type' : 'application/json'
-            }
-        });
+        try{
+            const result: VerifyResponse =  {
+                userInfo: {
+                    name: '',
+                    given_name: '',
+                    family_name: '',
+                    picture: ''
+                },
+                status: {is_success: false, message: ''}
+            };
 
-        if (response.userInfo) {
-            result.family_name = response.userInfo.family_name;
-            result.given_name = response.userInfo.given_name;
-            result.name = response.userInfo.name;
-            result.picture = response.userInfo.picture;
+
+            return (await axios.post('/oauth/google', {accessToken: accessToken}, {
+                headers: {
+                    'Content-Type' : 'application/json'
+                }
+            })).data;
+
+            
+        }
+        catch (error) {
+            return (error as AxiosError).response?.data;
         }
 
-        return result;
+       
     }
 )
 
