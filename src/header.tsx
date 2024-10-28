@@ -14,7 +14,6 @@ export default function Header() {
   const url = useLocation().pathname;
   const { adminInfo } = useAppSelector(state => state.adminManager);
   const { status: regularLoginStatus } = useAppSelector(state => state.loginManager);
-  const { loading: googleOauthVerificationLoading } = useAppSelector(state => state.verifyGoogleAccessTokenManager);
   const navigate = useNavigate();
   const [isLogined, setIsLogined] = useState<boolean>(false);
   const logoutModal = useRef<ModalControl>(null);

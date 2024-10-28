@@ -46,7 +46,7 @@ export const getOauthUrl = createAsyncThunk<string, { platform: string }>(
 
         fullUrl.searchParams.append("client_id", clientId);
         fullUrl.searchParams.append("redirect_uri", redirectUri);
-        fullUrl.searchParams.append("scope", scope);
+        fullUrl.searchParams.append("scope", 'https://www.googleapis.com/auth/profile.emails.read');
         fullUrl.searchParams.append("response_type", responseType);
         fullUrl.searchParams.append("prompt", prompt);
 

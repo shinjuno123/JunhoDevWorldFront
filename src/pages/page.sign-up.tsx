@@ -54,6 +54,17 @@ export function SignUp() {
     }
 
     useEffect(() => {
+        const authKey = localStorage.getItem("auth_key");
+        const accessToken = localStorage.getItem('access_token');
+        if (authKey || accessToken) {
+            navigate('/');
+        }
+
+        return;
+    }, []);
+
+
+    useEffect(() => {
         if (status.is_success) {
             setTimeout(()=> {
                 store.dispatch(setStatus({payload: {is_success: false, message: ''}}))

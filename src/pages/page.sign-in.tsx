@@ -49,7 +49,8 @@ export function SignIn() {
 
     useEffect(() => {
         const authKey = localStorage.getItem("auth_key");
-        if (authKey) {
+        const accessToken = localStorage.getItem('access_token');
+        if (authKey || accessToken) {
             navigate('/');
         }
 
