@@ -24,19 +24,23 @@ Server access token verification Response
 interface VerifyState {
     loading: 'idle' | 'pending' | 'succeeded' | 'failed';
     userInfo: {
-        name: string,
-        given_name: string,
-        family_name: string,
-        picture: string
+        azp: string,
+        aud: string,
+        scope: string,
+        exp: string,
+        expires_in: string,
+        access_type: string
     };
 }
 
 export interface VerifyResponse {
     userInfo: {
-        name: string,
-        given_name: string,
-        family_name: string,
-        picture: string
+        azp: string,
+        aud: string,
+        scope: string,
+        exp: string,
+        expires_in: string,
+        access_type: string
     } | null;
     status: {is_success: boolean, message: string};
 }
@@ -44,10 +48,12 @@ export interface VerifyResponse {
 const initialState: VerifyState = {
     loading: 'idle',
     userInfo: {
-        name: '',
-        given_name: '',
-        family_name: '',
-        picture: ''
+        azp: '',
+        aud: '',
+        scope: '',
+        exp: '',
+        expires_in: '',
+        access_type: ''
     }
 }
 
@@ -56,17 +62,6 @@ export const verifyAccessToken = createAsyncThunk<VerifyResponse, string>(
     async (accessToken: string) => {
 
         try{
-            const result: VerifyResponse =  {
-                userInfo: {
-                    name: '',
-                    given_name: '',
-                    family_name: '',
-                    picture: ''
-                },
-                status: {is_success: false, message: ''}
-            };
-
-
             return (await axios.post('/oauth/google', {accessToken: accessToken}, {
                 headers: {
                     'Content-Type' : 'application/json'
@@ -93,7 +88,14 @@ const googleVerifySlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(verifyAccessToken.fulfilled, (state, action) => {
             state.loading = 'succeeded';
-            state.userInfo = action.payload;
+            state.userInfo = action.payload.userInfo as {
+                azp: string,
+                aud: string,
+                scope: string,
+                exp: string,
+                expires_in: string,
+                access_type: string
+            };
         })
 
         .addCase(verifyAccessToken.pending, (state) => {
