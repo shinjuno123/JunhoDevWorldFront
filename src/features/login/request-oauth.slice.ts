@@ -22,67 +22,80 @@ expires_in=3599 &
 scope=https://www.googleapis.com/auth/drive.metadata.readonly
 */
 
-
-
 interface OauthState {
-    loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+  loading: "idle" | "pending" | "succeeded" | "failed";
 }
 
 const initialState: OauthState = {
-    loading: 'idle',
-}
+  loading: "idle",
+};
 
 export const getOauthUrl = createAsyncThunk<string, { platform: string }>(
-    'oauth',
-    async (_data) => {
-        const authURl = import.meta.env.VITE_GOOGLE_OAUTH_AUTH_URL as string;
-        const clientId = import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID as string;
-        const redirectUri = import.meta.env.VITE_GOOGLE_OAUTH_REDIRECT_URI as string;
-        const scope = import.meta.env.VITE_GOOGLE_OAUTH_SCOPE;
-        const responseType = import.meta.env.VITE_GOOGLE_OAUTH_RESPONSE_TYPE;
-        const prompt = import.meta.env.VITE_GOOGLE_OAUTH_PROMPT;
+  "oauth",
+  async (data) => {
+    if (data.platform === "google") {
+      const authURl = import.meta.env.VITE_GOOGLE_OAUTH_AUTH_URL as string;
+      const clientId = import.meta.env.VITE_GOOGLE_OAUTH_CLIENT_ID as string;
+      const redirectUri = import.meta.env
+        .VITE_GOOGLE_OAUTH_REDIRECT_URI as string;
+      const responseType = import.meta.env.VITE_GOOGLE_OAUTH_RESPONSE_TYPE;
+      const prompt = import.meta.env.VITE_GOOGLE_OAUTH_PROMPT;
 
-        const fullUrl = new URL(authURl);
+      const fullUrl = new URL(authURl);
 
-        fullUrl.searchParams.append("client_id", clientId);
-        fullUrl.searchParams.append("redirect_uri", redirectUri);
-        fullUrl.searchParams.append("scope", 'https://www.googleapis.com/auth/profile.emails.read');
-        fullUrl.searchParams.append("response_type", responseType);
-        fullUrl.searchParams.append("prompt", prompt);
+      fullUrl.searchParams.append("client_id", clientId);
+      fullUrl.searchParams.append("redirect_uri", redirectUri);
+      fullUrl.searchParams.append(
+        "scope",
+        "https://www.googleapis.com/auth/profile.emails.read"
+      );
+      fullUrl.searchParams.append("response_type", responseType);
+      fullUrl.searchParams.append("prompt", prompt);
 
+      window.location.href = fullUrl.toString();
 
-        window.location.href = fullUrl.toString();
-
-        return fullUrl.toString();
+      return fullUrl.toString();
     }
-)
 
+    if (data.platform === "github") {
+      const authURl = import.meta.env.VITE_GITHUB_OAUTH_AUTH_URL as string;
+      const clientId = import.meta.env.VITE_GITHUB_OAUTH_CLIENT_ID as string;
+      const redirectUri = import.meta.env
+        .VITE_GITHUB_OAUTH_REDIRECT_URI as string;
 
+      const fullUrl = new URL(authURl);
+
+      fullUrl.searchParams.append("client_id", clientId);
+      fullUrl.searchParams.append("redirect_uri", redirectUri);
+
+      window.location.href = fullUrl.toString();
+
+      return fullUrl.toString();
+    }
+
+    return '';
+  }
+);
 
 const oauthSlice = createSlice({
-    name: 'oauth',
-    initialState,
-    reducers: {
-    },
-    extraReducers: (builder) => {
-        builder.addCase(getOauthUrl.fulfilled, (state) => {
-            state.loading = 'succeeded';
+  name: "oauth",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getOauthUrl.fulfilled, (state) => {
+        state.loading = "succeeded";
+      })
 
-        })
+      .addCase(getOauthUrl.pending, (state) => {
+        state.loading = "pending";
+      })
 
-        .addCase(getOauthUrl.pending, (state) => {
-            state.loading = 'pending';
-        })
-
-        .addCase(getOauthUrl.rejected, (state) => {
-            state.loading = 'failed';
-        })
-
-    },
-
+      .addCase(getOauthUrl.rejected, (state) => {
+        state.loading = "failed";
+      });
+  },
 });
-
-
 
 // export const { getOAuthUrl: getOuathUrl } = oauthSlice.actions;
 export default oauthSlice.reducer;

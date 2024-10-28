@@ -28,10 +28,8 @@ export function SignIn() {
             });
     }
 
-    async function googleLogin() {
-        (await store.dispatch(getOauthUrl({platform: 'google'}))).payload as string;
-        
-        
+    async function oauthLogin(platform: string) {
+        (await store.dispatch(getOauthUrl({platform: platform}))).payload as string;
     }
 
     const printErrorMessage = useCallback(()=> {
@@ -78,8 +76,8 @@ export function SignIn() {
                     <button className="signin__register" onClick={() => navigate('/sign-up')}>Sign-up</button>
                 </div>
                 <div className="signin__oauth">
-                    <button onClick={googleLogin} type="button"><img src={googleIcon} alt={googleIcon}/></button>
-                    <button type="button"><img src={githubIcon} alt={githubIcon} /></button>
+                    <button onClick={() => oauthLogin('google')} type="button"><img src={googleIcon} alt={googleIcon}/></button>
+                    <button onClick={() => oauthLogin('github')} type="button"><img src={githubIcon} alt={githubIcon} /></button>
                 </div>
             </div>
         </section>
