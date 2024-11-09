@@ -8,6 +8,7 @@ import { useAppSelector } from "../app/hooks";
 import { PulseLoader } from "react-spinners";
 import Modal, { ModalControl } from "../components/component.modal";
 import { getOauthUrl } from "../features/login/request-oauth.slice";
+import InputModal, {InputModalControl} from "../components/component.input-modal";
 
 export function SignIn() {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ export function SignIn() {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const modal = useRef<ModalControl>(null);
+    const inputModal = useRef<InputModalControl>(null);
 
 
     function login() {
@@ -24,11 +26,14 @@ export function SignIn() {
                 
                 if (authKey) {
                     modal.current?.openModal();
-                } 
+                }
             });
     }
 
     async function oauthLogin(platform: string) {
+        if (platform === "github") {
+            undefined;
+        }
         (await store.dispatch(getOauthUrl({platform: platform}))).payload as string;
     }
 
@@ -48,6 +53,7 @@ export function SignIn() {
     useEffect(() => {
         const authKey = localStorage.getItem("auth_key");
         const accessToken = localStorage.getItem('access_token');
+        inputModal.current?.openModal();
         if (authKey || accessToken) {
             navigate('/');
         }
@@ -57,6 +63,11 @@ export function SignIn() {
 
     return <>
         <Modal title="Message" message="Login successful!" navigateUrl="/" ref={modal}></Modal>
+        <InputModal title={"Enter your info for the last step!"} labels={["Email"]} url={""} callBack={function (url: string): void {
+            
+            
+            inputModal.current?.closeModal();
+        } } ref={inputModal}/>
         <section className="signin container">
             <div className="signin__form">
                 <h2>Sign-In</h2>

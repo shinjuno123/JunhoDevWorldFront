@@ -183,13 +183,13 @@ export default function Header() {
                       <span className="nav__num">06</span> about
                     </Link>
                   </li>
-                  <li className="account" style={{ display: isLogined ? 'none' : 'flex' }}>
+                  {/* <li className="account" style={{ display: isLogined ? 'none' : 'flex' }}>
                     <button className="login__button" onClick={() => { navigate('/sign-in'); closeNavigation(); }}>Sign in</button>
                     <button className="signup__button" onClick={() => { navigate('/sign-up'); closeNavigation(); }}>Sign up</button>
                   </li>
                   <li className="account" style={{ display: isLogined ? 'flex' : 'none' }}>
                     <button className="signup__button" onClick={logout}>Logout</button>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
 

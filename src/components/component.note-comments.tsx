@@ -22,7 +22,7 @@ const NoteComment = forwardRef<toggleHandle, object>((_props, ref) => {
 
   return (
     <>
-      <section className={`comment__section ${isOpen}`}>
+      <section className={`comment__section ${isOpen}`} style={{display:"none"}}>
         <h3 className="comment__header">Write your comment</h3>
         <hr className="comment__header-hr" />
 

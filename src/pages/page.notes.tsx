@@ -106,7 +106,7 @@ export default function Notes() {
                       dangerouslySetInnerHTML={{ __html: note[1].content }}
                     ></main>
 
-                    <footer className="note__footer">
+                    <footer className="note__footer" style={{display:"none"}}>
                       <div className="left">
                         <i className="material-icons fa-regular">
                           favorite_border

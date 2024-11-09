@@ -62,7 +62,7 @@ export const verifyAccessToken = createAsyncThunk<VerifyResponse, string>(
     async (accessToken: string) => {
 
         try{
-            return (await axios.post('/oauth/google', {accessToken: accessToken}, {
+            return (await axios.post('/oauth/platforms/google', {accessToken: accessToken}, {
                 headers: {
                     'Content-Type' : 'application/json'
                 }

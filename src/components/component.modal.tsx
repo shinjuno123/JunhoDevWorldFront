@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, KeyboardEventHandler, useCallback, useEffect, useImperativeHandle, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export type ModalControl = {
@@ -28,6 +28,20 @@ const Modal = forwardRef<ModalControl, {title: string, message: string, navigate
             navigate(_props.navigateUrl);
         }
     }
+
+    const keyupEventListener = useCallback((event: KeyboardEvent) => {
+        if (event.key === 'Enter') {
+            setIsOpened(false);
+        }
+    },[])
+
+    useEffect(() => {
+        document.addEventListener("keyup", (event) => keyupEventListener(event))
+        
+        return () => {
+            document.removeEventListener("keyup", (event) => keyupEventListener(event))
+        }
+    },[]);
     
 
     return <>

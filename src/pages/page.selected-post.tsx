@@ -53,8 +53,7 @@ export default function SelectedPost() {
 
               <div className="selected-post__content" dangerouslySetInnerHTML={{__html:postData.post.post_content}}></div>
             </div>
-            <section className="comments__section">
-              <hr />
+            <section className="comments__section"  style={{display:"none"}}>
               <span className="leave-comment__title">Leave yours!</span>
               <div className="leave-comment">
                 <img
