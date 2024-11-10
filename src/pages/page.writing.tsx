@@ -36,7 +36,7 @@ export default function Writing() {
     if (
       Object.entries(posts).length &&
       window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 10
+        document.documentElement.scrollHeight - 100
     ) {
       if (currentPage < maxPage && !delayLoadingActivated && loading === 'succeeded') {
 
