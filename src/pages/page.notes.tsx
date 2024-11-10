@@ -47,7 +47,7 @@ export default function Notes() {
     if (
       Object.entries(notes).length &&
       window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight
+        document.documentElement.scrollHeight - 10
     ) {
       if (currentPage < maxPage && !delayLoadingActivated && loading === 'succeeded') {
 

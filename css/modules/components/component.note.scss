@@ -19,6 +19,12 @@
 
         .note {
             position: relative;
+            -webkit-box-sizing: border-box;
+            /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box;
+            /* Firefox, other Gecko */
+            box-sizing: border-box;
+            /* Opera/IE 8+ */
             border-radius: 20px;
             padding: 2rem 3rem;
             box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
@@ -52,6 +58,16 @@
             .note__main {
                 line-height: 2;
                 margin-block-end: 5rem;
+
+                figure {
+                    width: 100%;
+                    margin: 2rem 0rem;
+                    width: 100%!important;
+
+                    img {
+                        width: 100%!important;
+                    }
+                }
             }
 
             .note__footer {
@@ -207,18 +223,28 @@
     }
 }
 
-@media (max-width:$small-screen) {
+@media screen and (max-width:$small-screen) {
     .section__notes {
+        width: 100%;
+
         .notes__header {
             font-size: $font-size-7;
         }
 
         .notes {
+            position: relative;
+            width: 100%;
 
             .note {
+                width: 100%;
+                position: relative;
+                border-radius: 20px;
+                padding: 1rem 1rem;
+                box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
                 .note__header {
                     font-size: $font-size-2;
+                    width: auto;
                 }
 
                 .note__main {

@@ -1,4 +1,4 @@
-import { forwardRef, KeyboardEventHandler, useCallback, useEffect, useImperativeHandle, useState } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export type ModalControl = {

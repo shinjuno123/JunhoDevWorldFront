@@ -1,5 +1,5 @@
 // import { useParams } from "react-router-dom";
-import { Link, useLocation, useParams, useSearchParams} from "react-router-dom";
+import { Link, useLocation, useSearchParams} from "react-router-dom";
 import myFace from '../assets/images/myface.jpg'
 import { useEffect } from "react";
 import store from "../app/store";

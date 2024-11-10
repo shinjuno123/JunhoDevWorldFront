@@ -5,7 +5,7 @@ import { setNextPage, setPreviousPage } from "../features/about/about.routing.sl
 import { useLocation } from 'react-router-dom';
 
 export default function About() {
-    const [isFullscreen, setFullscreen] = useState(false);
+    const [isFullscreen] = useState(false);
     const dispatch = useAppDispatch();
     const location = useLocation();
 
@@ -19,13 +19,13 @@ export default function About() {
         });
     });
 
-    function toggleFullscreen() {
-        if (isFullscreen) {
-            setFullscreen(false);
-        } else {
-            setFullscreen(true);
-        }
-    }
+    // function toggleFullscreen() {
+    //     if (isFullscreen) {
+    //         setFullscreen(false);
+    //     } else {
+    //         setFullscreen(true);
+    //     }
+    // }
 
     return (
         <>

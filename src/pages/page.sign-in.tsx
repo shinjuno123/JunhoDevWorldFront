@@ -63,9 +63,7 @@ export function SignIn() {
 
     return <>
         <Modal title="Message" message="Login successful!" navigateUrl="/" ref={modal}></Modal>
-        <InputModal title={"Enter your info for the last step!"} labels={["Email"]} url={""} callBack={function (url: string): void {
-            
-            
+        <InputModal title={"Enter your info for the last step!"} labels={["Email"]} url={""} callBack={function (): void {
             inputModal.current?.closeModal();
         } } ref={inputModal}/>
         <section className="signin container">

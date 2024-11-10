@@ -72,7 +72,7 @@ export default function Home() {
                                                 <p className="featured-post__description">
                                                     {featuredPost[1].excerpt}
                                                 </p>
-                                                <span className="featured-post__likecount" aria-label="47 Likes">
+                                                <span style={{display:"none"}} className="featured-post__likecount" aria-label="47 Likes">
                                                     <i className="fa-regular fa-heart"></i>
                                                     &nbsp;&nbsp;<span>47</span>
                                                 </span>

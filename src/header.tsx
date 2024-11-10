@@ -1,55 +1,52 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "material-icons/iconfont/material-icons.scss";
 import { useEffect, useRef, useState } from "react";
 import { fetchAdminInfo } from "./features/admin/admin.slice";
 import { useAppSelector } from "./app/hooks";
 import store from "./app/store";
-import { logoutUser } from "./features/login/logout.slice";
 import Modal, { ModalControl } from "./components/component.modal";
-import { verifyAccessToken } from "./features/login/verify-google-oauth";
-import { VerifyResponse } from "./features/login/verify-google-oauth";
 
 export default function Header() {
   const [headerState, setHeaderState] = useState('closed');
   const url = useLocation().pathname;
   const { adminInfo } = useAppSelector(state => state.adminManager);
   const { status: regularLoginStatus } = useAppSelector(state => state.loginManager);
-  const navigate = useNavigate();
-  const [isLogined, setIsLogined] = useState<boolean>(false);
+  // const navigate = useNavigate();
+  // const [isLogined, setIsLogined] = useState<boolean>(false);
   const logoutModal = useRef<ModalControl>(null);
   const loginModal = useRef<ModalControl>(null);
 
 
-  function setCredentials() {
-    const params = new URLSearchParams(window.location.hash.replace("#", "?"));
-    const accessToken = params.get('access_token');
-    const tokenType = params.get('token_type');
-    const expiresIn = params.get('expires_in');
-    const startTime = Date.now().toString();
+  // function setCredentials() {
+  //   const params = new URLSearchParams(window.location.hash.replace("#", "?"));
+  //   const accessToken = params.get('access_token');
+  //   const tokenType = params.get('token_type');
+  //   const expiresIn = params.get('expires_in');
+  //   const startTime = Date.now().toString();
 
-    if (accessToken && tokenType && expiresIn) {
-      localStorage.setItem("access_token", accessToken);
-      localStorage.setItem("token_type", tokenType);
-      localStorage.setItem("expires_in", expiresIn);
-      localStorage.setItem("start_time", startTime);
-      window.location.hash = '';
-    }
-  }
+  //   if (accessToken && tokenType && expiresIn) {
+  //     localStorage.setItem("access_token", accessToken);
+  //     localStorage.setItem("token_type", tokenType);
+  //     localStorage.setItem("expires_in", expiresIn);
+  //     localStorage.setItem("start_time", startTime);
+  //     window.location.hash = '';
+  //   }
+  // }
 
-  async function logout() {
-    await store.dispatch(logoutUser());
-    setIsLogined(false);
+  // async function logout() {
+  //   await store.dispatch(logoutUser());
+  //   setIsLogined(false);
 
-    // Modal confirm click go back to home
-    navigate("/");
+  //   // Modal confirm click go back to home
+  //   navigate("/");
 
-    // Minimize the header
-    toggleNavigation();
+  //   // Minimize the header
+  //   toggleNavigation();
 
-    localStorage.clear();
+  //   localStorage.clear();
 
-    logoutModal.current?.openModal();
-  }
+  //   logoutModal.current?.openModal();
+  // }
 
   function toggleNavigation() {
     setHeaderState((headerState === 'closed' ? 'opened' : 'closed'));
@@ -71,35 +68,35 @@ export default function Header() {
   useEffect(() => {
     store.dispatch(fetchAdminInfo());
 
-    const authKey = localStorage.getItem('auth_key');
+    // const authKey = localStorage.getItem('auth_key');
 
-    if (authKey) {
-      setIsLogined(true);
-    } else {
-      setIsLogined(false);
-    }
+    // if (authKey) {
+    //   setIsLogined(true);
+    // } else {
+    //   setIsLogined(false);
+    // }
   }, [regularLoginStatus]);
 
   useEffect(() => {
-    setCredentials();
-    const accessToken = localStorage.getItem('access_token');
-    if (accessToken) {
-      store.dispatch(verifyAccessToken(accessToken))
-        .then((res) => {
-          const verifyRes = res.payload as VerifyResponse;
+    // setCredentials();
+    // const accessToken = localStorage.getItem('access_token');
+    // if (accessToken) {
+    //   store.dispatch(verifyAccessToken(accessToken))
+    //     .then((res) => {
+    //       const verifyRes = res.payload as VerifyResponse;
 
-          if (verifyRes.status.is_success) {
-            setIsLogined(true);
-            if (!localStorage.getItem('login_status')) {
-              loginModal.current?.openModal();
-            }
-            localStorage.setItem('login_status', 'exist');
-          } else {
-            localStorage.setItem('login_status', 'exist');
-            setIsLogined(false);
-          }
-        })
-    }
+    //       // if (verifyRes.status.is_success) {
+    //       //   setIsLogined(true);
+    //       //   if (!localStorage.getItem('login_status')) {
+    //       //     loginModal.current?.openModal();
+    //       //   }
+    //       //   localStorage.setItem('login_status', 'exist');
+    //       // } else {
+    //       //   localStorage.setItem('login_status', 'exist');
+    //       //   setIsLogined(false);
+    //       // }
+    //     })
+    // }
   }, []);
 
 
