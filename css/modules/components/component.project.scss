@@ -8,8 +8,12 @@
 
 
 
+.glide__arrows.hidden {
+    display: none;
+}
 
 .glide__arrows {
+
     .glide__arrow--left {
         position: absolute;
         left: 0;
