@@ -22,7 +22,7 @@ import { ClipLoader } from "react-spinners";
 export default function Projects() {
   const [hover, setHover] = useState("");
   const glideRef = useRef(null);
-  const projects = useRef<Element>(null);
+  const projects = useRef<HTMLDivElement>(null);
   const {
     outstandingProjects: outstandingProjects,
     loading: outstandingProjectsLoader,

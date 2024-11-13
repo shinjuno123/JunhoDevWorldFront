@@ -250,7 +250,7 @@
     position: fixed;
     z-index: 99;
     top: 3.125rem;
-    right:  10%;
+    right: 2.5%;
     height: 4px;
     width: 4px;
     transform: translate(-22px, 22px);
@@ -294,27 +294,48 @@
 
 // Media queries for responsisve screen
 @media (max-width: $medium-screen) {
-    .nav__menu {
-        flex-direction: column;
-        justify-content: center;
-        flex: 1 0 auto;
-        opacity: 0;
-        transform: translateY(1.5rem);
-        transition: opacity .5s linear .25s transform .5s cubic-bezier(.4, 0, .2, 1);
-    }
 
     .nav__content {
         display: none;
         width: 100%;
-        height: 100%;
+        height: 100vh;
         flex-direction: column;
-        justify-content: center;
+        justify-content:start;
         position: fixed;
         z-index: 100;
-        overflow-y: auto;
+        overflow-y: scroll;
         top: 0;
         left: 0;
         background-color: $primary-color;
+
+        .nav__menu {
+            flex-direction: column;
+            justify-content:center;
+            flex: 1 0 auto;
+            opacity: 0;
+            transform: translateY(1.5rem);
+            transition: opacity .5s linear .25s transform .5s cubic-bezier(.4, 0, .2, 1);
+            position: relative;
+            height: fit-content;
+    
+            .nav__item {
+                position: relative;
+                padding: 0 15%;
+                font-family: $font-family-display;
+                font-size: $font-size-5;
+                letter-spacing: 1px;
+                color: $text-color;
+                height: fit-content;
+        
+        
+                .nav__link {
+                    padding: 1rem;
+                    text-transform: none;
+                    color: $reversed-text-color!important;
+                }
+            }
+        }
+
     }
 
     .nav__togglebtn {
@@ -325,22 +346,8 @@
 
 
 
-    .nav__item {
-        padding: 0 15%;
-        font-family: $font-family-display;
-        font-size: $font-size-6;
-        letter-spacing: 1px;
-        color: $text-color;
-    }
-
     .nav--open .nav__item::after {
         height: 13px;
-    }
-
-    .nav__link {
-        padding: 1.5rem;
-        text-transform: none;
-        color: $reversed-text-color!important;
     }
 
     .nav--open .nav__content {
@@ -352,6 +359,8 @@
     .nav--open .nav__menu {
         opacity: 1;
         transform: translateY(0);
+        position: relative;
+        min-height: fit-content;
 
         .account {
             max-width: 100%;
