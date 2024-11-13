@@ -6,7 +6,6 @@ import Glide, {
 import {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -23,6 +22,7 @@ import { ClipLoader } from "react-spinners";
 export default function Projects() {
   const [hover, setHover] = useState("");
   const glideRef = useRef(null);
+  const projects = useRef<Element>(null);
   const {
     outstandingProjects: outstandingProjects,
     loading: outstandingProjectsLoader,
@@ -103,8 +103,14 @@ export default function Projects() {
     return;
   }, []);
 
+  const scrollTo = (element: Element) => {
+    element.scrollIntoView({behavior: 'smooth' })    
+  }
+
 
   const clickNext = async () => {
+    if (projects.current) scrollTo(projects.current);
+
     await store.dispatch(emptyOtherProjects());
     await store.dispatch(
       fetchOtherProjects({
@@ -116,6 +122,8 @@ export default function Projects() {
   };
 
   const clickPrev = async () => {
+    if (projects.current) scrollTo(projects.current);
+
     await store.dispatch(emptyOtherProjects());
     await store.dispatch(
       fetchOtherProjects({
@@ -124,9 +132,12 @@ export default function Projects() {
         nextPage: { activated: true, url: previousPageUrl },
       })
     );
+
   };
 
   const toPage = async (page: number) => {
+    if (projects.current) scrollTo(projects.current);
+
     await store.dispatch(emptyOtherProjects());
     await store.dispatch(
       fetchOtherProjects({
@@ -251,7 +262,7 @@ export default function Projects() {
 
           <h2>Check my other projects!</h2>
 
-          <div className="project-list">
+          <div className="project-list" ref={projects}>
             <ul className="projects">
               {Object.entries([1, 2, 3, 4, 5, 6, 7, 8]).map((_, index) => {
                 return (
@@ -288,10 +299,10 @@ export default function Projects() {
                           </div>
                           <div className="project__description">
                             <h4 className="project__title">
-                              {project[1].title}
+                              {project[1].title.length > 30? project[1].title.slice(0, 30) + "...": project[1].title}
                             </h4>
                             <p className="project__excerpt">
-                              {project[1].excerpt}
+                              {project[1].excerpt.length > 250? project[1].excerpt.slice(0, 250) + "...": project[1].excerpt}
                             </p>
                           </div>
                         </div>

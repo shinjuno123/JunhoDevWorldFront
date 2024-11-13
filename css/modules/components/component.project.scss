@@ -28,7 +28,7 @@
             display: block;
             left: 50%;
             transform: translateX(-50%);
-            font-size:$font-size-3;
+            font-size:$font-size-4;
         }
     }
 
@@ -50,7 +50,7 @@
             display: block;
             left: 50%;
             transform: translateX(-50%);
-            font-size: $font-size-3;
+            font-size:$font-size-4;
         }
     }
 
@@ -121,7 +121,7 @@
             
                     span {
                         display: block;
-                        font-size: $font-size-5;
+                        font-size: $font-size-4;
                         font-weight: bold;
                         line-height: 1.2;
                     }
@@ -377,6 +377,26 @@
 
 
 @media screen and (max-width: $small-screen) {
+
+    .glide__track .glide__slides .glide__slide .slide__description {
+        h3 {
+            font-size: $font-size-3;
+        }
+
+        p {
+            font-size: $font-size-2;
+        }
+
+        h4 {
+            font-size: $font-size-3;
+        }
+
+        ol {
+            font-size: $font-size-2;
+            text-align: center;
+        }
+    }
+
     .project-list {
         .projects {
             gap: 1rem;
