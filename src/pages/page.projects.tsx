@@ -103,8 +103,11 @@ export default function Projects() {
     return;
   }, []);
 
-  const scrollTo = (element: Element) => {
-    element.scrollIntoView({behavior: 'smooth' })    
+  const scrollTo = (element: HTMLDivElement) => {
+    const yOffset = 100; 
+    console.log(element.offsetTop);
+    const y = element.offsetTop + yOffset;
+    window.scrollTo({top: y, behavior: 'smooth'});  
   }
 
 
@@ -260,9 +263,9 @@ export default function Projects() {
             </div>
           </div>
 
-          <h2>Check my other projects!</h2>
+          <h2 ref={projects}>Check my other projects!</h2>
 
-          <div className="project-list" ref={projects}>
+          <div className="project-list">
             <ul className="projects">
               {Object.entries([1, 2, 3, 4, 5, 6, 7, 8]).map((_, index) => {
                 return (
