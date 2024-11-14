@@ -2,11 +2,16 @@
     position: relative;
     width: 100%;
     display: block;
-    padding-top: 2rem;
-    padding-bottom: 5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: white;
+    box-sizing: border-box;
+    margin-bottom: 2rem;
 
     .selected-post__inner {
         width: 45em;
