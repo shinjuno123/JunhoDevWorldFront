@@ -13,6 +13,20 @@
 @import "modules/components.scss";
 @import "modules/pages.scss";
 
+
+
+main::after, .local-page::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .2;
+    z-index: -1000;
+    background-image: url('../src/assets/background/background1.jpg');
+}
+
 .overflow-y-hidden {
     overflow-y: hidden;
 }

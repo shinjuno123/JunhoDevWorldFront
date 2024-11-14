@@ -1,6 +1,15 @@
+body {
+    padding-top: 120px;
+}
+
 .header {
     flex: none;
-    padding: 3.125rem 0;
+    padding: 2rem 0;
+    background-color: rgba($color: #fff, $alpha: .5);
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    z-index: 1000;
 }
 
 .header__inner {
