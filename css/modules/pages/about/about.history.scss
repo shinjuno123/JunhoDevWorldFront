@@ -3,7 +3,7 @@
     align-items: center;
 
     h2 {
-        padding: 4rem 0 4rem;
+        padding: 4rem 0 2rem;
         line-height: 3;
         font-size: $font-size-6;
     }
@@ -239,11 +239,13 @@
     }
 
     .about__section>.about__history {
-        width: 75%;
+        width: 95%;
 
 
 
         .records {
+            width: min-content;
+            
             .records__list {
 
 
@@ -251,11 +253,11 @@
                     position: relative;
     
                     .record__month-year {
-                        left: 110%;
+                        left: 105%;
                     }
     
                     .description {
-                        right: 110%;
+                        right: 105%;
                     }
     
                 }
@@ -264,11 +266,11 @@
                     position: relative;
     
                     .record__month-year {
-                        right: 110%;
+                        right: 105%;
                     }
     
                     .description {
-                        left: 110%;
+                        left: 105%;
                     }
     
                 }
@@ -279,7 +281,7 @@
 
                     .record__month-year {
                         font-size: $font-size-3;
-                        max-width: 7rem;
+                        max-width: fit-content;
 
                         i {
                             font-size: $font-size-2;
@@ -334,64 +336,75 @@
     }
 
 
-    .about__section>.about__history>.records>.records__list>.record {
-        padding: 0 .2rem;
+    .about__section>.about__history>.records {
+        box-shadow: none;
+        background-color: transparent;
 
+        .records__list {
 
-        .record__month-year {
-            font-size: $font-size-1;
-            width: 5.4rem;
-        }
-
-        .description {
-            padding: .3rem;
-            width: 5.4rem;
-
-
-            span {
-                font-size: .6rem;
-                line-height: 2;
-            }
-
-            p {
-                font-size: .5rem;
-                line-height: 1;
-            }
-        }
-
-
+            .record:nth-child(odd) {
+                position: relative;
         
-
-
-
-    }
-
-    .about__section>.about__history>.records>.records__list {
-        .record:nth-child(odd) {
-            position: relative;
-    
-            .record__month-year {
-                left: 105%;
+                .record__month-year {
+                    left: 65%;
+                }
+        
+                .description {
+                    right: 65%;
+                }
+        
+            }
+        
+            .record:nth-child(even) {
+                position: relative;
+        
+                .record__month-year {
+                    right: 65%;
+                }
+        
+                .description {
+                    left: 65%;
+                }
+        
             }
     
-            .description {
-                right: 105%;
+            .record {
+                padding: 0 0rem;
+                width: fit-content;
+        
+        
+                .record__month-year {
+                    font-size: $font-size-1;
+                    width: fit-content;
+                    width: 7rem;
+                }
+        
+                .description {
+                    padding: .6rem;
+                    width: 7rem;
+        
+        
+                    span {
+                        font-size: .6rem;
+                        line-height: 2;
+                    }
+        
+                    p {
+                        font-size: .5rem;
+                        line-height: 1;
+                    }
+                }
             }
     
         }
-    
-        .record:nth-child(even) {
-            position: relative;
-    
-            .record__month-year {
-                right: 105%;
-            }
-    
-            .description {
-                left: 105%;
-            }
-    
+
+        .records__list::after {
+            background-color: $secondary-color;
+            height: calc(100% - 5rem);
+            top: 2.5rem;
+            box-shadow: 14px 14px 60px -10px rgba(0, 0, 0, 0.3019607843);
         }
+    
 
     }
 

@@ -73,7 +73,6 @@ const adminHistorySlice = createSlice({
             }
 
             if (state.experiences && action.payload) { 
-                console.log(action.payload.workHistories)
                 action.payload.workHistories.forEach((experience) => {
                     state.experiences[experience.id] = experience;
                 })

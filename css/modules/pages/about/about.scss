@@ -80,7 +80,7 @@ canvas.loading__off {
     
 
     .button-padding {
-        padding: 7rem;
+        padding: 1rem;
     }
 
     .about__section-fullscreen-btn {
@@ -138,13 +138,14 @@ canvas.loading__off {
                 }
 
                 .card__profile {
+                    position: relative;
                     display: inline;
                     float: right;
-                    margin-left: 2rem;
-                    margin-bottom: 2rem;
-                    width: 85px;
+                    width: 10%;
 
                     img {
+                        position: relative;
+                        width: 100%;
                         border-radius: 5px;
                         box-shadow: 7px 7px 60px -10px rgba(0, 0, 0, 0.7);
                         object-fit: cover;
@@ -257,8 +258,9 @@ canvas.loading__off {
     }
 
     .about__section {
-        width: 100%;
+        width: 95%;
         position: relative;
+        margin: auto;
         display: flex;
         justify-content: center;
         padding: 1.5rem 0 5rem 0;
@@ -269,8 +271,10 @@ canvas.loading__off {
             }
 
             .card {
-                width: 75%;
-
+                box-sizing: border-box;
+                position: relative;
+                width: 100%;
+                padding: 2rem 1rem;
             }
 
             .card>.card__intro>.card__sentence {
