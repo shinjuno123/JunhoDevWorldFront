@@ -19,7 +19,7 @@ export default function Footer() {
                         <strong>Social</strong>
                         <br/>
                         <a href="https://github.com/shinjuno123"  rel="me">Github</a>
-                        <a href="https://www.linkedin.com/in/junho-shin-18b883234/"  rel="me">LinkedIn</a>
+                        <a href="https://www.linkedin.com/in/junho-shin-18b883234"  rel="me">LinkedIn</a>
                     </p>
 
 
