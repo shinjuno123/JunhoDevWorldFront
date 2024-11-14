@@ -94,7 +94,9 @@ export default function Projects() {
   }, []);
 
   const scrollTo = (element: HTMLDivElement) => {
-    element.scrollIntoView({behavior: 'smooth' })    
+    const yOffset = 100; 
+    const y = element.offsetTop + yOffset;
+    window.scrollTo({top: y, behavior: 'smooth'});  
   }
 
 

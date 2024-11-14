@@ -105,7 +105,6 @@ export default function Projects() {
 
   const scrollTo = (element: HTMLDivElement) => {
     const yOffset = 100; 
-    console.log(element.offsetTop);
     const y = element.offsetTop + yOffset;
     window.scrollTo({top: y, behavior: 'smooth'});  
   }
