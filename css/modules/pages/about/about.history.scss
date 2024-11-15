@@ -152,8 +152,8 @@
             content: '';
             position: absolute;
             width: .5rem;
-            height: calc(100% - 6rem);
-            top: 3rem;
+            height: calc(100% - 5rem);
+            top: 2.5rem;
             background-color: $background-color;
             left: 50%;
             transform: translateX(-50%);
@@ -165,6 +165,17 @@
     }
 
 }
+
+@keyframes grow-up {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: calc(100% - 5rem);
+    }
+}
+
 
 
 .about__history>.work-experience {
@@ -216,18 +227,6 @@
                 }
             }
         }
-    }
-}
-
-
-
-@keyframes grow-up {
-    0% {
-        height: 0;
-    }
-
-    100% {
-        height: calc(100% - 6rem);
     }
 }
 
@@ -400,10 +399,6 @@
 
         .records__list::after {
             background-color: $secondary-color;
-            height: calc(100% - 80px);
-            top: 40px;
-            box-shadow: 14px 14px 60px -10px rgba(0, 0, 0, 0.3019607843);
-            animation-duration: 4s;
         }
     
 
