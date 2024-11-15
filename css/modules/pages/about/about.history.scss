@@ -21,9 +21,9 @@
         .records__list {
             display: flex;
             flex-direction: column;
-            gap: 6rem;
+            gap: 7rem;
             align-items: center;
-            padding: 2rem 0;
+            padding: 0rem 0;
 
             .record:nth-child(odd) {
                 position: relative;
@@ -152,14 +152,14 @@
             content: '';
             position: absolute;
             width: .5rem;
-            height: calc(100% - 5rem);
-            top: 2.5rem;
+            height: calc(100% - 1.5rem);
+            top: .75rem;
             background-color: $background-color;
             left: 50%;
             transform: translateX(-50%);
             border-radius: 5px;
             animation: grow-up;
-            animation-duration: 5s;
+            animation-duration: 4s;
         }
 
     }
@@ -172,7 +172,7 @@
     }
 
     100% {
-        height: calc(100% - 5rem);
+        height: calc(100% - 1.5rem);
     }
 }
 
