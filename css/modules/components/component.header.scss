@@ -5,7 +5,7 @@ body {
 .header {
     flex: none;
     padding: 2rem 0;
-    background-color: rgba($color: #fff, $alpha: .5);
+    background-color: rgba($color: var(--background-color), $alpha: .5);
     position: fixed;
     width: 100%;
     top: 0px;
@@ -22,20 +22,20 @@ body {
 .header__brand {
     display: flex;
     align-items: center;
-    color: $text-color;
+    color: var(--text-color);
     font-weight: 700;
 }
 
 .header__brand:hover {
-    color: $primary-color;
+    color: var(--primary-color);
 
     .header__verification {
-        color: $supplementary-color2;
+        color: var(--supplementary-color2);
     }
 }
 
 .header__brand:hover > .header__info > :not(.header__verification) {
-    color: $primary-color;
+    color: var(--primary-color);
 }
 
 .header__info {
@@ -57,13 +57,13 @@ body {
 }
 
 .header__verification {
+    color: var(--reversed-text-color);
+    background-color: var(--primary-color);
     display: block;
-    background-color: $primary-color;
     border-radius: .2rem;
     height: fit-content;
     width: fit-content;
     font-size: $font-size-1;
-    color: $reversed-text-color;
 
     span {
         font-size: $font-size-3;
@@ -104,25 +104,25 @@ body {
         }
 
         .login__button {
-            background-color: $supplementary-color4;
-            color: $reversed-text-color;
+            color: var(--reversed-text-color);
+            background-color: var(--supplementary-color4);
             letter-spacing: .5px;
             transition: background-color .3s ease-in-out;
         }
 
         .signup__button {
-            background-color: $supplementary-color3;
-            color: $reversed-text-color;
+            color: var(--reversed-text-color);
+            background-color: var(--supplementary-color3);
+            transition: var(--background-color) .3s ease-in-out;
             letter-spacing: .5px;
-            transition: background-color .3s ease-in-out;
         }
 
         .login__button:hover {
-            background-color: rgba($color: $supplementary-color4, $alpha: .7);
+            background-color: rgba($color: var(--supplementary-color4), $alpha: .7);
         }
 
         .signup__button:hover {
-            background-color: rgba($color: $supplementary-color3, $alpha: .7);
+            background-color: rgba($color: var(--supplementary-color3), $alpha: .7);
         }
 
     }
@@ -134,9 +134,9 @@ body {
 
 .nav__item::after {
     content: "";
+    background-color: var(--supplementary-color1);
     display: block;
     height: 5px;
-    background-color: $supplementary-color1;
     position: absolute;
     left: 1.25rem;
     right: 1.25rem;
@@ -151,12 +151,13 @@ body {
 }
 
 .nav__item--active::after {
-    background-color: $secondary-color;
+    background-color: var(--secondary-color);
     transform: scaleX(1);
 }
 
 
 .nav__link {
+    color: var(--text-color);
     display: flex;
     align-items: center;
     position: relative;
@@ -166,7 +167,6 @@ body {
     white-space: nowrap;
     text-transform: lowercase;
     transition: color .2s linear;
-    color: $text-color;
 }
 
 .nav__num {
@@ -186,8 +186,8 @@ body {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    color: $reversed-text-color;
-    background-color: $primary-color;
+    color: var(--reversed-text-color);
+    background-color: var(--primary-color);
 }
 
 .menuicon {
@@ -268,6 +268,7 @@ body {
 }
 
 .nav__bg__circle {
+    background-color: var(--supplementary-color2);
     display: flex;
     width: calc(100vw * 4);
     height:calc(100vw * 4);
@@ -275,7 +276,6 @@ body {
     top: calc(100vw * -2);
     left:calc(100vw * -2);
     transform: scale(0);
-    background-color: $supplementary-color2;
     border-radius: 50%;
     transform-origin: 50% 50%;
     transition: transform .4s cubic-bezier(.755, .05, .855, .06);
@@ -305,6 +305,7 @@ body {
 @media (max-width: $medium-screen) {
 
     .nav__content {
+        background-color: var(--primary-color);
         display: none;
         width: 100%;
         height: 100vh;
@@ -315,7 +316,6 @@ body {
         overflow-y: scroll;
         top: 0;
         left: 0;
-        background-color: $primary-color;
 
         .nav__menu {
             flex-direction: column;
@@ -328,19 +328,19 @@ body {
             height: fit-content;
     
             .nav__item {
+                color: var(--text-color);
                 position: relative;
                 padding: 0 15%;
                 font-family: $font-family-display;
                 font-size: $font-size-5;
                 letter-spacing: 1px;
-                color: $text-color;
                 height: fit-content;
         
         
                 .nav__link {
+                    color: var(--reversed-text-color)!important;
                     padding: 1rem;
                     text-transform: none;
-                    color: $reversed-text-color!important;
                 }
             }
         }

@@ -7,6 +7,7 @@ import { useAppSelector } from "../app/hooks";
 import store from "../app/store";
 import { emptyNotes, fetchNotes } from "../features/note/note.slice";
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function Notes() {
   const noteCommentRefs = useRef<toggleHandle[]>([]);
@@ -86,7 +87,8 @@ export default function Notes() {
                 <React.Fragment key={note[0]}>
                   <li className="note">
                     <header className="note__header ">
-                      <img
+                      <LazyLoadImage
+                        effect="blur"
                         className="note-profile__image"
                         src={note[1].author.profileImage}
                         alt={note[1].author.name}

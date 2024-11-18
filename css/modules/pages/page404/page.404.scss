@@ -8,7 +8,7 @@
 
     h1 {
         padding: 0 0 5rem;
-        color: $primary-color;
+        color: var(--primary-color);
         font-size: $font-size-9;
     
     }
@@ -21,7 +21,7 @@
 
         h3 {
             margin-right: 1rem;
-            color: $secondary-color;
+            color: var(--secondary-color);
         }
 
         a {
@@ -29,13 +29,13 @@
             border-radius: 5px;
             box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
             padding: 1rem 2rem;
-            color: $secondary-color;
+            color: var(--secondary-color);
             font-weight: bolder;
         }
 
         a:hover {
-            background-color: $text-disabled-color;
-            color: $reversed-text-color;
+            background-color: var(--text-disabled-color);
+            color: var(--reversed-text-color);
             transition: all .5s ease-in-out;
         }
     }

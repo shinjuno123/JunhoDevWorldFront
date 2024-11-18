@@ -17,11 +17,11 @@
             padding: .2rem;
             height: 40px;
             width: 100%;
-            background-color: $background-color;
+            background-color: var(--background-color);
             border-radius: 2px;
             display: flex;
             align-items: center;
-            color: $text-disabled-color;
+            color: var(--text-disabled-color);
 
             span {
                 display: block;
@@ -35,21 +35,21 @@
         }
 
         .page-number:hover {
-            color: $text-color;
+            color: var(--text-color);
             text-decoration: underline;
         }
 
         .go-left, .go-right {
-            color:$text-disabled-color;
+            color: var(--text-disabled-color);
         }
 
         .go-left:hover, .go-right:hover{
-            color: $text-color;
+            color: var(--text-color);
             text-decoration: none!important;
         }
 
         .current-page {
-            color: $text-color;
+            color: var(--text-color);
             text-decoration: underline;
         }
     }

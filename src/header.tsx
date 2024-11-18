@@ -105,7 +105,7 @@ export default function Header() {
     <>
        <Modal title="Message" message="Login successful!" navigateUrl="/" ref={loginModal}></Modal>
       <Modal title="Message" message="Your account was logged out successfully!" navigateUrl="/" ref={logoutModal}></Modal>
-      <header className="header">
+      <header className="header theme--default">
         <div className="header__inner container">
           <Link className="header__brand" to="/">
             <img className="header__avatar" src={adminInfo.avatarUrl} alt={adminInfo.avatarUrl}></img>

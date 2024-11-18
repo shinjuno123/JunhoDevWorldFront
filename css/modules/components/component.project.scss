@@ -33,7 +33,7 @@
     }
 
     .glide__arrow--left:hover {
-        background-color: $secondary-color;
+        background-color: var(--secondary-color);
     }
 
     .glide__arrow--right {
@@ -55,13 +55,13 @@
     }
 
     .glide__arrow--right:hover {
-        background-color: $secondary-color;
+        background-color: var(--secondary-color);
     }
 }
 
 .glide__track {
     z-index: 200;
-    background-color: $primary-color;
+    background-color: var(--primary-color);
 
     .glide__slides {
         position: relative;
@@ -75,7 +75,7 @@
         }
 
         .glide__slide:hover {
-            background-color: $secondary-color;
+            background-color: var(--secondary-color);
         }
 
         .slide__wrapper {
@@ -83,7 +83,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background-color: $primary-color;
+            background-color: var(--primary-color);
             padding: 1.5rem;
             width: 90%;
             max-width: 55rem;
@@ -106,11 +106,11 @@
             }
 
             .slide__background.hover{
-                color: $reversed-text-color;
+                color: var(--reversed-text-color);
                 z-index: 100;
 
                 div {
-                    background-color: rgba($color: #000000, $alpha: .7);
+                    background-color: rgba($color: var(--text-color), $alpha: .7);
                     width: 100%;
                     height: 100%;
                     display: flex;
@@ -142,7 +142,7 @@
                 width: 100%;
                 height: 100%;
                 opacity: .5;
-                background-color: #000;
+                background-color: var(--text-color);
             }
 
             .slide__description {
@@ -155,21 +155,21 @@
                     transform: translateY(-130%);
                     position: absolute;
                     text-align: center;
-                    color: $reversed-text-color;
+                    color: var(--reversed-text-color);
                     
                 }
 
                 h4 {
                     text-indent: 5px;
                     padding: 1.5rem 0;
-                    color: $reversed-text-color;
+                    color: var(--reversed-text-color);
                 }
 
                 p {
-                    background-color: $primary-color;
+                    background-color: var(--primary-color);
                     padding: 1rem;
                     border-radius: 5px;
-                    color: $reversed-text-color;
+                    color: var(--reversed-text-color);
                 }
 
 
@@ -188,20 +188,20 @@
                         padding: 5px;
                         min-width: 50px;
                         border-radius: 5px;
-                        background-color: $supplementary-color3;
-                        color: $reversed-text-color;
+                        background-color: var(--supplementary-color3);
+                        color: var(--reversed-text-color);
 
                     }
                 }
 
                 a {
                     padding: 5px;
-                    color: $reversed-text-color;
+                    color: var(--reversed-text-color);
                     text-decoration: underline;
                 }
 
                 a:hover {
-                    color: $secondary-color;
+                    color: var(--secondary-color);
                 }
             }
         }
@@ -211,7 +211,7 @@
 
 .project-list {
     width: 100%;
-    background-color: $primary-color;
+    background-color: var(--primary-color);
     display: grid;
 
     .projects {
@@ -223,11 +223,11 @@
 
         .project {
             position: relative;
-            background-color: $secondary-color;
+            background-color: var(--secondary-color);
             min-height: 20rem;
             cursor: pointer;
             border-radius: 5px;
-            color: $reversed-text-color;
+            color: var(--reversed-text-color);
 
             .project__info {
                 display: flex;
@@ -264,7 +264,7 @@
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    background-color: rgba($color: #000000, $alpha: .6);
+                    background-color: rgba($color: var(--text-color), $alpha: .6);
                 }
 
 

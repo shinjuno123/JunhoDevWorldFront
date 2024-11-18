@@ -19,6 +19,8 @@ import {
   emptyOtherProjects,
 } from "../features/project/other-project.slice";
 import { ClipLoader } from "react-spinners";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 export default function Projects() {
   const [hover, setHover] = useState("");
   const glideRef = useRef(null);
@@ -187,6 +189,7 @@ export default function Projects() {
                             <div
                               className={`slide__background ${hover}`}
                               style={{
+                                backgroundColor: 'white',
                                 background: `url(${project[1].background}) no-repeat center center fixed`,
                                 backgroundSize: "cover",
                               }}
@@ -294,7 +297,10 @@ export default function Projects() {
                       <li className="project">
                         <div className="project__info">
                           <div className="project__background">
-                            <img
+                            <LazyLoadImage
+                              effect="blur"
+                              height={'100%'}
+                              width={'100%'}
                               src={project[1].background}
                               alt={project[1].title}
                             />

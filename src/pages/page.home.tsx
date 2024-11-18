@@ -6,96 +6,129 @@ import store from "../app/store";
 import { fetchFeaturedPosts } from "../features/writing/writing-featured-posts.slice";
 import React from "react";
 import { GridLoader } from "react-spinners";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export default function Home() {
-    const { featuredPosts, loading } = useAppSelector((state) => state.featuredPostManager);
-    const navigate = useNavigate();
+  const { featuredPosts, loading } = useAppSelector(
+    (state) => state.featuredPostManager
+  );
+  const navigate = useNavigate();
 
-    const fetchFeaturedPostsAsync = useCallback(async()=> {
-        await store.dispatch(fetchFeaturedPosts());
-    },[])
+  const fetchFeaturedPostsAsync = useCallback(async () => {
+    await store.dispatch(fetchFeaturedPosts());
+  }, []);
 
-    useEffect(() => {
-        fetchFeaturedPostsAsync();
-    }, []);
+  useEffect(() => {
+    fetchFeaturedPostsAsync();
+  }, []);
 
-    const clickLink = (id: number) => {
-        navigate(`/posts/${id}`);
-    }
+  const clickLink = (id: number) => {
+    navigate(`/posts/${id}`);
+  };
 
+  return (
+    <>
+      <main className="main container">
+        <div className="intro">
+          <div className="intro__inner">
+            <h1 className="intro__title">I do Software Development</h1>
+            <p className="intro__pretitle">
+              <Link to="/about">Hello, my name is Junho&nbsp;</Link>
+            </p>
+            <div className="intro__content">
+              <p>
+                I’m a Software Engineer, Quality Assuarance, Quality Control and
+                Full stack development, specialized in Web. I also write about
+                the web on my blog and elsewhere.
+              </p>
+            </div>
+          </div>
+        </div>
 
-    return (
-        <>
-            <main className="main container">
-                <div className="intro">
-                    <div className="intro__inner">
-                        <h1 className="intro__title">I do Software Development</h1>
-                        <p className="intro__pretitle">
-                            <Link to="/about">
-                                Hello, my name is Junho&nbsp;
+        <div className="featured-posts__outer">
+          <h2>Featured Posts</h2>
+          <div className="featured-posts">
+            <ul className="featured-posts__list">
+              {loading !== "succeeded" ? (
+                <li
+                  className="featured-posts__item"
+                  style={{ padding: "2rem" }}
+                >
+                  <div
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      width: "fit-content",
+                      left: "50%",
+                      top: "50%",
+                      transform: "translate(-50%,-50%)",
+                    }}
+                  >
+                    <GridLoader />
+                  </div>
+                </li>
+              ) : (
+                ""
+              )}
+              {Object.entries(featuredPosts)
+                .reverse()
+                .map((featuredPost) => {
+                  return (
+                    <React.Fragment key={featuredPost[0]}>
+                      <li
+                        className="featured-posts__item"
+                        onClick={() => clickLink(featuredPost[1].id)}
+                      >
+                        <div className="featured-post">
+                          <LazyLoadImage
+                            effect="opacity"
+                            className="featured-post__image"
+                            src={featuredPost[1].background_image}
+                            alt="featured-post"
+                          />
+                      {/* <LazyLoadImage
+                        effect="blur"
+                        className="note-profile__image"
+                        src={note[1].author.profileImage}
+                        alt={note[1].author.name}
+                      /> */}
+                          <div className="featured-post__inner">
+                            <Link
+                              className="featured-post__link"
+                              to={`/posts/${featuredPost[1].id}`}
+                            >
+                              <span className="featured-post__title">
+                                {featuredPost[1].title}
+                              </span>
                             </Link>
-                        </p>
-                        <div className="intro__content">
-                            <p>I’m a Software Engineer, Quality Assuarance, Quality Control and Full stack development, specialized in Web. I
-                                also write about the web on my blog and elsewhere.</p>
+                            <p className="featured-post__description">
+                              {featuredPost[1].excerpt}
+                            </p>
+                            <span
+                              style={{ display: "none" }}
+                              className="featured-post__likecount"
+                              aria-label="47 Likes"
+                            >
+                              <i className="fa-regular fa-heart"></i>
+                              &nbsp;&nbsp;<span>47</span>
+                            </span>
+                          </div>
                         </div>
-                    </div>
-
-                </div>
-
-                <div className="featured-posts__outer">
-                    <h2>Featured Posts</h2>
-                    <div className="featured-posts">
-                        <ul className="featured-posts__list">
-                            {loading !=='succeeded'? 
-                                <li className="featured-posts__item" style={{padding: '2rem'}}>
-                                    <div style={{position: 'relative', display: 'inline-block',width: 'fit-content', left: '50%', top:'50%', transform: 'translate(-50%,-50%)'}}>
-                                        <GridLoader/>
-                                    </div>
-                                </li>: ''}
-                            {Object.entries(featuredPosts).reverse().map((featuredPost) => {
-                                return <React.Fragment key={featuredPost[0]} >
-                                    <li className="featured-posts__item" onClick={()=> clickLink(featuredPost[1].id)}>
-                                        <div className="featured-post">
-                                            <picture>
-                                                <source
-                                                    srcSet={`${featuredPost[1].background_image} 500w`}
-                                                    type="img/avif" />
-                                                <img className="featured-post__image"
-                                                    src={featuredPost[1].background_image}
-                                                    alt="" loading="eager" decoding="auto" width="500" height="500" />
-                                            </picture>
-                                            <div className="featured-post__inner">
-                                                <Link className="featured-post__link" to={`/posts/${featuredPost[1].id}`}>
-                                                    <span className="featured-post__title">{featuredPost[1].title}</span>
-                                                </Link>
-                                                <p className="featured-post__description">
-                                                    {featuredPost[1].excerpt}
-                                                </p>
-                                                <span style={{display:"none"}} className="featured-post__likecount" aria-label="47 Likes">
-                                                    <i className="fa-regular fa-heart"></i>
-                                                    &nbsp;&nbsp;<span>47</span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                </React.Fragment>
-                            })}
-
-                        </ul>
-                        <p className="featured-posts__footer">
-
-                            <Link to="/posts" className="featured-posts__see-all">
-                                See All Posts&nbsp;
-                                <i className="material-icons icon">arrow_forward</i>
-                            </Link>
-
-
-                        </p>
-                    </div>
-                </div>
-            </main>
-        </>
-    )
+                      </li>
+                    </React.Fragment>
+                  );
+                })}
+            </ul>
+            <p className="featured-posts__footer">
+              <Link to="/posts" className="featured-posts__see-all">
+                See All Posts&nbsp;
+                <i className="material-icons icon">arrow_forward</i>
+              </Link>
+            </p>
+          </div>
+        </div>
+      </main>
+    </>
+  );
 }

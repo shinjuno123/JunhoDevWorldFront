@@ -1,25 +1,30 @@
-$primary-color: #3d52a0;
-$secondary-color: #7091e6;
-$supplementary-color1: #8697c4;
-$supplementary-color2: #adbbda;
-$supplementary-color3:#ff4c4c;
-$supplementary-color4:#117554;
-$background-color: #ffffff;
-$text-color: #0C0C0C;
-$text-disabled-color: #888888;
-$reversed-text-color: #ede8f5;
-$progress-bar-basic-color: #40534C;
-$font-family-display:  "Merriweather", serif;
+body[data-theme="light"] {
+    --primary-color: #3d52a0;
+    --secondary-color: #7091e6;
+    --supplementary-color1: #8697c4;
+    --supplementary-color2: #adbbda;
+    --supplementary-color3: #ff4c4c;
+    --supplementary-color4: #117554;
+    --background-color: #ffffff;
+    --text-color: #0C0C0C;
+    --text-disabled-color: #888888;
+    --reversed-text-color: #ede8f5;
+    --progress-bar-basic-color: #40534C;
+    --backquote-color: #555555;
+    --backquote-border: #78C0A8;
+    --backquote-span: #333333;
+}
 
+$font-family-display:  "Merriweather", serif;
 $standard-border-radius: 5px;
 
-$font-size-10:3.5rem;
-$font-size-9:3rem;
-$font-size-8:2.5rem;
-$font-size-7:2.1rem;
-$font-size-6:1.8rem;
-$font-size-5:1.5rem;
-$font-size-4:1.2rem;
-$font-size-3:1rem;
-$font-size-2:.65rem;
-$font-size-1:.5rem;
+$font-size-10: 3.5rem;
+$font-size-9: 3rem;
+$font-size-8: 2.5rem;
+$font-size-7: 2.1rem;
+$font-size-6: 1.8rem;
+$font-size-5: 1.5rem;
+$font-size-4: 1.2rem;
+$font-size-3: 1rem;
+$font-size-2: .65rem;
+$font-size-1: .5rem;
