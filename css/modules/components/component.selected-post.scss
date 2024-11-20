@@ -56,19 +56,26 @@
     }
 
     .btn__back-to-post-list__outer {
-        text-align: end;
+        display: block;
+        position: relative;
         padding: 1rem 0;
+        width: fit-content;
+        justify-self: flex-end;
+        height: fit-content;
+
 
         .btn__back-to-post-list {
             position: relative;
             display: flex;
+            height: fit-content;
             gap: 4px;
             justify-content: end;
-            align-items: center;
+            align-items: start;
             background-color: transparent;
             color: var(--primary-color);
             border: none;
             padding: 0;
+            width: fit-content;
 
             span {
                 display: block;
@@ -78,6 +85,8 @@
             i {
                  display: block;
                  font-size: $font-size-3;
+                 height: fit-content;
+                 width: fit-content;
             }
         }
 

@@ -1,37 +1,10 @@
+import { Link } from "react-router-dom";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+
 export default function Footer() {
   return (
     <>
-      {/* <footer className="footer">
-        <div className="container footer__inner">
-          <p className="footer__item">
-            <strong>© 2023-2024</strong>
-            <br />
-            <a href="/">Junho Shin</a>
-          </p>
-
-          <p className="footer__item">
-            <strong>Work</strong>
-            <br />
-            <a href="https://www.bobsweep.com/" rel="me">
-              bObsweep
-            </a>
-          </p>
-
-          <p className="footer__item">
-            <strong>Social</strong>
-            <br />
-            <a href="https://github.com/shinjuno123" rel="me">
-              Github
-            </a>
-            <a href="https://www.linkedin.com/in/junho-shin-18b883234" rel="me">
-              LinkedIn
-            </a>
-          </p>
-
-
-        </div>
-      </footer> */}
-
       <footer>
         <div className="background">
           <svg
@@ -51,7 +24,7 @@ export default function Footer() {
                   style={{stopColor: "rgba(53, 127, 242, 0.6)"}}
                 ></stop>
                 <stop
-                  offset="100%"
+                  offset="200%"
                   style={{stopColor: "rgba(38, 89, 190, 0.06)"}}
                 ></stop>
               </linearGradient>
@@ -64,28 +37,15 @@ export default function Footer() {
               />
             </defs>
             <g>
-              <use xlinkHref="#wave" opacity=".6">
+              <use xlinkHref="#wave" opacity=".8">
                 <animateTransform
                   attributeName="transform"
                   attributeType="XML"
                   type="translate"
                   dur="8s"
                   calcMode="spline"
-                  values="270 230; -334 180; 270 230"
+                  values="300 230; -50 180; 300 230"
                   keyTimes="0; .5; 1"
-                  keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
-                  repeatCount="indefinite"
-                />
-              </use>
-              <use xlinkHref="#wave" opacity=".7">
-                <animateTransform
-                  attributeName="transform"
-                  attributeType="XML"
-                  type="translate"
-                  dur="6s"
-                  calcMode="spline"
-                  values="-270 230;243 220;-270 230"
-                  keyTimes="0; .6; 1"
                   keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
                   repeatCount="indefinite"
                 />
@@ -95,9 +55,22 @@ export default function Footer() {
                   attributeName="transform"
                   attributeType="XML"
                   type="translate"
+                  dur="6s"
+                  calcMode="spline"
+                  values="-270 230;200 220;-270 230"
+                  keyTimes="0; .6; 1"
+                  keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
+                  repeatCount="indefinite"
+                />
+              </use>
+              <use xlinkHref="#wave" opacity="1">
+                <animateTransform
+                  attributeName="transform"
+                  attributeType="XML"
+                  type="translate"
                   dur="4s"
                   calcMode="spline"
-                  values="0 230;-140 200;0 230"
+                  values="0 230;-0 200;0 230"
                   keyTimes="0; .4; 1"
                   keySplines="0.42, 0, 0.58, 1.0;0.42, 0, 0.58, 1.0"
                   repeatCount="indefinite"
@@ -110,21 +83,24 @@ export default function Footer() {
         <section>
           <ul className="socials">
             <li>
-              <a className="fa-brands fa-linkedin"></a>
+                <a href="https://www.linkedin.com/in/junho-shin-18b883234"><LinkedInIcon viewBox="0 0 25 23"/></a>
             </li>
             <li>
-              <a className="fa-brands fa-instagram"></a>
+              <a href="https://github.com/shinjuno123"><GitHubIcon viewBox="0 0 25 23"/></a>
             </li>
           </ul>
           <ul className="links">
             <li>
-              <a>Home</a>
+              <Link to={'/'}>Home</Link>
             </li>
             <li>
-              <a>About</a>
+              <Link to={'/about'}>About</Link>
             </li>
             <li>
-              <a>Contact</a>
+              <Link to={'/'}>Contact</Link>
+            </li>
+            <li>
+              <a href={'https://www.bobsweep.com/'}>Work: bObsweep</a>
             </li>
           </ul>
           <p className="legal"><strong>© 2023-2024</strong></p>

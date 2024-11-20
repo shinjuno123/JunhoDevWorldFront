@@ -345,6 +345,7 @@
 }
 
 .hero_projects {
+    z-index: 500;
 
     h1 {
         text-align: center;
@@ -401,6 +402,7 @@
         .projects {
             gap: 1rem;
             grid-template-columns: repeat(1, 1fr);
+            padding: 5%;
 
             .project {
                 min-height: 10rem;

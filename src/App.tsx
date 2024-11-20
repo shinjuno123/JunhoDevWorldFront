@@ -13,36 +13,42 @@ import History from "./pages/about/page.about.history";
 import AboutSkills from "./pages/about/page.about.skills";
 import AboutProjects from "./pages/about/page.about.projects";
 import Page404 from "./pages/page.404";
-import './api-client.ts';
+import "./api-client.ts";
 import Skills from "./pages/page.skills.tsx";
 import { useEffect } from "react";
 
 function App() {
   const navigate = useNavigate();
 
-  useEffect(()=> {
-    window.scrollTo({top:0})
-  },[navigate])
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [navigate]);
 
   return (
     <>
       <Header></Header>
+      <div className="box">
+        <div className="wave -one"></div>
+        <div className="wave -two"></div>
+        <div className="wave -three"></div>
+      </div>
+
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="posts" element={<Writing />}></Route>
         <Route path="posts/:postId" element={<SelectedPost />}></Route>
         <Route path="notes" element={<Notes />}></Route>
         <Route path="projects" element={<Projects />}></Route>
-        <Route path="skills" element={<Skills/>}></Route>
+        <Route path="skills" element={<Skills />}></Route>
         {/* <Route path="sign-up" element={<SignUp/>}></Route> */}
         {/* <Route path="sign-in" element={<SignIn/>}></Route> */}
         <Route path="about" element={<About />}>
           <Route path="" element={<Intro />}></Route>
           <Route path="history" element={<History />}></Route>
-          <Route path="projects" element={<AboutProjects/>}></Route>
+          <Route path="projects" element={<AboutProjects />}></Route>
           <Route path="skills" element={<AboutSkills />}></Route>
         </Route>
-        <Route path="*" element={<Page404/>}></Route>
+        <Route path="*" element={<Page404 />}></Route>
       </Routes>
       <Footer></Footer>
     </>

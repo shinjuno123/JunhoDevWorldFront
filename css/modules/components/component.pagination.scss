@@ -1,5 +1,5 @@
 .pagination {
-    padding: 5rem;
+    padding: 2.5rem 5rem;
     display: flex;
     justify-content: center;
     .page-numbers {
@@ -52,5 +52,16 @@
             color: var(--text-color);
             text-decoration: underline;
         }
+    }
+}
+
+
+@media screen and (max-width: $small-screen) { 
+
+    .pagination {
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: center;
+    
     }
 }

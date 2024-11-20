@@ -3,9 +3,8 @@ body {
 }
 
 .header {
-    flex: none;
     padding: 2rem 0;
-    background-color: rgba($color: var(--background-color), $alpha: .5);
+    background-color: rgba(var( --background-color-rgb), .24);
     position: fixed;
     width: 100%;
     top: 0px;

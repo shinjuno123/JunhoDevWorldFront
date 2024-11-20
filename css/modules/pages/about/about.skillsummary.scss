@@ -1,17 +1,20 @@
 .about__skill-summary {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     width: 100%;
     justify-content: center;
     align-items: center;
     min-height: 50rem;
+    z-index: 500;
 
     h1 {
         padding: 1rem 0;
         width: fit-content;
         text-align: center;
         font-size: $font-size-5;
+        z-index: 100;
     }
 
     .skills {
@@ -28,6 +31,7 @@
         width: 90%;
         border-radius: 5px;
         margin: 3rem 0 5rem 0;
+        z-index: 100;
 
         .skill {
             position: relative;
