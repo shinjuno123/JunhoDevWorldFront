@@ -48,7 +48,7 @@ export default function AboutSkills() {
           {Object.entries(skills).reverse().map((skills) => {
 
             return <React.Fragment key={skills[0]}>
-              <li className="skill" onClick={() => clickSkill(skills[1].id)}>
+              <li className={`skill ${currentSkill.id === skills[1].id? 'selected':''}`} onClick={() => clickSkill(skills[1].id)}>
                 <div className="skill-name">
                   <span>{skills[1].name}</span>
                 </div>
