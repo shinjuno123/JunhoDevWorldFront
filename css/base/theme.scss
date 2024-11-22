@@ -16,6 +16,25 @@ body[data-theme="light"] {
     --backquote-span: #333333;
 }
 
+
+body[data-theme="dark"] {
+    --primary-color: #c2ad5f;
+    --secondary-color: #8f6e19;
+    --supplementary-color1: #79683b;
+    --supplementary-color2: #524425;
+    --supplementary-color3: #00b3b3;
+    --supplementary-color4: #ee8aab;
+    --background-color: #000000;
+    --background-color-rgb: 0, 0, 0;
+    --text-color: #f3f3f3;
+    --text-disabled-color: #777777;
+    --reversed-text-color: #000000;
+    --progress-bar-basic-color: #bfacb3;
+    --backquote-color: #aaaaaa;
+    --backquote-border: #873f57;
+    --backquote-span: #cccccc;
+}
+
 $font-family-display:  "Merriweather", serif;
 $standard-border-radius: 5px;
 
