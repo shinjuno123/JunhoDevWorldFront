@@ -27,12 +27,6 @@ function App() {
   return (
     <>
       <Header></Header>
-      <div className="box">
-        <div className="wave -one"></div>
-        <div className="wave -two"></div>
-        <div className="wave -three"></div>
-      </div>
-
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="posts" element={<Writing />}></Route>

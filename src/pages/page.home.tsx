@@ -82,17 +82,13 @@ export default function Home() {
                       >
                         <div className="featured-post">
                           <LazyLoadImage
-                            effect="opacity"
+                            effect="blur"
+                            height={'100%'}
+                            width={'100%'}
                             className="featured-post__image"
                             src={featuredPost[1].background_image}
-                            alt="featured-post"
+                            alt={featuredPost[1].background_image}
                           />
-                      {/* <LazyLoadImage
-                        effect="blur"
-                        className="note-profile__image"
-                        src={note[1].author.profileImage}
-                        alt={note[1].author.name}
-                      /> */}
                           <div className="featured-post__inner">
                             <Link
                               className="featured-post__link"

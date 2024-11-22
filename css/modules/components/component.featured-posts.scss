@@ -124,6 +124,8 @@
     margin-left: .25rem;
     transform: translate(0);
     transition: transform .2s;
+    height: fit-content;
+    width: fit-content;
 }
 
 .featured-posts__see-all:hover .icon {
