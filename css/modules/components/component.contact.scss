@@ -26,13 +26,19 @@
         form {
             display: flex;
             flex-direction: column;
-            gap: .5rem;
 
             .field {
+                p {
+                    line-height: 2.2;
+                    color: rgb(209, 21, 21);
+                    font-weight: bold;
+                    font-size: $font-size-2;
+                    min-height: 2.2rem;
+                }
                 label {
                     display: block;
                     font-size: $font-size-4;
-                    line-height: 2.5;
+                    line-height: 2;
                     font-weight: bolder;
                 }
 
@@ -90,6 +96,41 @@
         }
     }
 
+    .greeting {
+        position: relative;
+        border-radius: $standard-border-radius;
+        padding: 8rem 10% 5rem 10%;
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+
+        h1 {
+            line-height: 2;
+        }
+
+        h3 {
+            line-height: 1.5;
+        }
+
+        .button {
+            width: 100%;
+            padding: 4rem 0;
+
+            button {
+                width: 100%;
+                border: none;
+                line-height: 2.3;
+                border-radius: $standard-border-radius;
+                box-sizing: border-box;
+                color: var(--text-color);
+                font-weight: bold;
+                background-color: var(--secondary-color);
+            }
+
+            button:hover {
+                background-color: var(--primary-color);
+            }
+        }
+    }
+
 }
 
 @media screen and (max-width: $small-screen) {
@@ -134,6 +175,19 @@
 
                 }
             }
+        }
+
+
+        .greeting {
+    
+            h1 {
+                font-size: $font-size-6;
+            }
+    
+            h3 {
+                font-size: $font-size-3;
+            }
+    
         }
     }
 }
