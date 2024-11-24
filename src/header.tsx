@@ -263,6 +263,19 @@ export default function Header() {
                       <span className="nav__num">06</span> about
                     </Link>
                   </li>
+                  <li
+                    className={`nav__item ${
+                      url.includes("/contact") ? "nav__item--active" : ""
+                    }`}
+                  >
+                    <Link
+                      className="nav__link"
+                      to="/contact"
+                      onClick={closeNavigation}
+                    >
+                      <span className="nav__num">07</span> Contact
+                    </Link>
+                  </li>
                   {/* <li className="account" style={{ display: isLogined ? 'none' : 'flex' }}>
                     <button className="login__button" onClick={() => { navigate('/sign-in'); closeNavigation(); }}>Sign in</button>
                     <button className="signup__button" onClick={() => { navigate('/sign-up'); closeNavigation(); }}>Sign up</button>
