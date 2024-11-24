@@ -1,4 +1,4 @@
-import { FormEvent, useReducer, useState } from "react";
+import { FormEvent, useEffect, useReducer, useRef, useState } from "react";
 import NextPage from "../components/component.next-page-btn";
 import PreviousPage from "../components/component.previous-page-btn";
 
@@ -40,6 +40,10 @@ const reducer = (
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const emailInputElement = useRef<HTMLInputElement | null>(null);
+  const nameInputElement = useRef<HTMLInputElement | null>(null);
+  const messageInputElement = useRef<HTMLTextAreaElement | null>(null);
+
   const [formState, dispatchForm] = useReducer(reducer, {
     errorMessage: { email: "", message: "", name: "" },
     validated: false,
@@ -109,6 +113,11 @@ export default function Contact() {
     }
 
     if (type === "VALIDATED") {
+      // Erase all texts in the all fields on the form
+      if (emailInputElement.current) emailInputElement.current.value = "";
+      if (nameInputElement.current) nameInputElement.current.value = "";
+      if (messageInputElement.current) messageInputElement.current.value = "";
+
       // Submit the form to server
 
       // Set the form was already submitted
@@ -121,7 +130,12 @@ export default function Contact() {
   return (
     <>
       <section className="contact container">
-        <div style={{width: 'fit-content',display: `${window.location.href.includes('about')? 'block': 'none'}`}}>
+        <div
+          style={{
+            width: "fit-content",
+            display: `${window.location.href.includes("about") ? "block" : "none"}`,
+          }}
+        >
           <PreviousPage />
         </div>
         <div className={`contact__inner ${submitted ? "hide" : ""}`}>
@@ -133,17 +147,17 @@ export default function Contact() {
           <form onSubmit={submitMessage}>
             <div className="field">
               <label htmlFor="email">Email: </label>
-              <input name="email" type="text" />
+              <input ref={emailInputElement} name="email" type="text" />
               <p>{`${formState.validated ? "" : formState.errorMessage.email}`}</p>
             </div>
             <div className="field">
               <label htmlFor="name">Your Name: </label>
-              <input name="name" type="text" />
+              <input ref={nameInputElement} name="name" type="text" />
               <p>{`${formState.validated ? "" : formState.errorMessage.name}`}</p>
             </div>
             <div className="field">
               <label htmlFor="message">Message: </label>
-              <textarea name="message"></textarea>
+              <textarea ref={messageInputElement} name="message"></textarea>
               <p>{`${formState.validated ? "" : formState.errorMessage.message}`}</p>
             </div>
             <div className="button">
@@ -155,12 +169,29 @@ export default function Contact() {
           <h1>Thank you so much! 👏👏👏</h1>
           <h3>I will reach out to you as soon as possible 🙏</h3>
           <div className="button">
-            <button type="button" onClick={() => setSubmitted(false)}>
+            <button
+              type="button"
+              onClick={() => {
+                const errorMessage = {
+                  email: "",
+                  name: "",
+                  message: "",
+                } as UserFormAction["errorMessage"];
+                setSubmitted(false);
+
+                dispatchForm({ type: "INVALIDATED", errorMessage: errorMessage });
+              }}
+            >
               Retry!
             </button>
           </div>
         </div>
-        <div style={{width: 'fit-content',display: `${window.location.href.includes('about')? 'block': 'none'}`}}>
+        <div
+          style={{
+            width: "fit-content",
+            display: `${window.location.href.includes("about") ? "block" : "none"}`,
+          }}
+        >
           <NextPage />
         </div>
       </section>
