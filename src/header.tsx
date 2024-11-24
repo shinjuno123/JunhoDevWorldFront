@@ -9,7 +9,11 @@ import Modal, { ModalControl } from "./components/component.modal";
 export default function Header() {
   const [headerState, setHeaderState] = useState("closed");
   const [isThemeColorControlOpen, setIsThemeColorControlOpen] = useState(false);
-  const [themeMode, setThemeMode]  = useState(localStorage.getItem("themeMode")? localStorage.getItem("themeMode"):'light');
+  const [themeMode, setThemeMode] = useState(
+    localStorage.getItem("themeMode")
+      ? localStorage.getItem("themeMode")
+      : "light"
+  );
   const url = useLocation().pathname;
   const { adminInfo } = useAppSelector((state) => state.adminManager);
   const { status: regularLoginStatus } = useAppSelector(
@@ -30,8 +34,8 @@ export default function Header() {
 
   function applyThemeMode(themeName: string) {
     setThemeMode(themeName);
-    localStorage.setItem('themeMode', themeName);
-    document.querySelector('body')?.setAttribute('data-theme', themeName);
+    localStorage.setItem("themeMode", themeName);
+    document.querySelector("body")?.setAttribute("data-theme", themeName);
     setIsThemeColorControlOpen(false);
   }
 
@@ -83,8 +87,10 @@ export default function Header() {
 
   useEffect(() => {
     store.dispatch(fetchAdminInfo());
-    const themeMode = localStorage.getItem('themeMode')
-    document.querySelector('body')?.setAttribute('data-theme', themeMode? themeMode:'light');
+    const themeMode = localStorage.getItem("themeMode");
+    document
+      .querySelector("body")
+      ?.setAttribute("data-theme", themeMode ? themeMode : "light");
 
     // const authKey = localStorage.getItem('auth_key');
 
@@ -135,11 +141,19 @@ export default function Header() {
           className={`dark-mode__toggle ${isThemeColorControlOpen ? "open" : ""}`}
         >
           <ul className={`${isThemeColorControlOpen ? "open" : ""}`}>
-            <li className={`${themeMode === 'light'? 'selected':''}`} onClick={()=> applyThemeMode('light')} style={{backgroundColor: "white", color: 'black'}}>
-              <p>Light {themeMode === 'light'? '(SELECTED)':''}</p>
+            <li
+              className={`${themeMode === "light" ? "selected" : ""}`}
+              onClick={() => applyThemeMode("light")}
+              style={{ backgroundColor: "white", color: "black" }}
+            >
+              <p>Light {themeMode === "light" ? "(SELECTED)" : ""}</p>
             </li>
-            <li className={`${themeMode === 'dark'? 'selected':''}`} onClick={()=> applyThemeMode('dark')} style={{backgroundColor: "black", color: 'white'}}>
-              <p>Dark {themeMode === 'dark'? '(SELECTED)':''}</p>
+            <li
+              className={`${themeMode === "dark" ? "selected" : ""}`}
+              onClick={() => applyThemeMode("dark")}
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              <p>Dark {themeMode === "dark" ? "(SELECTED)" : ""}</p>
             </li>
           </ul>
           <div onClick={() => toggleIsLightDarkControlOpen()}>
@@ -171,7 +185,16 @@ export default function Header() {
             >
               <button
                 className={`iconbtn nav__togglebtn`}
-                onClick={toggleNavigation}
+                onClick={() => {
+                  if (isThemeColorControlOpen) {
+                    setIsThemeColorControlOpen(false);
+                    setTimeout(()=> {
+                      toggleNavigation();
+                    }, 300)
+                  } else {
+                    toggleNavigation();
+                  }
+                }}
               >
                 <span className="menuicon">
                   <span className="menuicon__bar"></span>
