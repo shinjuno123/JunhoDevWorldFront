@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useReducer, useRef, useState } from "react";
+import { FormEvent, useReducer, useRef, useState } from "react";
 import NextPage from "../components/component.next-page-btn";
 import PreviousPage from "../components/component.previous-page-btn";
 
