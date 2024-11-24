@@ -15,7 +15,7 @@ import AboutProjects from "./pages/about/page.about.projects";
 import Page404 from "./pages/page.404";
 import "./api-client.ts";
 import Skills from "./pages/page.skills.tsx";
-import { useEffect } from "react";
+import {useEffect } from "react";
 import Contact from "./pages/page.contact.tsx";
 
 function App() {
@@ -37,12 +37,13 @@ function App() {
         <Route path="skills" element={<Skills />}></Route>
         {/* <Route path="sign-up" element={<SignUp/>}></Route> */}
         {/* <Route path="sign-in" element={<SignIn/>}></Route> */}
-        <Route path="contact" element={<Contact/>}></Route>
+        <Route path="contact" element={<Contact />}></Route>
         <Route path="about" element={<About />}>
           <Route path="" element={<Intro />}></Route>
           <Route path="history" element={<History />}></Route>
           <Route path="projects" element={<AboutProjects />}></Route>
           <Route path="skills" element={<AboutSkills />}></Route>
+          <Route path="contact" element={<Contact />}></Route>
         </Route>
         <Route path="*" element={<Page404 />}></Route>
       </Routes>

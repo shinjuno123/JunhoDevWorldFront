@@ -1,4 +1,6 @@
 import { FormEvent, useReducer, useState } from "react";
+import NextPage from "../components/component.next-page-btn";
+import PreviousPage from "../components/component.previous-page-btn";
 
 interface UserFormState {
   validated: boolean;
@@ -119,6 +121,9 @@ export default function Contact() {
   return (
     <>
       <section className="contact container">
+        <div style={{width: 'fit-content',display: `${window.location.href.includes('about')? 'block': 'none'}`}}>
+          <PreviousPage />
+        </div>
         <div className={`contact__inner ${submitted ? "hide" : ""}`}>
           <h1>Contact 👜</h1>
           <h3>
@@ -150,8 +155,13 @@ export default function Contact() {
           <h1>Thank you so much! 👏👏👏</h1>
           <h3>I will reach out to you as soon as possible 🙏</h3>
           <div className="button">
-              <button type="button" onClick={() => setSubmitted(false)}>Retry!</button>
+            <button type="button" onClick={() => setSubmitted(false)}>
+              Retry!
+            </button>
           </div>
+        </div>
+        <div style={{width: 'fit-content',display: `${window.location.href.includes('about')? 'block': 'none'}`}}>
+          <NextPage />
         </div>
       </section>
     </>
