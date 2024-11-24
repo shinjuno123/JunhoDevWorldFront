@@ -9,6 +9,7 @@ import { fetchOtherProjects, emptyOtherProjects } from "../../features/project/o
 import PreviousPage from '../../components/component.previous-page-btn';
 import NextPage from '../../components/component.next-page-btn';
 import { ClipLoader } from 'react-spinners';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 export default function Projects() {
   const [hover, setHover] = useState("");
   const glideRef = useRef(null);
@@ -144,22 +145,24 @@ export default function Projects() {
     <>
       <section className="project__page">
         <section className="hero_projects local-page">
-          <PreviousPage />
+        <PreviousPage />
           <h1>Amazing Projects!</h1>
 
           <div className="glide" ref={glideRef}>
             <li
               style={{
-                display: outstandingProjectsLoader === 'pending' ? "block" : "none",
-                padding: '15rem 0',
+                display:
+                  outstandingProjectsLoader === "pending" ? "block" : "none",
+                padding: "15rem 0",
                 textAlign: "center",
               }}
             >
               <ClipLoader />
             </li>
+
             <div className="glide__track" data-glide-el="track">
               <ul className="glide__slides">
-              {Object.entries(outstandingProjects)
+                {Object.entries(outstandingProjects)
                   .reverse()
                   .map((project) => {
                     return (
@@ -176,10 +179,14 @@ export default function Projects() {
                             <div
                               className={`slide__background ${hover}`}
                               style={{
+                                backgroundColor: 'white',
                                 background: `url(${project[1].background}) no-repeat center center fixed`,
                                 backgroundSize: "cover",
                               }}
                             >
+                              
+                            </div>
+                            <div className="slide__background-after">
                               {hover === "hover" ? (
                                 <>
                                   <div>
@@ -225,17 +232,13 @@ export default function Projects() {
                 className="glide__arrow glide__arrow--left"
                 data-glide-dir="<"
               >
-                <span className="material-icons">
-                  arrow_back_ios
-                </span>
+                <span className="material-icons">arrow_back_ios</span>
               </button>
               <button
                 className="glide__arrow glide__arrow--right"
                 data-glide-dir=">"
               >
-                <span className="material-icons">
-                  arrow_forward_ios
-                </span>
+                <span className="material-icons">arrow_forward_ios</span>
               </button>
             </div>
 
@@ -259,7 +262,7 @@ export default function Projects() {
 
           <div className="project-list">
             <ul className="projects">
-            {Object.entries([1, 2, 3, 4, 5, 6, 7, 8]).map((_, index) => {
+              {Object.entries([1, 2, 3, 4, 5, 6, 7, 8]).map((_, index) => {
                 return (
                   <React.Fragment key={index}>
                     <li
@@ -287,7 +290,10 @@ export default function Projects() {
                       <li className="project">
                         <div className="project__info">
                           <div className="project__background">
-                            <img
+                            <LazyLoadImage
+                              effect="blur"
+                              height={'100%'}
+                              width={'100%'}
                               src={project[1].background}
                               alt={project[1].title}
                             />
@@ -316,16 +322,12 @@ export default function Projects() {
                     </React.Fragment>
                   );
                 })}
-
-
             </ul>
 
             <div className="pagination">
               <ol className="page-numbers">
                 <li className="go-left page-number" onClick={() => clickPrev()}>
-                  <span className="material-icons">
-                    chevron_left
-                  </span>
+                  <span className="material-icons">chevron_left</span>
                 </li>
 
                 {[...Array(maxPage).keys()]
@@ -343,10 +345,11 @@ export default function Projects() {
                     );
                   })}
 
-                <li className="go-right page-number" onClick={() => clickNext()}>
-                  <span className="material-icons">
-                    chevron_right
-                  </span>
+                <li
+                  className="go-right page-number"
+                  onClick={() => clickNext()}
+                >
+                  <span className="material-icons">chevron_right</span>
                 </li>
               </ol>
             </div>

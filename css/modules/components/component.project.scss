@@ -76,6 +76,7 @@
 
         .glide__slide:hover {
             background-color: var(--secondary-color);
+            z-index: -100;
         }
 
         .slide__wrapper {
@@ -97,7 +98,7 @@
                 height: 100%;
                 width: 100%;
                 color: transparent;
-                transition: all .3s ease-in-out;      
+                transition: all .3s ease-in-out;    
             }
 
 
@@ -107,10 +108,8 @@
 
             .slide__background.hover{
                 color: var(--reversed-text-color);
-                z-index: 100;
 
                 div {
-                    background-color: rgba($color: var(--text-color), $alpha: .7);
                     width: 100%;
                     height: 100%;
                     display: flex;
@@ -129,20 +128,43 @@
 
             }
 
-            .slide__background.hover::after {
-                opacity: 0;
-
-            }
-
-            .slide__background::after {
+            .slide__background+.slide__background-after {
                 content: '';
                 position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
-                opacity: .5;
-                background-color: var(--text-color);
+                background-color: rgba(var(--text-color-rgb), 0.35);
+
+
+                div {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+
+            
+                    span {
+                        color: var(--reversed-text-color);
+                        display: block;
+                        font-size: $font-size-4;
+                        font-weight: bold;
+                        line-height: 1.2;
+                    }
+                }
+            }
+
+
+            .slide__background.hover+.slide__background-after {
+                background-color: rgba(var(--text-color-rgb), 0);
+
+                div {
+                    background-color: rgba(var(--text-color-rgb), .35);
+                }
             }
 
             .slide__description {
@@ -190,7 +212,6 @@
                         border-radius: 5px;
                         background-color: var(--supplementary-color3);
                         color: var(--reversed-text-color);
-
                     }
                 }
 
@@ -223,7 +244,6 @@
 
         .project {
             position: relative;
-            background-color: var(--secondary-color);
             min-height: 20rem;
             cursor: pointer;
             border-radius: 5px;
@@ -244,27 +264,21 @@
                     flex: .3;
                     height: 100%;
                     width: 100%;
-                    
+                    z-index: 0;
+                    background-color: var(--primary-color);
 
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        border-radius: 5px;
-                    
+                    span {
+                        border-radius:$standard-border-radius;
+                        img {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: 5px;
+                        }
                     }
-                }
 
-                .project__background::after {
-                    content: '';
-                    position: absolute;
-                    border-radius: 5px;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: rgba($color: var(--text-color), $alpha: .6);
+                    
                 }
 
 
@@ -280,6 +294,8 @@
                     left: 0;
                     top: 0;
                     padding: 0 1rem;
+                    background-color: rgba(var(--text-color-rgb),.5);
+                    border-radius: $standard-border-radius;
 
                     .project__title {
                         line-height: 2;
@@ -303,7 +319,7 @@
                 height: 100%;
                 border-radius: 5px;
                 z-index: 1;
-                background-color: rgba($color: #000000, $alpha: .6);
+                background-color: rgba($color: #000000, $alpha: 1);
 
                 .project__link {
                     display: flex;

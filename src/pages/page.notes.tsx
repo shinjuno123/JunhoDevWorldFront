@@ -156,7 +156,7 @@ export default function Notes() {
                     textAlign: "center",
                   }}
                 >
-                  <ClipLoader></ClipLoader>
+                  <ClipLoader color="var(--text-color)"></ClipLoader>
                 </li>
           </ul>
         </section>

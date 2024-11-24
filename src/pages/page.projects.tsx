@@ -194,6 +194,9 @@ export default function Projects() {
                                 backgroundSize: "cover",
                               }}
                             >
+                              
+                            </div>
+                            <div className="slide__background-after">
                               {hover === "hover" ? (
                                 <>
                                   <div>
