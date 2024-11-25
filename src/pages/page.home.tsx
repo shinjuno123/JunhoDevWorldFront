@@ -9,6 +9,14 @@ import { GridLoader } from "react-spinners";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
+/**
+ * The homepage of the site.
+ *
+ * This component shows a list of featured posts, fetched from the API.
+ *
+ * @returns {JSX.Element} The JSX element representing the homepage.
+ * @constructor
+ */
 export default function Home() {
   const { featuredPosts, loading } = useAppSelector(
     (state) => state.featuredPostManager

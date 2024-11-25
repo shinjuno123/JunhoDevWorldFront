@@ -1,6 +1,8 @@
 import { FormEvent, useReducer, useRef, useState } from "react";
 import NextPage from "../components/component.next-page-btn";
 import PreviousPage from "../components/component.previous-page-btn";
+import store from "../app/store";
+import { sendEmail } from "../features/email/email.slice";
 
 interface UserFormState {
   validated: boolean;
@@ -119,6 +121,7 @@ export default function Contact() {
       if (messageInputElement.current) messageInputElement.current.value = "";
 
       // Submit the form to server
+      store.dispatch(sendEmail({ email, name, message }));
 
       // Set the form was already submitted
       setSubmitted(true);
