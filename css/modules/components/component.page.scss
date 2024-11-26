@@ -14,7 +14,7 @@
     margin: 3.5em 0;
     padding-top: 5.5rem;
     width: 45em;
-    background: white;
+    background: var(--background-color);
 }
 
 .blog-page__header {
@@ -58,7 +58,7 @@
 .post {
     display: block;
     margin-block-end: 5.5rem;
-    border-bottom: 1px $supplementary-color2 solid;
+    border-bottom: 1px var(--supplementary-color2) solid;
     padding-bottom: 1.5rem;
 
     .post__category {
@@ -66,7 +66,7 @@
     }
 
     .post__category:hover {
-        color: rgba($color: $primary-color, $alpha: .5);
+        color: rgba($color: var(--primary-color), $alpha: .5);
     }
 }
 
@@ -78,19 +78,19 @@
     font-size: $font-size-6;
     font-weight: bold;
     margin-block-end: .2em;
-    color: $primary-color;
+    color: var(--primary-color);
     cursor: pointer;
 }
 
 .post__link:hover {
-    color: $secondary-color;
+    color: var(--secondary-color);
 }
 
 .post__date-category {
     display: block;
     font-size: $font-size-3;
     margin-block-end: 2em;
-    color: $primary-color;
+    color: var(--primary-color);
     letter-spacing: 1.3px;
 }
 

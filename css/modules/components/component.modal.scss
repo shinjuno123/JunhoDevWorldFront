@@ -11,9 +11,9 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba($color: $secondary-color, $alpha: .5);
+    background-color: rgba($color: var(--secondary-color), $alpha: .5);
     z-index: 500;
-    color: $reversed-text-color;
+    color: var(--reversed-text-color);
 
 
     .modal__inner {
@@ -21,7 +21,7 @@
         height: 15rem;
         padding: 0 1.5rem;
         border-radius: 5px;
-        background-color: $supplementary-color3;
+        background-color: var(--supplementary-color3);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -31,7 +31,7 @@
 
         .modal__title {
             display: block;
-            background-color: $primary-color;
+            background-color: var(--primary-color);
             padding: .5rem 0;
             border-radius: 5px;
             text-align: center;
@@ -59,11 +59,11 @@
                 width: 70%;
                 box-shadow: inset #abacaf 0 0 0 2px;
                 border: 0;
-                background: rgba(0, 0, 0, 0);
+                background: rgba($color: var(--background-color), $alpha: 0);
                 appearance: none;
                 border-radius: 3px;
                 line-height: 1.4;
-                color: rgb(0, 0, 0);
+                color: var(--text-color);
                 font-size: 13px;
                 font-weight: 400;
                 height: 40px;
@@ -90,8 +90,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: $text-color;
-            background-color: white;
+            color: var(--text-color);
+            background-color: var(--background-color);
             width: 100%;
             height: 100%;
             border-radius: 5px;
@@ -106,10 +106,10 @@
 
         .modal__button {
             display: block;
-            background-color: $supplementary-color4;
+            background-color: var(--supplementary-color4);
             border: none;
             border-radius: 5px;
-            color: $reversed-text-color;
+            color: var(--reversed-text-color);
             padding: .5rem 5em;
             transform: translateY(1rem);
             font-size: $font-size-3;

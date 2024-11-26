@@ -17,8 +17,8 @@
 .featured-posts {
     display: block;
     unicode-bidi: bidi-override;
-    --gradient-bottom: linear-gradient( 0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .15) 50%, rgba(0, 0, 0, .4) 100% );
-    --gradient-full: linear-gradient( 0deg, rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .4) 100% );
+    --gradient-bottom: linear-gradient( 0deg, rgba(var(--text-color-rgb), 0) 0%, rgba(var(--text-color-rgb), .15) 50%, var(--text-color) 100% );
+    --gradient-full: linear-gradient( 0deg,  var(--text-color-rgb) 0%, rgba(var(--text-color-rgb), .6) 100% );
 }
 
 .featured-posts__list {
@@ -40,9 +40,19 @@
     position: relative;
     border-radius: .5rem;
     overflow: hidden;
-    box-shadow: 14px 14px 60px -10px rgba(0, 0, 0, 0.3019607843);
     transition: transform .2s ease;
     cursor: pointer;
+}
+
+.featured-post::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--text-color-rgb), .2);
 }
 
 .featured-post:hover {
@@ -70,23 +80,25 @@
     right: 0;
     overflow: hidden;
     border-radius: .5rem;
-    color: $reversed-text-color;
+    z-index: 100;
+    color: var(--reversed-text-color);
+    font-weight: bolder;
     padding: 1rem;
-    background-image: var(--gradient-full);
+    background-image: var(--gradient-full)!important;
 }
 
 .featured-post__link {
     word-wrap: break-word;
     overflow-wrap: break-word;
-    -webkit-hyphens: auto;
+    -webkit-hyphens: auto; 
     hyphens: auto;
     display: block;
-    color: $reversed-text-color!important;
+    color: var(--reversed-text-color)!important;
 }
 
 .featured-post__title {
     display: block;
-    font-weight: 500;
+    font-weight: bold;
     font-size: $font-size-4;
     line-height: 1.4;
     margin-bottom: .5rem;
@@ -124,6 +136,8 @@
     margin-left: .25rem;
     transform: translate(0);
     transition: transform .2s;
+    height: fit-content;
+    width: fit-content;
 }
 
 .featured-posts__see-all:hover .icon {
@@ -153,6 +167,7 @@
     }
     
     .featured-post:hover .featured-post__inner {
-        background-image: var(--gradient-full);
+        background: var(--gradient-full);
     }
+
 }

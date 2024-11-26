@@ -57,12 +57,13 @@
         margin: auto auto;
         font-family: Open Sans;
         font-style: italic;
-        color: #555555;
+        color: var(--backquote-color);
         padding: 1.2em 30px 1.2em 75px;
-        border-left: 8px solid #78C0A8;
+        border-left: 8px solid var(--backquote-border);
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
         line-height: 1.6;
         position: relative;
-        background: #EDEDED;
+        background: var(--reversed-text-color);
 
         p {
             margin-bottom: .1rem;
@@ -76,7 +77,7 @@
     blockquote::before {
         font-family: Arial;
         content: "\201C";
-        color: #78C0A8;
+        color:  var(--backquote-border);
         font-size: 4em;
         position: absolute;
         left: 10px;
@@ -89,7 +90,7 @@
 
     blockquote span {
         display: block;
-        color: #333333;
+        color: var(--backquote-span);
         font-style: normal;
         font-weight: bold;
         margin-top: 1em;

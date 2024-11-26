@@ -6,6 +6,7 @@ import store from "../app/store";
 import { fetchSelectedPost } from "../features/writing/writing-selected-post.slice";
 import { useAppSelector } from "../app/hooks";
 import { SyncLoader } from "react-spinners";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function SelectedPost() {
   const { postData, loading } = useAppSelector(
@@ -77,8 +78,9 @@ export default function SelectedPost() {
               <ul className="comments">
                 <span className="comments__title">Comments</span>
                 <li className="comment">
-                  <img
+                  <LazyLoadImage
                     className="comment__profile"
+                    effect="blur"
                     src={myFace}
                     alt="profile-image"
                   />
