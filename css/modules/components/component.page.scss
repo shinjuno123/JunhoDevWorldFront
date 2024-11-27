@@ -11,8 +11,7 @@
     display: block;
     border-radius: 20px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    margin: 3.5em 0;
-    padding-top: 5.5rem;
+    padding-top: 3.5rem;
     width: 45em;
     background: var(--background-color);
 }
@@ -152,7 +151,6 @@
 
 @media (max-width: $medium-screen) {
     .blog-page {
-        margin: 1.5rem .5rem;
         width: 100%;
     }
 

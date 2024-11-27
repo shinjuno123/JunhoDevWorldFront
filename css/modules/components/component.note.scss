@@ -1,6 +1,6 @@
 .section__notes {
     max-width: 40em;
-    margin: 4rem auto 10rem auto;
+    margin: 0 auto 0rem auto;
 
     .notes__header {
         display: block;
@@ -29,12 +29,13 @@
             border-radius: 20px;
             padding: 2rem 3rem;
             box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+            height: fit-content;
 
             .note__header {
                 display: flex;
                 align-items: center;
                 gap: 0 20px;
-                margin-block-end: 4rem;
+                margin-block-end: .5rem;
 
                 .note-profile__image {
                     max-width: 3rem;
@@ -58,7 +59,7 @@
 
             .note__main {
                 line-height: 2;
-                margin-block-end: 5rem;
+                margin-block-end: 1rem;
 
                 figure {
                     width: 100%;
@@ -227,6 +228,7 @@
 @media screen and (max-width:$small-screen) {
     .section__notes {
         width: 100%;
+        margin: 0 auto 6rem auto;
 
         .notes__header {
             font-size: $font-size-7;

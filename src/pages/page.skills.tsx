@@ -32,7 +32,6 @@ export default function Skills() {
    */
   function clickSkill(id: number) {
     setCurrentSkill(skills[id]);
-    skillDetailsRef.current?.scrollToDetails();
   }
 
   useEffect(() => {
