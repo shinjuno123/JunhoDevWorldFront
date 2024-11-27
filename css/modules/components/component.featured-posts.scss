@@ -84,7 +84,7 @@
     color: var(--reversed-text-color);
     font-weight: bolder;
     padding: 1rem;
-    background-image: var(--gradient-full)!important;
+    background-color: var(--gradient-full)!important;
 }
 
 .featured-post__link {
@@ -167,7 +167,7 @@
     }
     
     .featured-post:hover .featured-post__inner {
-        background: var(--gradient-full);
+        background-color: var(--gradient-full);
     }
 
 }
