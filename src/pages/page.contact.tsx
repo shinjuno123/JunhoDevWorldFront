@@ -121,7 +121,7 @@ export default function Contact() {
       if (messageInputElement.current) messageInputElement.current.value = "";
 
       // Submit the form to server
-      store.dispatch(sendEmail({ email, name,  message: message.replace(/\n/g, "<br />") }));
+      store.dispatch(sendEmail({ email:email, name:name,  message: message.replace(/\n/g, "<br />") }));
 
       // Set the form was already submitted
       setSubmitted(true);
