@@ -4,17 +4,7 @@
     font-family: "Lato", sans-serif;
     font-weight: 500;
     word-spacing: .23rem;
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: "Abril Fatface", serif;
-        font-weight: 600 !important;
-        letter-spacing: .1rem;
-    }
+    width: 100%;
 
     p {
         line-height: 1.7;
@@ -23,24 +13,62 @@
     }
 
     .wp-block-heading {
-        line-height: .5;
-        margin-bottom: $paragraph-margin;
+        line-height: 3;
+    }
+
+    .wp-block-list {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: .2rem;
+        padding: 0rem 1rem 1.5rem;
+    }
+
+    ul.wp-block-list {
+        list-style: disc;
+    }
+
+    ol.wp-block-list {
+        list-style: decimal;
     }
 
     .wp-block-image {
-        margin: .5rem 1.5rem;
+        position: relative;
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+        text-align: center;
+        padding: 1.5rem 0;
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .wp-block-image.size-full img{
+        width: 100%!important;
     }
 
     .wp-block-image.aligncenter {
-        text-align: center;
+        text-align: center!important;
+
+        img {
+            width: 60%!important;
+        }
     }
 
     .wp-block-image.alignright {
-        float: left;
+        text-align: right!important;
+        img {
+            width: 60%!important;
+        }
     }
 
     .wp-block-image.alignleft {
-        float: right;
+        text-align: left!important;
+        img {
+            width: 60%!important;
+        }
     }
 
     ul {
@@ -120,6 +148,31 @@
 
 @media (max-width: $small-screen) {
     .selected-post__content {
+        h2 {
+            font-size: 1.3rem;
+        }
+
+        h3 {
+            font-size: 1rem;
+        }
+
+        h4 {
+            font-size: .85rem;
+        }
+
+        p {
+            font-size: .8rem;
+        }
+
+        .wp-block-list {
+            padding: 0rem 1rem;
+
+            li {
+                font-size: .8rem;
+            }
+        }
+    
+
         .wp-block-image {
             margin: 0 .5rem;
         }
