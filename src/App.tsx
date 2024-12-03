@@ -16,6 +16,10 @@ import "./api-client.ts";
 import Skills from "./pages/page.skills.tsx";
 import {useEffect } from "react";
 import Contact from "./pages/page.contact.tsx";
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
+import 'highlight.js/styles/github.css';
+hljs.registerLanguage('javascript', javascript);
 
 function App() {
   const navigate = useNavigate();
@@ -23,6 +27,10 @@ function App() {
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, [navigate]);
+
+  useEffect(() => {
+    hljs.highlightAll();
+  }, []);
 
   return (
     <>

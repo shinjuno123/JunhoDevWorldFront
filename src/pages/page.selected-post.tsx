@@ -51,7 +51,6 @@ export default function SelectedPost() {
               </div>
               <hr />
               {loading !== "succeeded"? <SyncLoader/>:''}
-
               <div className="selected-post__content" dangerouslySetInnerHTML={{__html:postData.post.post_content}}></div>
             </div>
             <section className="comments__section"  style={{display:"none"}}>
