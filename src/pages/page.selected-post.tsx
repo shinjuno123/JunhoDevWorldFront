@@ -7,6 +7,10 @@ import { fetchSelectedPost } from "../features/writing/writing-selected-post.sli
 import { useAppSelector } from "../app/hooks";
 import { SyncLoader } from "react-spinners";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
+import 'highlight.js/styles/github.css';
+hljs.registerLanguage('javascript', javascript);
 
 export default function SelectedPost() {
   const { postData, loading } = useAppSelector(
@@ -22,7 +26,7 @@ export default function SelectedPost() {
 
     async function executeAsync() {
       const postID = Number(pathname.split('/').at(-1));
-      await store.dispatch(fetchSelectedPost({id:postID}));
+      await store.dispatch(fetchSelectedPost({id:postID})).then(()=>hljs.initHighlighting());
     }
 
     executeAsync();
