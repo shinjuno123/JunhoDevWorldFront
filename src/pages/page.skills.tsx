@@ -53,14 +53,33 @@ export default function Skills() {
         hoverpause: true,
         autoplay: 5000,
         focusAt: "center",
+        breakpoints: {
+          1000: {
+            perView: 3
+          },
+          670: {
+            perView: 2
+          }
+        }
       });
 
-      tmpGlide.on("run", () => {
-        const currentSlide = document.querySelector(".glide__slide--active");
-        const nextSlide = document.querySelector(".glide__slide--active + .glide__slide");
-        nextSlide?.classList.add('glide__slide--active');
-        currentSlide?.classList.remove('glide__slide--active');
+      tmpGlide.on("run.before", (move: { direction: string; }) => {
+        if (move.direction === ">") {
+          const currentSlide = document.querySelector(".glide__slide--active");
+          const nextSlide = document.querySelector(".glide__slide--active + .glide__slide");
+          nextSlide?.classList.add('glide__slide--active');
+          currentSlide?.classList.remove('glide__slide--active');
+        }
+
+        if (move.direction === "<") {
+          const currentSlide = document.querySelector(".glide__slide--active");
+          const prevSlide = document.querySelector('.glide__slide:has(+.glide__slide.glide__slide--active)');
+          prevSlide?.classList.add('glide__slide--active');
+          currentSlide?.classList.remove('glide__slide--active');
+        }
       })
+
+
       addDeviceEvent(tmpGlide);
       setGlide(tmpGlide);
     }
