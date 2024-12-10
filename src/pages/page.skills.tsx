@@ -63,6 +63,8 @@ export default function Skills() {
         }
       });
 
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       tmpGlide.on("run.before", (move: { direction: string; }) => {
         if (move.direction === ">") {
           const currentSlide = document.querySelector(".glide__slide--active");
