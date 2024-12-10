@@ -195,21 +195,29 @@
 
     .glide {
         .glide__slide.glide__slide--active {
-            transform: scaleX(1) scaleY(.9);
+            transform: scale(1);
         }
 
-        .glide__slide--active + .glide__slide,
-        .glide__slide:has(+.glide__slide.glide__slide--active){
-            transform: scale(.8);
+
+        .glide__slide--active + .glide__slide {
+            transform: scale(.85) rotateY(30deg) rotateX(7deg);
+        }
+
+        .glide__slide:has(+.glide__slide.glide__slide--active) {
+            transform: scale(.85) rotateY(-30deg) rotateX(7deg);
+        }
+
+        .glide__slide:has(+.glide__slide + .glide__slide.glide__slide--active) {
+            transform: scale(.7) rotateY(-30deg) rotateX(7deg);
         }
 
 
 
         .glide__slide {
             height: 20rem;
-            transform: scale(.7);
+            transform: scale(.7) rotateY(30deg) rotateX(7deg);
             background-color: red;
-            transition: transform .3s cubic-bezier(0,1.1,1,.99);
+            transition: transform .3s ease-out;
         }
     }
 }

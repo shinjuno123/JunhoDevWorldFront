@@ -54,6 +54,13 @@ export default function Skills() {
         autoplay: 5000,
         focusAt: "center",
       });
+
+      tmpGlide.on("run", () => {
+        const currentSlide = document.querySelector(".glide__slide--active");
+        const nextSlide = document.querySelector(".glide__slide--active + .glide__slide");
+        nextSlide?.classList.add('glide__slide--active');
+        currentSlide?.classList.remove('glide__slide--active');
+      })
       addDeviceEvent(tmpGlide);
       setGlide(tmpGlide);
     }
