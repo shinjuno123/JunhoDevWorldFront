@@ -194,8 +194,12 @@
 
 
     .glide {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        box-sizing: border-box;
+
         .glide__slide.glide__slide--active {
-            transform: scale(1);
+            transform: scale(.95);
         }
 
 
@@ -214,10 +218,22 @@
 
 
         .glide__slide {
-            height: 20rem;
+            height: 23rem;
             transform: scale(.7) rotateY(30deg) rotateX(7deg);
-            background-color: red;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             transition: transform .3s ease-out;
+            box-sizing: border-box;
+            padding: .2rem;
+            
+            hr {
+                border: 1.5px solid var(--secondary-color);
+                border-radius: 10px;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            }
+
+            img {
+                width: 100%;
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 
 export type SkillDetailsControl = {
   scrollToDetails: () => void;
@@ -8,9 +8,15 @@ export type Callback = () => void;
 
 const SkillDetails = forwardRef<
   SkillDetailsControl,
-  { imageLink: string; skillName: string; description: string }
+  {
+    imageLink: string;
+    skillName: string;
+    description: string;
+    proficiency: number;
+  }
 >((_props, ref) => {
   const skillDetailsRef = useRef<HTMLDivElement>(null);
+  const [countUp, setCountUp] = useState(0);
   useImperativeHandle(ref, () => ({
     /**
      * Scrolls the element referenced by skillDetailsRef into view smoothly.
@@ -19,8 +25,16 @@ const SkillDetails = forwardRef<
      * @returns {void}
      */
     scrollToDetails: () => {
-      const toTopElement = document.querySelector('.skill-details .to-top');
-      if (toTopElement) window.scrollTo({ top: Math.round(toTopElement.getBoundingClientRect().top + document.documentElement.scrollTop) - 400, behavior: "smooth" });
+      const toTopElement = document.querySelector(".skill-details .to-top");
+      if (toTopElement)
+        window.scrollTo({
+          top:
+            Math.round(
+              toTopElement.getBoundingClientRect().top +
+                document.documentElement.scrollTop
+            ) - 400,
+          behavior: "smooth",
+        });
     },
   }));
 
@@ -30,14 +44,34 @@ const SkillDetails = forwardRef<
    * and wants to return to the top of the page.
    */
   function toTop() {
-    const ulElement = document.querySelector('.skills');
-    if (ulElement) window.scrollTo({ top: Math.round(ulElement.getBoundingClientRect().top + document.documentElement.scrollTop) - 100, behavior: "smooth" });
+    const ulElement = document.querySelector(".skills");
+    if (ulElement)
+      window.scrollTo({
+        top:
+          Math.round(
+            ulElement.getBoundingClientRect().top +
+              document.documentElement.scrollTop
+          ) - 100,
+        behavior: "smooth",
+      });
   }
+
+
+  const countUpHandler = useCallback(() => {
+    if (_props.proficiency >= countUp) return;
+    setCountUp(countUp + 1);
+  },[_props.proficiency, countUp]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      countUpHandler();
+    }, 5)
+  },[countUpHandler]);
 
   return (
     <>
       <div className="skill-details" ref={skillDetailsRef}>
-        <h3 className="skill-details__skillname">{_props.skillName}</h3>
+        <h3 className="skill-details__skillname">{_props.skillName} <span>(Proficiency: {countUp}%)</span></h3>
         <hr />
         <div className="skill-details__description-box">
           <img src={_props.imageLink} alt={_props.skillName} />
