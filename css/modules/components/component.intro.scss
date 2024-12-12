@@ -70,16 +70,16 @@
     }
 }
 
-@media (min-width: $small-screen) {
+@media (max-width: $small-screen) {
     .intro__title {
-        font-size: $font-size-10;
+        font-size: $font-size-7;
     }
 
     .intro__content {
-        font-size: $font-size-5;
+        font-size: $font-size-3;
     }
 
     .intro__pretitle {
-        font-size: $font-size-4;
+        font-size: $font-size-2;
     }
 }

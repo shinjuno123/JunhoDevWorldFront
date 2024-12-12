@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 
 export type SkillDetailsControl = {
   scrollToDetails: () => void;
@@ -14,29 +14,10 @@ const SkillDetails = forwardRef<
     description: string;
     proficiency: number;
   }
->((_props, ref) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+>((_props, _) => {
   const skillDetailsRef = useRef<HTMLDivElement>(null);
   const [countUp, setCountUp] = useState(0);
-  useImperativeHandle(ref, () => ({
-    /**
-     * Scrolls the element referenced by skillDetailsRef into view smoothly.
-     * This function is intended to be used to bring the skill details section
-     * into the user's viewport.
-     * @returns {void}
-     */
-    scrollToDetails: () => {
-      const toTopElement = document.querySelector(".skill-details .to-top");
-      if (toTopElement)
-        window.scrollTo({
-          top:
-            Math.round(
-              toTopElement.getBoundingClientRect().top +
-                document.documentElement.scrollTop
-            ) - 400,
-          behavior: "smooth",
-        });
-    },
-  }));
 
   /**
    * Scrolls the window to the top smoothly. This is intended to be
@@ -44,7 +25,7 @@ const SkillDetails = forwardRef<
    * and wants to return to the top of the page.
    */
   function toTop() {
-    const ulElement = document.querySelector(".skills");
+    const ulElement = document.querySelector(".glide");
     if (ulElement)
       window.scrollTo({
         top:
