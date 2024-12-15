@@ -120,15 +120,15 @@
 
 
                     span {
-                        font-size: $font-size-3;
+                        font-size: $font-size-1;
                         line-height: 2;
                         font-weight: bold;
                     }
 
                     p {
-                        font-size: $font-size-2;
+                        font-size: $font-size-1;
                         line-height: 1.5;
-                        font-weight: bold;
+                        font-weight: lighter;
                     }
                 }
             }
@@ -166,7 +166,6 @@
 
 
 .about__history>.work-experience {
-    max-width: 55rem;
 
     .experiences {
 
@@ -177,6 +176,10 @@
             margin-block-end: 3rem;
 
             .company-logo {
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                
                 padding: .5rem;
                 border-radius: 5px;
                 text-align: center;
@@ -185,17 +188,25 @@
                 margin-block-end: 2rem;
 
                 img {
-                    width: 5rem;
+                    width: 32px;
+                    height: 32px;
+                }
+
+                h4 {
+                    font-size: $font-size-2;
+                    width: 100%;
                 }
             }
 
             .experience-description {
                 h4 {
-                    margin-block-end: 1rem;
+                    font-size: $font-size-2;
+                    margin-block-end: .5rem;
                 }
 
                 .experience-description-details {
                     li {
+                        font-size: $font-size-2;
                         list-style: outside;
                         list-style-position: inside;
                         margin-bottom: 1rem;
@@ -266,15 +277,14 @@
                     width: 100%;
 
                     .record__month-year {
-                        font-size: $font-size-3;
                         width: 10rem;
 
                         i {
-                            font-size: $font-size-2;
+                            font-size: $font-size-1;
                         }
 
                         span {
-                            font-size: $font-size-2;
+                            font-size: $font-size-1;
                         }
                     }
 
@@ -284,8 +294,7 @@
 
 
                         span {
-                            font-size: $font-size-2;
-                            line-height: 2;
+                            line-height: 1;
                         }
 
                         p {
@@ -307,8 +316,31 @@
         font-size: $font-size-6;
     }
 
+
     .about__history>.work-experience {
-        font-size: $font-size-2;
+    
+        .experiences {
+    
+            .experience {
+                .company-logo {
+                    img {
+                        width: 5rem;
+                    }
+                }
+                .experience-description {
+                    h4 {
+                        font-size: $font-size-1;
+                    }
+    
+                    .experience-description-details {
+                        li {
+                            font-size: $font-size-1;
+                        }
+                    }
+    
+                }
+            }
+        }
     }
 
     .about__section>.about__history>.records>.records__list>.record>.description {
@@ -366,7 +398,7 @@
         
         
                 .record__month-year {
-                    font-size: $font-size-1;
+                    font-size: $font-size-0;
                     width: 8rem;
                 }
         
@@ -376,12 +408,12 @@
         
         
                     span {
-                        font-size: .6rem;
-                        line-height: 2;
+                        font-size: $font-size-1;
+                        line-height: 1;
                     }
         
                     p {
-                        font-size: .5rem;
+                        font-size: $font-size-0;
                         line-height: 1;
                     }
                 }

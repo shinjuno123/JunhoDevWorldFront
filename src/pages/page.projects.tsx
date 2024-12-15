@@ -3,12 +3,7 @@ import Glide, {
   Breakpoints,
   Swipe,
 } from "@glidejs/glide/dist/glide.modular.esm";
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "material-icons/iconfont/material-icons.scss";
 import { useAppSelector } from "../app/hooks";
 import store from "../app/store";
@@ -20,6 +15,8 @@ import {
 } from "../features/project/other-project.slice";
 import { ClipLoader } from "react-spinners";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import PreviousPage from "../components/component.previous-page-btn";
+import NextPage from "../components/component.next-page-btn";
 
 export default function Projects() {
   const [hover, setHover] = useState("");
@@ -42,26 +39,26 @@ export default function Projects() {
     null
   );
 
-
   const swipeInterval = () => {
     const arrowRight = document.querySelector(".glide__arrow--right");
     arrowRight?.dispatchEvent(new Event("click"));
   };
 
   function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
   }
 
   const addDeviceEvent = useCallback((tmpGlide: Glide | null) => {
     console.log(isMobile());
     if (isMobile()) {
-      document.querySelector('.glide__arrows')?.classList.add('hidden');
+      document.querySelector(".glide__arrows")?.classList.add("hidden");
       tmpGlide?.mount({ Controls, Breakpoints, Swipe }).play();
     } else {
-      
       tmpGlide?.mount({ Controls, Breakpoints }).play();
     }
-  },[])
+  }, []);
 
   const createGlide = useCallback(() => {
     if (!glide) {
@@ -106,11 +103,10 @@ export default function Projects() {
   }, []);
 
   const scrollTo = (element: HTMLDivElement) => {
-    const yOffset = 100; 
+    const yOffset = 100;
     const y = element.offsetTop + yOffset;
-    window.scrollTo({top: y, behavior: 'smooth'});  
-  }
-
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
 
   const clickNext = async () => {
     if (projects.current) scrollTo(projects.current);
@@ -136,7 +132,6 @@ export default function Projects() {
         nextPage: { activated: true, url: previousPageUrl },
       })
     );
-
   };
 
   const toPage = async (page: number) => {
@@ -155,6 +150,15 @@ export default function Projects() {
   return (
     <>
       <section className="project__page">
+        <div
+          style={{
+            display: window.location.href.endsWith("/about/projects")
+              ? "block"
+              : "none",
+          }}
+        >
+          <PreviousPage />
+        </div>
         <section className="hero_projects local-page">
           <h1>Amazing Projects!</h1>
 
@@ -189,13 +193,11 @@ export default function Projects() {
                             <div
                               className={`slide__background ${hover}`}
                               style={{
-                                backgroundColor: 'white',
+                                backgroundColor: "white",
                                 background: `url(${project[1].background}) no-repeat center center fixed`,
                                 backgroundSize: "cover",
                               }}
-                            >
-                              
-                            </div>
+                            ></div>
                             <div className="slide__background-after">
                               {hover === "hover" ? (
                                 <>
@@ -302,18 +304,22 @@ export default function Projects() {
                           <div className="project__background">
                             <LazyLoadImage
                               effect="blur"
-                              height={'100%'}
-                              width={'100%'}
+                              height={"100%"}
+                              width={"100%"}
                               src={project[1].background}
                               alt={project[1].title}
                             />
                           </div>
                           <div className="project__description">
                             <h4 className="project__title">
-                              {project[1].title.length > 30? project[1].title.slice(0, 30) + "...": project[1].title}
+                              {project[1].title.length > 30
+                                ? project[1].title.slice(0, 30) + "..."
+                                : project[1].title}
                             </h4>
                             <p className="project__excerpt">
-                              {project[1].excerpt.length > 250? project[1].excerpt.slice(0, 250) + "...": project[1].excerpt}
+                              {project[1].excerpt.length > 250
+                                ? project[1].excerpt.slice(0, 250) + "..."
+                                : project[1].excerpt}
                             </p>
                           </div>
                         </div>
@@ -365,6 +371,15 @@ export default function Projects() {
             </div>
           </div>
         </section>
+        <div
+          style={{
+            display: window.location.href.endsWith("/about/projects")
+              ? "block"
+              : "none",
+          }}
+        >
+          <NextPage />
+        </div>
       </section>
     </>
   );

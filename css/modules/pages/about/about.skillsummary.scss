@@ -11,8 +11,12 @@
         padding: 1rem 0;
         width: fit-content;
         text-align: center;
-        font-size: $font-size-5;
+        font-size: $font-size-10;
         z-index: 100;
+    }
+
+    p {
+        font-size: $font-size-4;
     }
 
     .skills {
@@ -33,7 +37,7 @@
             flex-wrap: wrap;
             gap: .5rem;
             box-sizing: border-box;
-            padding: 0rem 0 1rem;
+            padding: 0rem 0 5rem;
 
             .skill__block {
                 border: none;
@@ -42,6 +46,7 @@
                 border-radius: $standard-border-radius;
                 background-color: var(--primary-color);
                 width: fit-content;        
+                font-weight: bold;
             }
 
             .skill__block:hover {
@@ -61,7 +66,7 @@
             box-sizing: border-box;
         
             .skill-details__skillname {
-                font-size: $font-size-4;
+                font-size: $font-size-3;
                 line-height: 1.5;
                 text-indent: 1rem;
             }
@@ -71,12 +76,6 @@
                 border-radius: 5px;
             }
         
-            .skill-details__description-box img {
-                width: 25%;
-                float: right;
-                border-radius: 5px;
-                margin: 0 0 .6rem .6rem;
-            }
         
             ul {
                 padding: .5rem;
@@ -88,7 +87,7 @@
             }
         
             .skill-details__description-box {
-                padding: 1rem;
+                padding: 1rem 1rem 2rem;
                 font-weight: lighter;
         
                 strong {
@@ -100,6 +99,17 @@
                     background-color: var(--secondary-color);
                     padding: .1rem;
                     border-radius: 5px;
+                }
+
+                img {
+                    width: 25%;
+                    float: right;
+                    border-radius: 5px;
+                    margin: 0 0 .6rem .6rem;
+                }
+                
+                p {
+                    font-size: $font-size-2;
                 }
             }
         
@@ -115,7 +125,7 @@
             padding: .5rem 1rem;
             color: var(--reversed-text-color);
             font-weight: bolder;
-            font-size: $font-size-2; 
+            font-size: $font-size-1; 
             border-radius: $standard-border-radius;
             
             i {
@@ -141,8 +151,8 @@
 
 
     .glide {
-        padding-top: 2rem;
-        padding-bottom: 1rem;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
         box-sizing: border-box;
 
         .glide__slide.glide__slide--active {
@@ -167,10 +177,18 @@
         .glide__slide {
             height: 23rem;
             transform: scale(.7) rotateY(30deg) rotateX(7deg);
-            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            box-shadow: rgba(var(--text-color-rgb), 0.35) 0px 5px 15px;
             transition: transform .3s ease-out;
             box-sizing: border-box;
             padding: .2rem;
+
+            h2 {
+                font-size: $font-size-2;
+            }
+
+            p {
+                font-size: $font-size-1;
+            }
             
             hr {
                 border: 1.5px solid var(--secondary-color);
@@ -182,6 +200,23 @@
                 width: 100%;
             }
         }
+
+        .glide__arrows {
+            .glide__arrow {
+                color: var(--reversed-text-color);
+                border: 2px solid rgba(var(--secondary-color-rgb), 1);
+                background-color: rgba(var(--primary-color-rgb), 1);
+                font-weight: bolder;
+            }
+
+            .glide__arrow--left {
+                left: 1rem;
+            }
+
+            .glide__arrow--right {
+                right: 1rem;
+            }
+        }
     }
 }
 
@@ -191,6 +226,21 @@
 @keyframes grow-skill-gauge-up {
     0% {
         width: 0;
+    }
+}
+
+@media (max-width:$medium-screen) {
+
+    .about__skill-summary {
+        h1 {
+            font-size: $font-size-5;
+        }
+    
+        p {
+            font-size: $font-size-2;
+        }
+
+        
     }
 }
 
@@ -228,22 +278,24 @@
 
     
             .skill-details {
-                padding: .3rem .3rem;
 
             
                 .skill-details__skillname {
-                    font-size: $font-size-3;
-                    text-indent: .5rem;
+                    font-size: $font-size-2;
+                    text-indent: 0;
+                    padding: 0 1rem;
                 }
             
             
                 .skill-details__description-box {
-                    padding: .5rem;
-        
+                    .skill-details__description {
+                        font-size: $font-size-1;
+                        line-height: 1.5;
+                    }
                 }
 
                 .to-top {
-                    font-size: .4rem; 
+                    font-size: $font-size-0; 
                     padding: .3rem .5rem;
                     bottom: -1.2rem;
 

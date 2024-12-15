@@ -10,7 +10,6 @@ import About from "./pages/page.about";
 import SelectedPost from "./pages/page.selected-post";
 import Intro from "./pages/about/page.about.intro";
 import History from "./pages/about/page.about.history";
-import AboutProjects from "./pages/about/page.about.projects";
 import Page404 from "./pages/page.404";
 import "./api-client.ts";
 import Skills from "./pages/page.skills.tsx";
@@ -41,7 +40,7 @@ function App() {
         <Route path="about" element={<About />}>
           <Route path="" element={<Intro />}></Route>
           <Route path="history" element={<History />}></Route>
-          <Route path="projects" element={<AboutProjects />}></Route>
+          <Route path="projects" element={<Projects />}></Route>
           <Route path="skills" element={<Skills />}></Route>
           <Route path="contact" element={<Contact />}></Route>
         </Route>

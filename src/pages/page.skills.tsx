@@ -37,7 +37,7 @@ export default function Skills() {
    */
 
   const addDeviceEvent = useCallback((tmpGlide: Glide | null) => {
-    tmpGlide?.mount({ Controls, Breakpoints, Swipe, Keyboard }).play();
+    tmpGlide?.mount({ Controls, Breakpoints, Swipe, Keyboard });
   }, []);
 
   function clickSkill(skill: Skill, index: number) {
@@ -53,9 +53,9 @@ export default function Skills() {
         const tmpGlide = new Glide(".glide", {
           type: "carousel",
           perView: 5,
-          hoverpause: true,
           startAt: 0,
           focusAt: "center",
+          autoplay: false,
           breakpoints: {
             1000: {
               perView: 3,

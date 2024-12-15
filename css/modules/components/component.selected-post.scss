@@ -70,7 +70,7 @@
             height: fit-content;
             gap: 4px;
             justify-content: end;
-            align-items: start;
+            align-items: center;
             background-color: transparent;
             color: var(--primary-color);
             border: none;
@@ -79,12 +79,12 @@
 
             span {
                 display: block;
-                font-size: $font-size-3;
+                font-size: $font-size-2;
             }
 
             i {
                  display: block;
-                 font-size: $font-size-3;
+                 font-size: $font-size-2;
                  height: fit-content;
                  width: fit-content;
             }
@@ -111,6 +111,31 @@
         .selected-post__inner {
             width: 100%;
         }
+
+        .selected-post__title {
+            font-size: $font-size-3;
+            line-height: 1;
+            padding: 1rem 0;
+        }
+
+        .selected-post__info {
+            font-size: $font-size-1;
+        }
+
+
+        .btn__back-to-post-list__outer {
+
+            .btn__back-to-post-list {
+    
+                span {
+                    font-size: $font-size-2;
+                }
+
+                i {
+                    font-size: $font-size-2;
+                }
+            }
+        }
     }
 }
 
@@ -121,17 +146,34 @@
             width: 100%;
         }
         .selected-post__title {
-            font-size: $font-size-4;
+            font-size: $font-size-2;
+            line-height: 1;
+            padding: .3rem 0;
         }
 
         .selected-post__info {
-            font-size: $font-size-3;
+            font-size: $font-size-2;
+
 
         }
-    
-    
-        .selected-post__content {
-            font-size: $font-size-2;
+
+        .selected-post__info {
+            font-size: $font-size-1;
         }
+
+        .btn__back-to-post-list__outer {
+
+            .btn__back-to-post-list {
+    
+                span {
+                    font-size: $font-size-1;
+                }
+
+                i {
+                    font-size: $font-size-1;
+                }
+            }
+        }
+
     }
 }

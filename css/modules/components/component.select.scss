@@ -1,7 +1,7 @@
 .custom-select {
     position: relative;
     font-family: $font-family-display;
-    font-size: $font-size-2;
+    font-size: $font-size-1;
     padding: 2rem 0;
 }
 
@@ -61,4 +61,11 @@
 
 .select-items div:hover, .same-as-selected {
     background-color: rgba($color: var(--supplementary-color3), $alpha: .7);
-  }
+}
+
+
+@media screen and (max-width: $small-screen) {
+    .custom-select {
+        font-size: $font-size-0;
+    }
+}

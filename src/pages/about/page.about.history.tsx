@@ -44,7 +44,6 @@ export default function History() {
                   </span>
                   <section className="description">
                     <span>{history[1].title}</span>
-                    <p>{history[1].description}</p>
                   </section>
                 </li>
 
@@ -55,7 +54,7 @@ export default function History() {
 
         <h2>Work Experience</h2>
 
-        <div className="work-experience">
+        <div className="work-experience container">
           <ul className="experiences">
             <li className="experience"
               style={{
@@ -75,9 +74,9 @@ export default function History() {
                       src={experience[1].icon}
                       alt={experience[1].company}
                     />
+                    <h4>Company name: <p dangerouslySetInnerHTML={{__html: experience[1].company}}></p></h4>
                   </div>
                   <div className="experience-description">
-                    <h4>Company name: {experience[1].company}</h4>
                     <h4>Period: {experience[1].from} ~ {experience[1].to ? experience[1].to : 'now'}</h4>
                     <div className="experience-description-details" dangerouslySetInnerHTML={{ __html: experience[1].description }}></div>
                   </div>
