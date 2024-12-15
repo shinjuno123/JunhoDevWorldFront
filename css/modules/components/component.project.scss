@@ -447,6 +447,15 @@
 
             .project {
                 min-height: 10rem;
+
+                .project__description{
+                    .project__title {
+                        font-size: $font-size-1 !important;
+                    }
+                    .project__excerpt {
+                        font-size: $font-size-0!important;
+                    }
+                }
             }
         }
     }

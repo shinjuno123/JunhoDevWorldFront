@@ -2,7 +2,7 @@ import Glide, {
   Controls,
   Breakpoints,
   Swipe,
-  Autoplay
+  Autoplay,
 } from "@glidejs/glide/dist/glide.modular.esm";
 import { useCallback, useEffect, useRef, useState } from "react";
 import "material-icons/iconfont/material-icons.scss";
@@ -37,7 +37,6 @@ export default function Projects() {
   } = useAppSelector((state) => state.otherProjectManager);
   const [glide, setGlide] = useState<Glide | null>(null);
 
-
   function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
@@ -60,13 +59,11 @@ export default function Projects() {
         type: "carousel",
         perView: 1,
         autoplay: 5000,
-        hoverpause: true
-
+        hoverpause: true,
       });
       addDeviceEvent(tmpGlide);
       setGlide(tmpGlide);
     }
-
   }, []);
 
   const fetchOutstandingProjectsAsync = useCallback(async () => {
@@ -210,7 +207,7 @@ export default function Projects() {
                                 <br />
                                 {`(Click this slide to see the details)`}
                               </h3>
-                              <p>{project[1].description}</p>
+                              <p dangerouslySetInnerHTML={{ __html: project[1].description }}></p>
                               <h4>Skills</h4>
                               <ol>
                                 {project[1].skills.map((skill, index) => {
@@ -310,11 +307,15 @@ export default function Projects() {
                                 ? project[1].title.slice(0, 30) + "..."
                                 : project[1].title}
                             </h4>
-                            <p className="project__excerpt">
-                              {project[1].excerpt.length > 250
-                                ? project[1].excerpt.slice(0, 250) + "..."
-                                : project[1].excerpt}
-                            </p>
+                            <p
+                              className="project__excerpt"
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  project[1].excerpt.length > 250
+                                    ? project[1].excerpt.slice(0, 250) + "..."
+                                    : project[1].excerpt,
+                              }}
+                            ></p>
                           </div>
                         </div>
                         <div className="project__link-cover">
