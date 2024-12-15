@@ -37,7 +37,7 @@ export default function Skills() {
    */
 
   const addDeviceEvent = useCallback((tmpGlide: Glide | null) => {
-    tmpGlide?.mount({ Controls, Breakpoints, Swipe, Keyboard });
+    tmpGlide?.mount({ Controls, Breakpoints, Swipe, Keyboard }).play();
   }, []);
 
   function clickSkill(skill: Skill, index: number) {

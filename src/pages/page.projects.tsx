@@ -2,6 +2,7 @@ import Glide, {
   Controls,
   Breakpoints,
   Swipe,
+  Autoplay
 } from "@glidejs/glide/dist/glide.modular.esm";
 import { useCallback, useEffect, useRef, useState } from "react";
 import "material-icons/iconfont/material-icons.scss";
@@ -35,14 +36,7 @@ export default function Projects() {
     currentPage,
   } = useAppSelector((state) => state.otherProjectManager);
   const [glide, setGlide] = useState<Glide | null>(null);
-  const [intervalEvent, setIntervalEvent] = useState<NodeJS.Timeout | null>(
-    null
-  );
 
-  const swipeInterval = () => {
-    const arrowRight = document.querySelector(".glide__arrow--right");
-    arrowRight?.dispatchEvent(new Event("click"));
-  };
 
   function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -54,9 +48,9 @@ export default function Projects() {
     console.log(isMobile());
     if (isMobile()) {
       document.querySelector(".glide__arrows")?.classList.add("hidden");
-      tmpGlide?.mount({ Controls, Breakpoints, Swipe }).play();
+      tmpGlide?.mount({ Controls, Breakpoints, Swipe, Autoplay }).play(5000);
     } else {
-      tmpGlide?.mount({ Controls, Breakpoints }).play();
+      tmpGlide?.mount({ Controls, Breakpoints, Autoplay }).play(5000);
     }
   }, []);
 
@@ -65,14 +59,14 @@ export default function Projects() {
       const tmpGlide = new Glide(".glide", {
         type: "carousel",
         perView: 1,
+        autoplay: 5000,
+        hoverpause: true
+
       });
       addDeviceEvent(tmpGlide);
       setGlide(tmpGlide);
     }
 
-    if (!intervalEvent) {
-      setIntervalEvent(setInterval(swipeInterval, 7000));
-    }
   }, []);
 
   const fetchOutstandingProjectsAsync = useCallback(async () => {

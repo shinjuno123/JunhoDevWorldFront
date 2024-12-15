@@ -40,17 +40,22 @@
             padding: 0rem 0 5rem;
 
             .skill__block {
+                display: block;
                 border: none;
                 color: var(--reversed-text-color);
-                padding: .2rem .5rem;
+                padding: .2rem .5rem .3rem;
                 border-radius: $standard-border-radius;
                 background-color: var(--primary-color);
                 width: fit-content;        
                 font-weight: bold;
             }
 
+            .skill__block.active {
+                background-color: var(--supplementary-color3);
+            }
+
             .skill__block:hover {
-                background-color: var(--secondary-color);
+                background-color: var(--supplementary-color3);
             }
         }
 
@@ -127,15 +132,23 @@
             font-weight: bolder;
             font-size: $font-size-1; 
             border-radius: $standard-border-radius;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             
             i {
+                position: relative;
                 display: block;
                 font-size: 1rem; 
                 transform: rotate(-90deg);
                 margin-bottom: .1rem;
+                height: fit-content;
+                width: fit-content;
             }
 
             span {
+                position: relative;
                 display: block;
             }
         }
@@ -258,7 +271,8 @@
         }
 
         >p {
-            font-size: $font-size-2;
+            font-size: $font-size-1;
+            text-align: center;
         }
     
         .skills {
