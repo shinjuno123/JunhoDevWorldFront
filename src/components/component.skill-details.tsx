@@ -39,15 +39,32 @@ const SkillDetails = forwardRef<
 
 
   const countUpHandler = useCallback(() => {
-    if (_props.proficiency >= countUp) return;
-    setCountUp(countUp + 1);
+    if (countUp > _props.proficiency) {
+      setCountUp(countUp - 1);
+      return;
+    }
+
+    if (countUp === _props.proficiency) return; 
+
+    if (_props.proficiency >= countUp) {
+      setCountUp(countUp + 1);
+      return;
+    }
+  
   },[_props.proficiency, countUp]);
 
   useEffect(() => {
-    setTimeout(() => {
+
+    const countUpHandle = setInterval(() => {
       countUpHandler();
-    }, 5)
-  },[countUpHandler]);
+
+      if (countUp >= _props.proficiency) return clearInterval(countUpHandle);
+    }, 30);
+
+    return () => {
+      clearInterval(countUpHandle);
+    }
+  },[_props.proficiency, countUp, countUpHandler]);
 
   return (
     <>

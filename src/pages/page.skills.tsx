@@ -214,6 +214,7 @@ export default function Skills() {
             display: window.location.href.endsWith("/about/skills")
               ? "block"
               : "none",
+              marginTop: "3rem",
           }}
         >
           <NextPage />

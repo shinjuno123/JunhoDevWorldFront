@@ -193,8 +193,10 @@
                 }
 
                 h4 {
-                    font-size: $font-size-2;
+                    font-size: $font-size-1;
                     width: 100%;
+                    word-wrap: break-word;
+                    word-break:break-all;
                 }
             }
 
@@ -325,6 +327,10 @@
                 .company-logo {
                     img {
                         width: 5rem;
+                    }
+
+                    h4 {
+                        font-size: $font-size-0;
                     }
                 }
                 .experience-description {

@@ -43,7 +43,7 @@ export default function History() {
                     <span>{history[1].date}</span>
                   </span>
                   <section className="description">
-                    <span>{history[1].title}</span>
+                    <span dangerouslySetInnerHTML={{ __html: history[1].title }}></span>
                   </section>
                 </li>
 

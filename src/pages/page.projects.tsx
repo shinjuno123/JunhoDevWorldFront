@@ -146,6 +146,7 @@ export default function Projects() {
             display: window.location.href.endsWith("/about/projects")
               ? "block"
               : "none",
+              width: "fit-content",
           }}
         >
           <PreviousPage />
