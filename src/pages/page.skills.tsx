@@ -117,11 +117,13 @@ export default function Skills() {
       .then((data) => {
         const skillResponse = data.payload as SkillResponse;
         if (skillResponse.skills.length) {
-          const skills = Object.entries(skillResponse.skills).sort((a, b) => a[1].id - b[1].id);
-          if(skills.length) {
+          const skills = Object.entries(skillResponse.skills).sort(
+            (a, b) => a[1].id - b[1].id
+          );
+          if (skills.length) {
             setCurrentSkill(skills[0][1]);
           }
-        } 
+        }
 
         return data;
       })
@@ -149,29 +151,31 @@ export default function Skills() {
           <PreviousPage />
         </div>
         <h1>Skill Summary</h1>
-        <p>Please click each of skills below to see the details</p>
+        <p>Please drag or click side buttons to slide below</p>
 
         <div className="glide">
           <div className="glide__track" data-glide-el="track">
             <ul className="glide__slides">
-              {Object.entries(skills).sort((a, b) => a[1].id - b[1].id).map((skill) => {
-                return (
-                  <li
-                    className="glide__slide"
-                    key={skill[1].id}
-                    data-skill-id={skill[1].id}
-                  >
-                    <img src={skill[1].icon} alt={skill[1].name} />
-                    <h2>{skill[1].name}</h2>
-                    <hr />
-                    <p>
-                      {skill[1].description.length > 80
-                        ? skill[1].description.slice(0, 80) + "..."
-                        : skill[1].description}
-                    </p>
-                  </li>
-                );
-              })}
+              {Object.entries(skills)
+                .sort((a, b) => a[1].id - b[1].id)
+                .map((skill) => {
+                  return (
+                    <li
+                      className="glide__slide"
+                      key={skill[1].id}
+                      data-skill-id={skill[1].id}
+                    >
+                      <img src={skill[1].icon} alt={skill[1].name} />
+                      <h2>{skill[1].name}</h2>
+                      <hr />
+                      <p>
+                        {skill[1].description.length > 80
+                          ? skill[1].description.slice(0, 80) + "..."
+                          : skill[1].description}
+                      </p>
+                    </li> 
+                  );
+                })}
             </ul>
           </div>
           <div className="glide__arrows" data-glide-el="controls">
@@ -192,13 +196,19 @@ export default function Skills() {
 
         <div className="skills">
           <div className="skill-blocks">
-            {Object.entries(skills).sort((a, b) => a[1].id - b[1].id).map((skill, index) => {
-              return (
-                <button onClick={() => clickSkill(skill[1], index)} className={`skill__block ${skill[1].id === currentSkill.id ? "active" : ""}`} key={skill[1].id}>
-                  {skill[1].name}
-                </button>
-              );
-            })}
+            {Object.entries(skills)
+              .sort((a, b) => a[1].id - b[1].id)
+              .map((skill, index) => {
+                return (
+                  <button
+                    onClick={() => clickSkill(skill[1], index)}
+                    className={`skill__block ${skill[1].id === currentSkill.id ? "active" : ""}`}
+                    key={skill[1].id}
+                  >
+                    {skill[1].name}
+                  </button>
+                );
+              })}
           </div>
           <SkillDetails
             ref={skillDetailsRef}
@@ -206,15 +216,18 @@ export default function Skills() {
             skillName={currentSkill.name}
             description={currentSkill.description}
             proficiency={currentSkill.proficiency}
+            currentSkill={currentSkill}
           ></SkillDetails>
         </div>
+
+      
 
         <div
           style={{
             display: window.location.href.endsWith("/about/skills")
               ? "block"
               : "none",
-              marginTop: "3rem",
+            marginTop: "3rem",
           }}
         >
           <NextPage />

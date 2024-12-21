@@ -231,6 +231,22 @@
             }
         }
     }
+
+    .project-glide {
+        position: relative;
+        width: 100%;
+        height: 10rem;
+        .glide__track {
+            position: relative;
+            width: 100%!important;
+            height: 100%!important;
+            .glide__slides {
+                position: relative;
+                height: 100%!important;
+            }
+        }
+
+    }
 }
 
 

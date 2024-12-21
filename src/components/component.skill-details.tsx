@@ -1,4 +1,10 @@
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
+import { Skill } from "../features/skills/skills.slice";
+import { useAppSelector } from "../app/hooks";
+import store from "../app/store";
+import {
+  fetchProjects, emptyProjects
+} from "../features/project/projects.slice";
 
 export type SkillDetailsControl = {
   scrollToDetails: () => void;
@@ -13,11 +19,13 @@ const SkillDetails = forwardRef<
     skillName: string;
     description: string;
     proficiency: number;
+    currentSkill: Skill;
   }
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 >((_props, _) => {
   const skillDetailsRef = useRef<HTMLDivElement>(null);
   const [countUp, setCountUp] = useState(0);
+  const {projects} = useAppSelector((state) => state.projectManager);
 
   /**
    * Scrolls the window to the top smoothly. This is intended to be
@@ -55,16 +63,24 @@ const SkillDetails = forwardRef<
 
   useEffect(() => {
 
-    const countUpHandle = setInterval(() => {
+    const countUpHandle = setTimeout(() => {
       countUpHandler();
 
       if (countUp >= _props.proficiency) return clearInterval(countUpHandle);
-    }, 30);
+    }, 20);
 
     return () => {
-      clearInterval(countUpHandle);
+      clearTimeout(countUpHandle);
     }
   },[_props.proficiency, countUp, countUpHandler]);
+
+  useEffect(() => {
+    store.dispatch(emptyProjects());
+    store.dispatch(fetchProjects({skillId: _props.currentSkill.id}));
+  
+    return;
+  }, [_props.currentSkill])
+
 
   return (
     <>
@@ -77,6 +93,17 @@ const SkillDetails = forwardRef<
             className="skill-details__description"
             dangerouslySetInnerHTML={{ __html: _props.description }}
           ></p>
+          <hr />
+          <h4>Related Projects</h4>
+          <ul>
+            {Object.entries(projects).sort((a, b) => a[1].id - b[1].id).map((project) => {
+              return (
+                <li key={project[1].id}>
+                  <a href={`${project[1].github_link}`} target="_blank">{project[1].title}</a>
+                </li>
+              )
+            })}
+          </ul>
         </div>
         <button type="button" className="to-top" onClick={toTop}>
           <i className="material-icons">arrow_forward_ios</i>
