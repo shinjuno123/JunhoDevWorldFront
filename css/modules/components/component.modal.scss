@@ -36,7 +36,7 @@
             border-radius: 5px;
             text-align: center;
             transform: translateY(-1rem);
-            font-size: $font-size-3;
+            font-size: $font-size-1;
             width: 100%;
         }
 
@@ -96,7 +96,8 @@
             height: 100%;
             border-radius: 5px;
             text-align: center;
-            font-size: $font-size-3;
+            font-size: $font-size-1;
+            font-weight: bold;
 
             span {
                 position: relative;
@@ -112,12 +113,33 @@
             color: var(--reversed-text-color);
             padding: .5rem 5em;
             transform: translateY(1rem);
-            font-size: $font-size-3;
+            font-size: $font-size-1;
             transition: opacity .2s ease-in-out;
+            font-weight: bold;
         }
 
         .modal__button:hover {
             opacity: .5;
+        }
+    }
+}
+
+@media screen and (max-width: $small-screen) {
+    .modal.open {
+
+    
+        .modal__inner {
+
+    
+            
+    
+            .modal__message {
+
+                font-size: $font-size-0;
+
+            }
+    
+    
         }
     }
 }

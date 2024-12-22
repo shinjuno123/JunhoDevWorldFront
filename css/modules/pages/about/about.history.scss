@@ -3,9 +3,15 @@
     align-items: center;
 
     h2 {
-        padding: 4rem 0 2rem;
-        line-height: 3;
+        padding-top: 4rem;
+        line-height: 2;
         font-size: $font-size-6;
+    }
+
+    p {
+        line-height: 2;
+        font-size: $font-size-3;
+        padding-bottom: 4rem;
     }
 
 
@@ -87,6 +93,7 @@
                 position: relative;
                 padding: 0 .1rem;
                 width: 80%;
+
                 .record__month-year {
                     position: relative;
                     display: flex!important;
@@ -107,8 +114,34 @@
                     }
                 }
 
+                .description:hover {
+                    background-color: var(--supplementary-color4);
+                }
+                .description:hover::after {
+                    background-color: var(--supplementary-color4);
+                }
+
+                .description.active {
+                    background-color: var(--supplementary-color4);
+                }
+
+                .description.active::after {
+                    background-color: var(--supplementary-color4);
+                }
+
+
+                .description:hover::after {
+                    background-color: var(--supplementary-color4);
+                }
+
+                .description::after {
+                    transition: all .5s ease-in-out;
+                    cursor: pointer;
+                }
+
                 .description {
                     position: absolute;
+                    cursor: pointer;
                     width: 20rem;
                     max-width: 15rem;
                     top: 0;
@@ -116,6 +149,7 @@
                     text-align: center;
                     padding: .5rem;
                     color: var(--reversed-text-color);
+                    transition: all .5s ease-in-out;
 
 
 
@@ -240,6 +274,14 @@
     .about__section>.about__history {
         width: 95%;
 
+        h2 {
+            font-size: $font-size-4;
+        }
+    
+        p {
+            font-size: $font-size-2;
+        }
+
 
 
         .records {
@@ -317,6 +359,7 @@
     .about__section>.about__history>h2 {
         font-size: $font-size-6;
     }
+    
 
 
     .about__history>.work-experience {
@@ -346,6 +389,16 @@
     
                 }
             }
+        }
+    }
+
+    .about__section>.about__history {
+        h2 {
+            font-size: $font-size-3;
+        }
+    
+        p {
+            font-size: $font-size-1;
         }
     }
 
