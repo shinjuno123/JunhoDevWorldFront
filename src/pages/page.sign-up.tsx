@@ -68,7 +68,7 @@ export function SignUp() {
         if (status.is_success) {
             setTimeout(()=> {
                 store.dispatch(setStatus({payload: {is_success: false, message: ''}}))
-                modal.current?.openModal();
+                modal.current?.openModal('Message', 'Account was created successfully!', '/sign-in');
             }, 3000);
         }
 

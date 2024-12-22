@@ -31,7 +31,7 @@ export function SignIn() {
                 const authKey = localStorage.getItem("auth_key");
                 
                 if (authKey) {
-                    modal.current?.openModal();
+                    modal.current?.openModal('Message', 'Login successful!', '/');
                 }
             });
     }
