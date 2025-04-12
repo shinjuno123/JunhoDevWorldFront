@@ -4,17 +4,7 @@
     font-family: "Lato", sans-serif;
     font-weight: 500;
     word-spacing: .23rem;
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: "Abril Fatface", serif;
-        font-weight: 600 !important;
-        letter-spacing: .1rem;
-    }
+    width: 100%;
 
     p {
         line-height: 1.7;
@@ -23,24 +13,62 @@
     }
 
     .wp-block-heading {
-        line-height: .5;
-        margin-bottom: $paragraph-margin;
+        line-height: 3;
+    }
+
+    .wp-block-list {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: .2rem;
+        padding: 0rem 1rem 1.5rem;
+    }
+
+    ul.wp-block-list {
+        list-style: disc;
+    }
+
+    ol.wp-block-list {
+        list-style: decimal;
     }
 
     .wp-block-image {
-        margin: .5rem 1.5rem;
+        position: relative;
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+        text-align: center;
+        padding: 1.5rem 0;
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .wp-block-image.size-full img{
+        width: 100%!important;
     }
 
     .wp-block-image.aligncenter {
-        text-align: center;
+        text-align: center!important;
+
+        img {
+            width: 60%!important;
+        }
     }
 
     .wp-block-image.alignright {
-        float: left;
+        text-align: right!important;
+        img {
+            width: 60%!important;
+        }
     }
 
     .wp-block-image.alignleft {
-        float: right;
+        text-align: left!important;
+        img {
+            width: 60%!important;
+        }
     }
 
     ul {
@@ -51,18 +79,31 @@
         }
     }
 
+    .wp-block-code {
+        box-sizing: border-box;
+        font-size: $font-size-1;
+
+        code {
+            position: relative;
+            border-radius: $standard-border-radius;
+            background-color: #f1f1f1!important;
+            overflow: auto;
+        }
+    }
+
 
     blockquote {
-        font-size: 1rem;
+        font-size: $font-size-1;
         margin: auto auto;
         font-family: Open Sans;
         font-style: italic;
-        color: #555555;
+        color: var(--backquote-color);
         padding: 1.2em 30px 1.2em 75px;
-        border-left: 8px solid #78C0A8;
+        border-left: 8px solid var(--backquote-border);
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
         line-height: 1.6;
         position: relative;
-        background: #EDEDED;
+        background: var(--reversed-text-color);
 
         p {
             margin-bottom: .1rem;
@@ -76,8 +117,8 @@
     blockquote::before {
         font-family: Arial;
         content: "\201C";
-        color: #78C0A8;
-        font-size: 4em;
+        color:  var(--backquote-border);
+        font-size: $font-size-5;
         position: absolute;
         left: 10px;
         top: -10px;
@@ -89,7 +130,7 @@
 
     blockquote span {
         display: block;
-        color: #333333;
+        color: var(--backquote-span);
         font-style: normal;
         font-weight: bold;
         margin-top: 1em;
@@ -119,6 +160,31 @@
 
 @media (max-width: $small-screen) {
     .selected-post__content {
+        h2 {
+            font-size: $font-size-2;
+        }
+
+        h3 {
+            font-size: $font-size-1;
+        }
+
+        h4 {
+            font-size: $font-size-1;
+        }
+
+        p {
+            font-size: $font-size-0;
+        }
+
+        .wp-block-list {
+            padding: 0rem 1rem;
+
+            li {
+                font-size: $font-size-1;
+            }
+        }
+    
+
         .wp-block-image {
             margin: 0 .5rem;
         }

@@ -1,7 +1,7 @@
 .custom-select {
     position: relative;
     font-family: $font-family-display;
-    font-size: $font-size-2;
+    font-size: $font-size-1;
     padding: 2rem 0;
 }
 
@@ -11,7 +11,7 @@
 
 .select-selected {
     position: relative;
-    background-color: $primary-color;
+    background-color: var(--primary-color);
     width: 12rem;
     border: none;
 }
@@ -26,29 +26,29 @@
     width: 0;
     height: 0;
     border: 6px solid transparent;
-    border-color: $reversed-text-color transparent transparent transparent;
+    border-color: var(--reversed-text-color) transparent transparent transparent;
 }
 
 .select-selected.active:after {
-    border-color: transparent transparent $reversed-text-color transparent;
+    border-color: transparent transparent var(--reversed-text-color) transparent;
     top: 7px;
 }
 
 .select-items div,.select-selected {
-    color: $reversed-text-color;
+    color: var(--reversed-text-color);
     padding: .6rem 0;
-    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    border-color: transparent transparent rgba($color: var(--text-color), $alpha:0.1) transparent;
     cursor: pointer;
 
   }
 
 .select-items .active {
-    background-color: $supplementary-color3;
+    background-color: var(--supplementary-color3);
 }
 
 .select-items {
     position: absolute;
-    background-color: $secondary-color;
+    background-color: var(--secondary-color);
     left: 0;
     right: 0;
     z-index: 99;
@@ -60,5 +60,12 @@
 }
 
 .select-items div:hover, .same-as-selected {
-    background-color: rgba($color: $supplementary-color3, $alpha: .7);
-  }
+    background-color: rgba($color: var(--supplementary-color3), $alpha: .7);
+}
+
+
+@media screen and (max-width: $small-screen) {
+    .custom-select {
+        font-size: $font-size-0;
+    }
+}

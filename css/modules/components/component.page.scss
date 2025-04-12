@@ -5,16 +5,16 @@
     align-items: center;
     animation-name: fade-in;
     animation-duration: .5s;
+    margin-top: .1rem;
 }
 
 .blog-page {
     display: block;
     border-radius: 20px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-    margin: 3.5em 0;
-    padding-top: 5.5rem;
-    width: 45em;
-    background: white;
+    padding-top: 3.5rem;
+    width: 100%;
+    background: var(--background-color);
 }
 
 .blog-page__header {
@@ -51,14 +51,14 @@
 }
 
 .post__list {
-    width: 40em;
+    width: 90%;
 }
 
 
 .post {
     display: block;
     margin-block-end: 5.5rem;
-    border-bottom: 1px $supplementary-color2 solid;
+    border-bottom: 1px var(--supplementary-color2) solid;
     padding-bottom: 1.5rem;
 
     .post__category {
@@ -66,7 +66,7 @@
     }
 
     .post__category:hover {
-        color: rgba($color: $primary-color, $alpha: .5);
+        color: rgba($color: var(--primary-color), $alpha: .5);
     }
 }
 
@@ -75,29 +75,29 @@
 
 .post__link {
     display: block;
-    font-size: $font-size-6;
+    font-size: $font-size-4;
     font-weight: bold;
     margin-block-end: .2em;
-    color: $primary-color;
+    color: var(--primary-color);
     cursor: pointer;
 }
 
 .post__link:hover {
-    color: $secondary-color;
+    color: var(--secondary-color);
 }
 
 .post__date-category {
     display: block;
-    font-size: $font-size-3;
+    font-size: $font-size-1;
     margin-block-end: 2em;
-    color: $primary-color;
+    color: var(--primary-color);
     letter-spacing: 1.3px;
 }
 
 .post__excerpt {
     display: block;
     line-height: 2;
-    font-size:  $font-size-3;
+    font-size:  $font-size-2;
 }
 
 
@@ -144,15 +144,8 @@
 }
 
 
-
-
-
-
-
-
 @media (max-width: $medium-screen) {
     .blog-page {
-        margin: 1.5rem .5rem;
         width: 100%;
     }
 
@@ -167,18 +160,18 @@
 
 
     .blog-page__header {
-        font-size: $font-size-8;
+        font-size: $font-size-5;
     }
 
     .post__link {
-        font-size: $font-size-4;
+        font-size: $font-size-3;
     }
 
     .post__date-category {
-        font-size: $font-size-2;
+        font-size: $font-size-1;
     }
 
     .post__excerpt {
-        font-size: $font-size-2;
+        font-size: $font-size-1;
     }
 }

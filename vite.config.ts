@@ -11,6 +11,10 @@ export default defineConfig(({ command }) => {
   } else {
     return {
       plugins: [react()],
+      esbuild: {
+        pure: ['console.log']
+      }
     }
   }
+
 })

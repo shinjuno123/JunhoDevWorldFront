@@ -57,7 +57,7 @@ canvas.loading__off {
     overflow-y: scroll;
     padding: 0;
     width: 100%;
-    background-color: $background-color;
+    background-color: var(--background-color);
     min-height: 100vh;
     top: 0;
     z-index: 102;
@@ -71,7 +71,6 @@ canvas.loading__off {
     position: relative;
     display: flex;
     justify-content: center;
-    padding: 1.5rem 0 5rem 0;
     transition: all 1s ease;
 
     section.local-page {
@@ -125,7 +124,7 @@ canvas.loading__off {
 
         .card {
             width: 60%;
-            background-color: $background-color;
+            background-color: var(--background-color);
             padding: 3rem;
             border-radius: 5px;
             box-shadow: 14px 14px 60px -10px rgba(0, 0, 0, 0.3019607843);
@@ -141,7 +140,7 @@ canvas.loading__off {
                     position: relative;
                     display: inline;
                     float: right;
-                    width: 10%;
+                    width: 8rem;
 
                     img {
                         position: relative;
@@ -149,7 +148,7 @@ canvas.loading__off {
                         border-radius: 5px;
                         box-shadow: 7px 7px 60px -10px rgba(0, 0, 0, 0.7);
                         object-fit: cover;
-                        border: 1px solid $primary-color;
+                        border: 1px solid var(--primary-color);
                         border-radius: 5px;
                     }
                 }
@@ -171,11 +170,11 @@ canvas.loading__off {
             align-items: center;
             border: none;
             background: none;
-            transition: background-color .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+            transition: var(--background-color) .5s cubic-bezier(0.075, 0.82, 0.165, 1);
             height: 5rem;
             padding: 1rem;
             border-radius: 5px;
-            color: $text-color;
+            color: var(--text-color);
         }
 
         a>i {
@@ -184,18 +183,18 @@ canvas.loading__off {
             transform: rotate(90deg);
             width: fit-content;
             transition: transform .2s ease;
-            color: $secondary-color;
+            color: var(--secondary-color);
             font-weight: bold;
         }
 
         a:hover {
-            background-color: $text-disabled-color;
-            color: $reversed-text-color;
+            background-color: var(--text-disabled-color);
+            color: var(--reversed-text-color) ;
         }
 
         a:hover>i {
             transform: rotate(90deg) translateX(-10px);
-            color: $reversed-text-color;
+            color: var(--reversed-text-color);
         }
 
         a>span {
@@ -218,7 +217,7 @@ canvas.loading__off {
             height: 5rem;
             padding: 1rem;
             border-radius: 5px;
-            color: $text-color;
+            color: var(--text-color);
         }
 
         a>i {
@@ -226,12 +225,12 @@ canvas.loading__off {
             transform: rotate(90deg);
             width: fit-content;
             transition: transform .2s ease;
-            color: $secondary-color;
+            color: var(--secondary-color);
         }
 
         a:hover {
-            background-color: $text-disabled-color;
-            color: $reversed-text-color;
+            background-color: var(--text-disabled-color);
+            color: var(--reversed-text-color);
         }
 
         a:hover>i {
@@ -258,14 +257,15 @@ canvas.loading__off {
     }
 
     .about__section {
-        width: 95%;
         position: relative;
         margin: auto;
         display: flex;
         justify-content: center;
         padding: 1.5rem 0 5rem 0;
+        width: 100%;
 
         .about__intro {
+            width: 90%;
             h1 {
                 font-size: $font-size-5;
             }
@@ -278,7 +278,7 @@ canvas.loading__off {
             }
 
             .card>.card__intro>.card__sentence {
-                font-size: $font-size-2;
+                font-size: $font-size-1;
             }
         }
     }

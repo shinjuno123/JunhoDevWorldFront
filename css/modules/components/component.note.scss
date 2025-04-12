@@ -1,6 +1,6 @@
 .section__notes {
     max-width: 40em;
-    margin: 4rem auto 10rem auto;
+    margin: 0 auto 0rem auto;
 
     .notes__header {
         display: block;
@@ -18,7 +18,7 @@
         gap: 10rem 0;
 
         .note {
-            background: white;
+            background: var(--background-color);
             position: relative;
             -webkit-box-sizing: border-box;
             /* Safari/Chrome, other WebKit */
@@ -29,12 +29,13 @@
             border-radius: 20px;
             padding: 2rem 3rem;
             box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+            height: fit-content;
 
             .note__header {
                 display: flex;
                 align-items: center;
                 gap: 0 20px;
-                margin-block-end: 4rem;
+                margin-block-end: .5rem;
 
                 .note-profile__image {
                     max-width: 3rem;
@@ -58,7 +59,7 @@
 
             .note__main {
                 line-height: 2;
-                margin-block-end: 5rem;
+                margin-block-end: 1rem;
 
                 figure {
                     width: 100%;
@@ -102,7 +103,7 @@
                         align-items: center;
                         gap: .5rem;
                         background-color: transparent;
-                        color: $text-color;
+                        color: var(--text-color);
                         border: none;
 
                         i.fa-solid {
@@ -136,7 +137,7 @@
                 }
 
                 .comment__header-hr {
-                    border: 1px $supplementary-color2 solid;
+                    border: 1px var(--supplementary-color2) solid;
                     margin-bottom: 1rem;
                 }
 
@@ -153,8 +154,8 @@
                     }
 
                     .your-comment__textarea {
-                        background-color: $background-color;
-                        color: $text-color;
+                        background-color: var(--background-color);
+                        color: var(--text-color);
                         font-size: $font-size-2;
                         width: 80%;
                         max-width: 80%;
@@ -167,15 +168,15 @@
                         font-size: $font-size-1;
                         width: 10%;
                         height: 2.5rem;
-                        background-color: $primary-color;
-                        color: $reversed-text-color;
+                        background-color: var(--primary-color);
+                        color: var(--reversed-text-color);
                         border: none;
                         border-radius: 5px;
 
                     }
 
                     .your-comment__submit:hover {
-                        background-color: $secondary-color;
+                        background-color: var(--secondary-color);
                     }
                 }
 
@@ -200,16 +201,16 @@
 
                     hr {
                         width: 100%;
-                        border: 1px $supplementary-color2 solid;
+                        border: 1px var(--supplementary-color2) solid;
                     }
                 }
             }
 
 
-            ::after {
+            .note-profile::after {
                 content: "";
                 position: absolute;
-                background-color: $supplementary-color2;
+                background-color: var(--supplementary-color2);
                 left: 50%;
                 transform: translateX(-50%);
                 bottom: calc(0% - 10rem - 1px);
@@ -224,12 +225,14 @@
     }
 }
 
+
 @media screen and (max-width:$small-screen) {
     .section__notes {
         width: 100%;
+        margin: 0 auto 6rem auto;
 
         .notes__header {
-            font-size: $font-size-7;
+            font-size: $font-size-6;
         }
 
         .notes {
@@ -244,23 +247,24 @@
                 box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
                 .note__header {
-                    font-size: $font-size-2;
+                    font-size: $font-size-1;
                     width: auto;
                 }
 
                 .note__main {
-                    font-size: $font-size-2;
+                    font-size: $font-size-1;
+                    line-height: 1.7;
                 }
 
                 .note__footer {
-                    font-size: $font-size-2;
+                    font-size: $font-size-1;
                 }
 
                 .comment__section {
 
 
                     .comment__header {
-                        font-size: $font-size-2;
+                        font-size: $font-size-1;
 
 
 
@@ -282,7 +286,7 @@
                     }
 
                     .note-comments {
-                        font-size: $font-size-2;
+                        font-size: $font-size-1;
 
                     }
 

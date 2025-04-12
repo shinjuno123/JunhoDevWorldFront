@@ -153,12 +153,14 @@ export default function Writing() {
 
                 <li
                   style={{
-                    display: delayLoadingActivated? "block" : "none",
+                    display: delayLoadingActivated? "flex" : "none",
+                    width: "100%",
+                    height: "2.5rem",
                     paddingBottom: "5rem",
-                    textAlign: "center",
+                    justifyContent: "center"
                   }}
                 >
-                  <ClipLoader></ClipLoader>
+                  <ClipLoader color="var(--text-color)"></ClipLoader>
                 </li>
               </ul>
             </div>

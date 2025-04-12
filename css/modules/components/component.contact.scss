@@ -1,0 +1,196 @@
+.contact {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .hide {
+        display: none;
+    }
+
+    .contact__inner {
+        position: relative;
+        border-radius: $standard-border-radius;
+        padding: 5rem 10%;
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+
+        h1,
+        h3 {
+            text-align: center;
+        }
+
+
+        h3 {
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+
+        form {
+            display: flex;
+            flex-direction: column;
+
+            .field {
+                p {
+                    line-height: 2.2;
+                    color: rgb(209, 21, 21);
+                    font-weight: bold;
+                    font-size: $font-size-1;
+                    min-height: 2.2rem;
+                }
+                label {
+                    display: block;
+                    font-size: $font-size-2;
+                    line-height: 2;
+                    font-weight: bolder;
+                }
+
+                input,
+                textarea {
+                    padding: .5rem .5rem;
+                    display: block;
+                    width: 100%;
+                    max-width: 100%;
+                    min-width: 100%;
+                    letter-spacing: -.5px;
+                    border: none;
+                    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+                    box-sizing: border-box;
+                    border-radius: $standard-border-radius;
+                }
+
+                input {
+                    font-size: $font-size-1;
+                }
+
+                textarea {
+                    font-size: $font-size-1;
+                    min-height: 10rem;
+                }
+
+                input:focus-visible,
+                textarea:focus-visible {
+                    outline: none;
+                    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+                }
+
+            }
+
+            .button {
+                width: 100%;
+                padding: 2rem 0;
+
+                button {
+                    width: 100%;
+                    padding: 0;
+                    border: none;
+                    line-height: 2.3;
+                    border-radius: $standard-border-radius;
+                    box-sizing: border-box;
+                    color: var(--text-color);
+                    font-weight: bold;
+                    background-color: var(--secondary-color);
+                }
+
+                button:hover {
+                    background-color: var(--primary-color);
+                }
+            }
+        }
+    }
+
+    .greeting {
+        position: relative;
+        border-radius: $standard-border-radius;
+        padding: 8rem 10% 5rem 10%;
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+
+        h1 {
+            line-height: 2;
+        }
+
+        h3 {
+            line-height: 1.5;
+        }
+
+        .button {
+            width: 100%;
+            padding: 4rem 0;
+
+            button {
+                width: 100%;
+                border: none;
+                line-height: 2.3;
+                border-radius: $standard-border-radius;
+                box-sizing: border-box;
+                color: var(--text-color);
+                font-weight: bold;
+                background-color: var(--secondary-color);
+            }
+
+            button:hover {
+                background-color: var(--primary-color);
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: $small-screen) {
+    .contact {
+        .contact__inner {
+            h1 {
+                font-size: $font-size-6;
+            }
+
+
+            h3 {
+                font-size: $font-size-3;
+            }
+
+
+            form {
+
+
+                .field {
+
+                    label {
+                        font-size: $font-size-2;
+                    }
+
+
+                    input {
+                        font-size: $font-size-1;
+                    }
+
+                    textarea {
+                        font-size: $font-size-1;
+                    }
+
+
+                }
+
+                .button {
+
+                    button {
+                        font-size: $font-size-1;
+                    }
+
+                }
+            }
+        }
+
+
+        .greeting {
+    
+            h1 {
+                font-size: $font-size-4;
+            }
+    
+            h3 {
+                font-size: $font-size-2;
+            }
+    
+        }
+    }
+}

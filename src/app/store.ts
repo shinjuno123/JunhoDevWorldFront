@@ -14,6 +14,8 @@ import loginReducer from "../features/login/login.slice.ts";
 import logoutReducer from "../features/login/logout.slice.ts";
 import requestOauthReducer from "../features/login/request-oauth.slice.ts";
 import verifyGoogleAccessTokenSlice from "../features/login/verify-google-oauth.ts";
+import EmailSlice from "../features/email/email.slice.ts";
+import projectReducer from "../features/project/projects.slice.ts";
 
 export const store = configureStore({
     reducer: {
@@ -31,7 +33,9 @@ export const store = configureStore({
         loginManager: loginReducer,
         logoutManager: logoutReducer,
         requestOauthManager: requestOauthReducer,
-        verifyGoogleAccessTokenManager: verifyGoogleAccessTokenSlice
+        verifyGoogleAccessTokenManager: verifyGoogleAccessTokenSlice,
+        emailManager: EmailSlice,
+        projectManager: projectReducer,
     },
     middleware: (getDefaultMiddleware) => { 
         return getDefaultMiddleware();

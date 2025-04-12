@@ -8,7 +8,7 @@ interface AboutRouterState {
 }
 
 const initialState: AboutRouterState = {
-    params: ['','history','skills','projects'],
+    params: ['','history','skills','projects','contact'],
     previuosPageParam: '',
     nextPageParam: ''
 }

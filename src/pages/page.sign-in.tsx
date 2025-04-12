@@ -10,6 +10,12 @@ import Modal, { ModalControl } from "../components/component.modal";
 import { getOauthUrl } from "../features/login/request-oauth.slice";
 import InputModal, {InputModalControl} from "../components/component.input-modal";
 
+/**
+ * Handles login logic and redirection after login.
+ * @returns A SignIn component. This component renders a sign in form and handles the logic for the form, including
+ * login and sign-up redirections.
+ */
+
 export function SignIn() {
     const navigate = useNavigate();
     const { loading, status } = useAppSelector(state => state.loginManager);
@@ -25,7 +31,7 @@ export function SignIn() {
                 const authKey = localStorage.getItem("auth_key");
                 
                 if (authKey) {
-                    modal.current?.openModal();
+                    modal.current?.openModal('Message', 'Login successful!', '/');
                 }
             });
     }

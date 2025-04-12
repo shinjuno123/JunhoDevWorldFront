@@ -2,13 +2,9 @@ import Glide, {
   Controls,
   Breakpoints,
   Swipe,
+  Autoplay,
 } from "@glidejs/glide/dist/glide.modular.esm";
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "material-icons/iconfont/material-icons.scss";
 import { useAppSelector } from "../app/hooks";
 import store from "../app/store";
@@ -19,6 +15,10 @@ import {
   emptyOtherProjects,
 } from "../features/project/other-project.slice";
 import { ClipLoader } from "react-spinners";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import PreviousPage from "../components/component.previous-page-btn";
+import NextPage from "../components/component.next-page-btn";
+
 export default function Projects() {
   const [hover, setHover] = useState("");
   const glideRef = useRef(null);
@@ -36,43 +36,33 @@ export default function Projects() {
     currentPage,
   } = useAppSelector((state) => state.otherProjectManager);
   const [glide, setGlide] = useState<Glide | null>(null);
-  const [intervalEvent, setIntervalEvent] = useState<NodeJS.Timeout | null>(
-    null
-  );
-
-
-  const swipeInterval = () => {
-    const arrowRight = document.querySelector(".glide__arrow--right");
-    arrowRight?.dispatchEvent(new Event("click"));
-  };
 
   function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
   }
 
   const addDeviceEvent = useCallback((tmpGlide: Glide | null) => {
     console.log(isMobile());
     if (isMobile()) {
-      document.querySelector('.glide__arrows')?.classList.add('hidden');
-      tmpGlide?.mount({ Controls, Breakpoints, Swipe }).play();
+      document.querySelector(".glide__arrows")?.classList.add("hidden");
+      tmpGlide?.mount({ Controls, Breakpoints, Swipe, Autoplay }).play(5000);
     } else {
-      
-      tmpGlide?.mount({ Controls, Breakpoints }).play();
+      tmpGlide?.mount({ Controls, Breakpoints, Autoplay }).play(5000);
     }
-  },[])
+  }, []);
 
   const createGlide = useCallback(() => {
     if (!glide) {
       const tmpGlide = new Glide(".glide", {
         type: "carousel",
         perView: 1,
+        autoplay: 5000,
+        hoverpause: true,
       });
       addDeviceEvent(tmpGlide);
       setGlide(tmpGlide);
-    }
-
-    if (!intervalEvent) {
-      setIntervalEvent(setInterval(swipeInterval, 7000));
     }
   }, []);
 
@@ -104,11 +94,10 @@ export default function Projects() {
   }, []);
 
   const scrollTo = (element: HTMLDivElement) => {
-    const yOffset = 100; 
+    const yOffset = 100;
     const y = element.offsetTop + yOffset;
-    window.scrollTo({top: y, behavior: 'smooth'});  
-  }
-
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
 
   const clickNext = async () => {
     if (projects.current) scrollTo(projects.current);
@@ -134,7 +123,6 @@ export default function Projects() {
         nextPage: { activated: true, url: previousPageUrl },
       })
     );
-
   };
 
   const toPage = async (page: number) => {
@@ -153,6 +141,16 @@ export default function Projects() {
   return (
     <>
       <section className="project__page">
+        <div
+          style={{
+            display: window.location.href.endsWith("/about/projects")
+              ? "block"
+              : "none",
+              width: "fit-content",
+          }}
+        >
+          <PreviousPage />
+        </div>
         <section className="hero_projects local-page">
           <h1>Amazing Projects!</h1>
 
@@ -187,10 +185,12 @@ export default function Projects() {
                             <div
                               className={`slide__background ${hover}`}
                               style={{
+                                backgroundColor: "white",
                                 background: `url(${project[1].background}) no-repeat center center fixed`,
                                 backgroundSize: "cover",
                               }}
-                            >
+                            ></div>
+                            <div className="slide__background-after">
                               {hover === "hover" ? (
                                 <>
                                   <div>
@@ -208,7 +208,7 @@ export default function Projects() {
                                 <br />
                                 {`(Click this slide to see the details)`}
                               </h3>
-                              <p>{project[1].description}</p>
+                              <p dangerouslySetInnerHTML={{ __html: project[1].description }}></p>
                               <h4>Skills</h4>
                               <ol>
                                 {project[1].skills.map((skill, index) => {
@@ -294,18 +294,29 @@ export default function Projects() {
                       <li className="project">
                         <div className="project__info">
                           <div className="project__background">
-                            <img
+                            <LazyLoadImage
+                              effect="blur"
+                              height={"100%"}
+                              width={"100%"}
                               src={project[1].background}
                               alt={project[1].title}
                             />
                           </div>
                           <div className="project__description">
                             <h4 className="project__title">
-                              {project[1].title.length > 30? project[1].title.slice(0, 30) + "...": project[1].title}
+                              {project[1].title.length > 30
+                                ? project[1].title.slice(0, 30) + "..."
+                                : project[1].title}
                             </h4>
-                            <p className="project__excerpt">
-                              {project[1].excerpt.length > 250? project[1].excerpt.slice(0, 250) + "...": project[1].excerpt}
-                            </p>
+                            <p
+                              className="project__excerpt"
+                              dangerouslySetInnerHTML={{
+                                __html:
+                                  project[1].excerpt.length > 250
+                                    ? project[1].excerpt.slice(0, 250) + "..."
+                                    : project[1].excerpt,
+                              }}
+                            ></p>
                           </div>
                         </div>
                         <div className="project__link-cover">
@@ -356,6 +367,15 @@ export default function Projects() {
             </div>
           </div>
         </section>
+        <div
+          style={{
+            display: window.location.href.endsWith("/about/projects")
+              ? "block"
+              : "none",
+          }}
+        >
+          <NextPage />
+        </div>
       </section>
     </>
   );
