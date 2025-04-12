@@ -213,8 +213,7 @@
                 display: flex;
                 justify-content: left;
                 align-items: center;
-                
-                padding: .5rem;
+                padding: .5rem!important;
                 border-radius: 5px;
                 text-align: center;
                 background-color: var(--background-color);
@@ -231,6 +230,11 @@
                     width: 100%;
                     word-wrap: break-word;
                     word-break:break-all;
+
+                    p {
+                        padding: 0;
+                        line-height: 1.5;
+                    }
                 }
             }
 

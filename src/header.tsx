@@ -168,13 +168,17 @@ export default function Header() {
           <Link className="header__brand" to="/">
             <img
               className="header__avatar"
+              role="avatar"
+              aria-label="Avatar"
               src={adminInfo.avatarUrl}
-              alt={adminInfo.avatarUrl}
+              alt={"Avatar of Junho Shin"}
             ></img>
             <span className="header__info">
               <span>Junho Shin</span>
               <span className="header__verification">
-                <span className="material-icons">check</span>
+                <span className="material-icons"               
+                role="checkmark"
+                aria-label="checkmark">check</span>
               </span>
             </span>
           </Link>
@@ -185,6 +189,8 @@ export default function Header() {
             >
               <button
                 className={`iconbtn nav__togglebtn`}
+                role="menu-button"
+                aria-label="Menu Button"
                 onClick={() => {
                   if (isThemeColorControlOpen) {
                     setIsThemeColorControlOpen(false);
@@ -208,19 +214,6 @@ export default function Header() {
                 <ul className="nav__menu" id="nav__menu">
                   <li
                     className={`nav__item ${
-                      url == "/" ? "nav__item--active" : ""
-                    }`}
-                  >
-                    <Link
-                      className="nav__link"
-                      to="/"
-                      onClick={closeNavigation}
-                    >
-                      <span className="nav__num">01</span> home
-                    </Link>
-                  </li>
-                  <li
-                    className={`nav__item ${
                       url.includes("/posts") ? "nav__item--active" : ""
                     }`}
                   >
@@ -229,7 +222,7 @@ export default function Header() {
                       to="/posts"
                       onClick={closeNavigation}
                     >
-                      <span className="nav__num">02</span> writing
+                      <span className="nav__num">01</span> writing
                     </Link>
                   </li>
                   <li
@@ -242,7 +235,7 @@ export default function Header() {
                       to="/notes"
                       onClick={closeNavigation}
                     >
-                      <span className="nav__num">03</span> notes
+                      <span className="nav__num">02</span> notes
                     </Link>
                   </li>
                   <li
@@ -255,7 +248,7 @@ export default function Header() {
                       to="/projects"
                       onClick={closeNavigation}
                     >
-                      <span className="nav__num">04</span> projects
+                      <span className="nav__num">03</span> projects
                     </Link>
                   </li>
 
@@ -269,7 +262,7 @@ export default function Header() {
                       to="/skills"
                       onClick={closeNavigation}
                     >
-                      <span className="nav__num">05</span> Skills
+                      <span className="nav__num">04</span> Skills
                     </Link>
                   </li>
 
@@ -283,7 +276,7 @@ export default function Header() {
                       to="/about"
                       onClick={closeNavigation}
                     >
-                      <span className="nav__num">06</span> about
+                      <span className="nav__num">05</span> about
                     </Link>
                   </li>
                   <li
@@ -296,7 +289,7 @@ export default function Header() {
                       to="/contact"
                       onClick={closeNavigation}
                     >
-                      <span className="nav__num">07</span> Contact
+                      <span className="nav__num">06</span> Contact
                     </Link>
                   </li>
                   {/* <li className="account" style={{ display: isLogined ? 'none' : 'flex' }}>

@@ -41,9 +41,9 @@ export default function Home() {
         <div className="intro">
           <div className="intro__inner">
             <h1 className="intro__title">I do Software Development</h1>
-            <p className="intro__pretitle">
-              <Link to="/about">Hello, my name is Junho&nbsp;</Link>
-            </p>
+            <h1 className="intro__pretitle">
+              <Link to="/about" role="link" aria-label="Link to introduction page">Hello, my name is Junho&nbsp;</Link>
+            </h1>
             <div className="intro__content">
               <p>
                 I’m a Software Engineer, Quality Assuarance, Quality Control and
@@ -93,30 +93,23 @@ export default function Home() {
                             effect="blur"
                             height={'100%'}
                             width={'100%'}
+                            alt={"Link to featured Post" + featuredPost[1].title}
                             className="featured-post__image"
                             src={featuredPost[1].background_image}
-                            alt={featuredPost[1].background_image}
+                            placeholderSrc={featuredPost[1].background_image}
                           />
                           <div className="featured-post__inner">
                             <Link
                               className="featured-post__link"
                               to={`/posts/${featuredPost[1].id}`}
                             >
-                              <span className="featured-post__title">
+                              <h1 className="featured-post__title">
                                 {featuredPost[1].title}
-                              </span>
+                              </h1>
                             </Link>
-                            <p className="featured-post__description">
+                            <h2 className="featured-post__description">
                               {featuredPost[1].excerpt}
-                            </p>
-                            <span
-                              style={{ display: "none" }}
-                              className="featured-post__likecount"
-                              aria-label="47 Likes"
-                            >
-                              <i className="fa-regular fa-heart"></i>
-                              &nbsp;&nbsp;<span>47</span>
-                            </span>
+                            </h2>
                           </div>
                         </div>
                       </li>

@@ -21,11 +21,11 @@ export default function Footer() {
               <linearGradient id="bg" x2="0%" y2="100%">
                 <stop
                   offset="0%"
-                  style={{stopColor: "rgba(53, 127, 242, 0.6)"}}
+                  style={{stopColor: "rgb(0, 27, 122)"}}
                 ></stop>
                 <stop
                   offset="200%"
-                  style={{stopColor: "rgba(38, 89, 190, 0.06)"}}
+                  style={{stopColor: "rgb(0, 0, 0)"}}
                 ></stop>
               </linearGradient>
               <path
@@ -83,24 +83,24 @@ export default function Footer() {
         <section>
           <ul className="socials">
             <li>
-                <a href="https://www.linkedin.com/in/junho-shin-18b883234"><LinkedInIcon viewBox="0 0 25 23"/></a>
+                <a href="https://www.linkedin.com/in/junho-shin-18b883234" role="outer-website-link" aria-label="Link to LinkedIn" aria-hidden="false"><LinkedInIcon viewBox="0 0 25 23"/></a>
             </li>
             <li>
-              <a href="https://github.com/shinjuno123"><GitHubIcon viewBox="0 0 25 23"/></a>
+              <a href="https://github.com/shinjuno123" role="outer-website-link" aria-label="Link to Github" aria-hidden="false"><GitHubIcon viewBox="0 0 25 23"/></a>
             </li>
           </ul>
           <ul className="links">
             <li>
-              <Link to={'/'}>Home</Link>
+              <Link role="Link To Home page" to={'/'} type="text" aria-label="Home Page Link">Home</Link>
             </li>
             <li>
-              <Link to={'/about'}>About</Link>
+              <Link role="Link To About page"  to={'/about'} aria-label="About Page Link">About</Link>
             </li>
             <li>
-              <Link to={'/contact'}>Contact</Link>
+              <Link role="Link To Contract page"  to={'/contact'} aria-label="Contact Page Link">Contact</Link>
             </li>
             <li>
-              <a href={'https://www.bobsweep.com/'}>Work: bObsweep</a>
+              <a role="Link To Current Working Page" href={'https://www.bobsweep.com/'} aria-label="Current Working Company Page Link">Work: bObsweep</a>
             </li>
           </ul>
           <p className="legal"><strong>© 2023-2024</strong></p>

@@ -111,16 +111,16 @@ export default function History() {
               <ClipLoader />
             </li>
             {Object.entries(experiences)
-              .sort(() => -1)
+              .sort((a,b) => a[1].from < b[1].from ? 1 : -1)
               .map((experience) => {
                 return (
                   <React.Fragment key={experience[0]}>
                     <li className="experience">
                       <div className="company-logo">
-                        <img
+                        {/* <img
                           src={experience[1].icon}
                           alt={experience[1].company}
-                        />
+                        /> */}
                         <h4>
                           Company name:{" "}
                           <p
